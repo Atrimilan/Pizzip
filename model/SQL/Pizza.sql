@@ -1,14 +1,3 @@
--- *********************************************
--- * SQL MySQL generation                      
--- *--------------------------------------------
--- * DB-MAIN version: 11.0.1              
--- * Generator date: Dec  4 2018              
--- * Generation date: Wed Apr  7 15:21:15 2021 
--- * LUN file: E:\Dropbox\CNAM\Projets\Pizza\Pizza1.lun 
--- * Schema: Phys3 (MLD)/3-1 
--- * Aucaigne 
--- ********************************************* 
-
 
 -- Database Section
 -- ________________ 
