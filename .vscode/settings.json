@@ -11,7 +11,7 @@
             "name": "Pizzip",
             "database": "Pizzip",
             "username": "root",
-            "password": ""
+            "password": "",
         }
     ]
 }
