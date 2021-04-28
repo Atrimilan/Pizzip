@@ -8,7 +8,7 @@
 
 if (isset($_GET['fic'])){
 	$fic=$_GET['fic'];
-	require_once '../../controller/connexion.php';
+	require_once 'connexion.php'; // ../../controller/connexion.php
         if (!empty($_GET)) {
             // CONNEXION PDO
             try {
