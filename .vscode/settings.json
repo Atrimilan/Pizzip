@@ -5,13 +5,13 @@
                 "authProtocol": "default"
             },
             "previewLimit": 50,
-            "server": "localhost",
+            "server": "remotemysql.com",
             "port": 3306,
             "driver": "MySQL",
             "name": "Pizzip",
-            "database": "Pizzip",
-            "username": "root",
-            "password": "test"
+            "username": "eEPfirnc1C",
+            "password": "vZFMsKIeXw",
+            "database": "eEPfirnc1C"
         }
     ]
 }
