@@ -1,222 +1,219 @@
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Hôte : 127.0.0.1:3306
--- Généré le : mer. 07 avr. 2021 à 15:01
--- Version du serveur :  8.0.21
--- Version de PHP : 7.3.21
+-- *********************************************
+-- * SQL MySQL generation                      
+-- *--------------------------------------------
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+-- Tables Section
+-- _____________ 
+
+create table COM_DETAIL (
+     Num_OF int not null,
+     Quant int not null,
+     NumCom int not null,
+     constraint FKCon_DETAIL_ID primary key (Num_OF))
+     ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+create table COMMANDE (
+     NumCom int(5) not null,
+     NomClient char(25) not null,
+     TelClient char(12) not null,
+     AdrClient char(30),
+     CP_Client char(5) not null,
+     VilClient char(20),
+     Date date not null,
+     HeureDispo date not null,
+     TypeEmbal enum('carton','thermo') COLLATE utf8_bin NOT NULL DEFAULT 'carton',
+     A_Livrer enum('O','N') COLLATE utf8_bin NOT NULL DEFAULT 'N',
+     EtatLivraison char(1) default 'N',
+     CoutLiv float(6,2),
+     IdLivreur int(5),
+     DateArchiv date,
+     constraint ID_COMMANDE_ID primary key (NumCom))
+     ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+create table DETAIL_INGR (
+     Num_OF int not null,
+     IdIngred int not null,
+     constraint ID_Utilise_ID primary key (IdIngred, Num_OF))
+      ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+create table DETAIL (
+     Num_OF int not null,
+     NomPizza char(30) not null,
+     IngBase1 char(20) not null,
+     IngBase2 char(20),
+     IngBase3 char(20),
+     IngBase4 char(20),
+     IngOpt1 char(20),
+     IngOpt2 char(20),
+     IngOpt3 char(20),
+     IngOpt4 char(20),
+     IdPizza int not null,
+     DateArchiv date,
+     constraint ID_DETAIL_ID primary key (Num_OF))
+     ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+create table FOURN_INGR (
+     NomFourn char(25) not null,
+     IdIngred int not null,
+     PrixUHT float(5,2) not null,
+     constraint ID_Provient_ID primary key (NomFourn, IdIngred))
+     ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+create table FOURNISSEUR (
+     NomFourn char(25) not null,
+     Adresse char(30) not null,
+     CodePostal char(5) not null,
+     Ville char(20) not null,
+     Tel char(12) not null,
+     ParDefaut enum('O','N') COLLATE utf8_bin NOT NULL DEFAULT 'N',
+     DateArchiv date,
+     constraint ID_FOURNISSEUR_ID primary key (NomFourn))
+     ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+create table INGREDIENT (
+     IdIngred int not null,
+     NomIngred char(30) not null,
+     Frais enum('O','N') COLLATE utf8_bin NOT NULL DEFAULT 'N',
+     Unite char(10) default '"sans"' not null,
+     StockMin int not null,
+     StockReel float(6,2) not null,
+     PrixUHT_Moyen float(5,2) not null,
+     Q_A_Com int not null,
+     DateArchiv date,
+     constraint ID_INGREDIENT_ID primary key (IdIngred))
+     ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+create table LIVREUR (
+     IdLivreur int not null,
+     Nom char(20) not null,
+     Prenom char(20) not null,
+     Tel char(16) not null,
+     NumSS char(15) not null,
+     DateArchiv date,
+     constraint ID_LIVREUR_ID primary key (IdLivreur))
+     ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+create table PIZZA_INGR (
+     IdIngred int not null,
+     IdPizza int not null,
+     Quant int not null,
+     constraint ID_Comporte_ID primary key (IdIngred, IdPizza))
+     ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+create table PIZZA (
+     IdPizza int not null,
+     NomPizza char(20) not null,
+     Taille enum('L','XL') COLLATE utf8_bin DEFAULT 'L',
+     NbIngBase int,
+     NbIngOpt int,
+     PrixUHT float(5,2) not null,
+     Image char(50),
+     IngBase1 char(20) not null,
+     IngBase2 char(20),
+     IngBase3 char(20),
+     IngBase4 char(20),
+     IngBase5 char(20),
+     IngOpt1 char(20),
+     IngOpt2 char(20),
+     IngOpt3 char(20),
+     IngOpt4 char(20),
+     IngOpt5 char(20),
+     IngOpt6 char(20),
+     NbOptMax int,
+     DateArchiv date,
+     constraint ID_PIZZA_ID primary key (IdPizza))
+     ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+-- Constraints Section
+-- ___________________ 
 
---
--- Base de données : `pizzip`
---
+alter table COM_DETAIL add constraint FKCon_DETAIL_FK
+     foreign key (Num_OF)
+     references DETAIL (Num_OF);
 
--- --------------------------------------------------------
+alter table COM_DETAIL add constraint FKCon_COM
+     foreign key (NumCom)
+     references COMMANDE (NumCom);
 
---
--- Structure de la table `commande`
---
+alter table COMMANDE add constraint FKLivre
+     foreign key (IdLivreur)
+     references LIVREUR (IdLivreur);
 
-DROP TABLE IF EXISTS `commande`;
-CREATE TABLE IF NOT EXISTS `commande` (
-  `NumCom` int NOT NULL AUTO_INCREMENT,
-  `Date` date NOT NULL,
-  `HeureDispo` time NOT NULL,
-  `TypeEmbal` enum('carton','thermo') NOT NULL DEFAULT 'carton',
-  `A_Livrer` enum('O','N') NOT NULL DEFAULT 'N',
-  `EtatLivraison` enum('O','N') DEFAULT 'N',
-  `CoutLiv` float(6,2) DEFAULT NULL,
-  `IdLivreur` int DEFAULT NULL,
-  `NomCli` varchar(200) NOT NULL,
-  `PrenomCli` varchar(200) NOT NULL,
-  `Tel` varchar(200) NOT NULL,
-  `Adresse` varchar(200) DEFAULT NULL,
-  `CodePostal` varchar(200) DEFAULT NULL,
-  `Ville` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`NumCom`),
-  UNIQUE KEY `ID_COMMANDE_IND` (`NumCom`),
-  KEY `FKLivre` (`IdLivreur`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+alter table DETAIL_INGR add constraint FKUti_ING
+     foreign key (IdIngred)
+     references INGREDIENT (IdIngred);
 
--- --------------------------------------------------------
+alter table DETAIL_INGR add constraint FKUti_DETAIL
+     foreign key (Num_OF)
+     references DETAIL (Num_OF);
 
---
--- Structure de la table `commande_option`
---
+-- Not implemented
+alter table DETAIL add constraint ID_DETAIL_CHK
+    check(exists(select * from DETAIL_INGR
+                 where DETAIL_INGR.Num_OF = Num_OF)); 
 
-DROP TABLE IF EXISTS `commande_option`;
-CREATE TABLE IF NOT EXISTS `commande_option` (
-  `Num_OF` int NOT NULL,
-  `Quant` int NOT NULL,
-  `NumCom` int NOT NULL,
-  PRIMARY KEY (`Num_OF`),
-  UNIQUE KEY `FKCon_OPT_IND` (`Num_OF`),
-  KEY `FKCon_COM` (`NumCom`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- Not implemented
+alter table DETAIL add constraint ID_DETAIL_CHK
+    check(exists(select * from COM_DETAIL
+                 where COM_DETAIL.Num_OF = Num_OF)); 
 
--- --------------------------------------------------------
+alter table DETAIL add constraint FKEstChoisi
+     foreign key (IdPizza)
+     references PIZZA (IdPizza);
 
---
--- Structure de la table `fournisseur`
---
+alter table FOURN_INGR add constraint FKPro_ING
+     foreign key (IdIngred)
+     references INGREDIENT (IdIngred);
 
-DROP TABLE IF EXISTS `fournisseur`;
-CREATE TABLE IF NOT EXISTS `fournisseur` (
-  `NomFourn` char(25) NOT NULL,
-  `Adresse` char(30) NOT NULL,
-  `CodePostal` char(5) NOT NULL,
-  `Ville` char(20) NOT NULL,
-  `Tel` char(12) NOT NULL,
-  `ParDefaut` enum('O','N') NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`NomFourn`),
-  UNIQUE KEY `ID_FOURNISSEUR_IND` (`NomFourn`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+alter table FOURN_INGR add constraint FKPro_FOU
+     foreign key (NomFourn)
+     references FOURNISSEUR (NomFourn);
 
--- --------------------------------------------------------
+alter table PIZZA_INGR add constraint FKCom_PRO
+     foreign key (IdPizza)
+     references PIZZA (IdPizza);
 
---
--- Structure de la table `fournisseur_ingredient`
---
+alter table PIZZA_INGR add constraint FKCom_ING
+     foreign key (IdIngred)
+     references INGREDIENT (IdIngred);
 
-DROP TABLE IF EXISTS `fournisseur_ingredient`;
-CREATE TABLE IF NOT EXISTS `fournisseur_ingredient` (
-  `NomFourn` char(25) NOT NULL,
-  `NomIngred` char(20) NOT NULL,
-  PRIMARY KEY (`NomFourn`,`NomIngred`),
-  UNIQUE KEY `ID_Provient_IND` (`NomFourn`,`NomIngred`),
-  KEY `FKPro_ING` (`NomIngred`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- Not implemented
+alter table PIZZA add constraint ID_PIZZA_CHK
+    check(exists(select * from PIZZA_INGR
+                 where PIZZA_INGR.IdPizza = IdPizza)); 
 
--- --------------------------------------------------------
 
---
--- Structure de la table `ingredient`
---
+-- Index Section
+-- _____________ 
 
-DROP TABLE IF EXISTS `ingredient`;
-CREATE TABLE IF NOT EXISTS `ingredient` (
-  `NomIngred` char(20) NOT NULL,
-  `Frais` char(1) NOT NULL,
-  `Unite` char(10) NOT NULL DEFAULT 'sans',
-  `StockMin` int NOT NULL,
-  `StockReel` float NOT NULL,
-  `PrixUHT` float NOT NULL,
-  `Q_A_Com` int NOT NULL,
-  PRIMARY KEY (`NomIngred`),
-  UNIQUE KEY `ID_INGREDIENT_IND` (`NomIngred`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+create unique index FKCon_DETAIL_IND
+     on COM_DETAIL (Num_OF);
 
--- --------------------------------------------------------
+create unique index ID_COMMANDE_IND
+     on COMMANDE (NumCom);
 
---
--- Structure de la table `livreur`
---
+create unique index ID_Utilise_IND
+     on DETAIL_INGR (IdIngred, Num_OF);
 
-DROP TABLE IF EXISTS `livreur`;
-CREATE TABLE IF NOT EXISTS `livreur` (
-  `IdLivreur` int NOT NULL AUTO_INCREMENT,
-  `Nom` char(20) NOT NULL,
-  `Prenom` char(20) NOT NULL,
-  `Tel` char(16) NOT NULL,
-  PRIMARY KEY (`IdLivreur`),
-  UNIQUE KEY `ID_LIVREUR_IND` (`IdLivreur`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+create unique index ID_DETAIL_IND
+     on DETAIL (Num_OF);
 
--- --------------------------------------------------------
+create unique index ID_Provient_IND
+     on FOURN_INGR (NomFourn, IdIngred);
 
---
--- Structure de la table `options`
---
+create unique index ID_FOURNISSEUR_IND
+     on FOURNISSEUR (NomFourn);
 
-DROP TABLE IF EXISTS `options`;
-CREATE TABLE IF NOT EXISTS `options` (
-  `Num_OF` int NOT NULL AUTO_INCREMENT,
-  `IngBase1` char(20) NOT NULL,
-  `IngBase2` char(20) DEFAULT NULL,
-  `IngBase3` char(20) DEFAULT NULL,
-  `IngBase4` char(20) DEFAULT NULL,
-  `IngOpt1` char(20) DEFAULT NULL,
-  `IngOpt2` char(20) DEFAULT NULL,
-  `IngOpt3` char(20) DEFAULT NULL,
-  `IngOpt4` char(20) DEFAULT NULL,
-  `NomPizza` char(25) NOT NULL,
-  PRIMARY KEY (`Num_OF`),
-  UNIQUE KEY `ID_OPTION_IND` (`Num_OF`),
-  KEY `FKEstChoisi` (`NomPizza`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+create unique index ID_INGREDIENT_IND
+     on INGREDIENT (IdIngred);
 
--- --------------------------------------------------------
+create unique index ID_LIVREUR_IND
+     on LIVREUR (IdLivreur);
 
---
--- Structure de la table `option_ingredient`
---
+create unique index ID_Comporte_IND
+     on PIZZA_INGR (IdIngred, IdPizza);
 
-DROP TABLE IF EXISTS `option_ingredient`;
-CREATE TABLE IF NOT EXISTS `option_ingredient` (
-  `NomIngred` char(20) NOT NULL,
-  `Num_OF` int NOT NULL,
-  PRIMARY KEY (`NomIngred`,`Num_OF`),
-  UNIQUE KEY `ID_Utilise_IND` (`NomIngred`,`Num_OF`),
-  KEY `FKUti_OPT` (`Num_OF`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+create unique index ID_PIZZA_IND
+     on PIZZA (IdPizza);
 
--- --------------------------------------------------------
-
---
--- Structure de la table `pizza`
---
-
-DROP TABLE IF EXISTS `pizza`;
-CREATE TABLE IF NOT EXISTS `pizza` (
-  `NomPizza` char(25) NOT NULL,
-  `Taille` char(1) DEFAULT NULL,
-  `NbIngBase` int DEFAULT NULL,
-  `NbIngOpt` int DEFAULT NULL,
-  `PrixUTTC` float NOT NULL,
-  `Image` char(60) DEFAULT NULL,
-  `IngBase1` char(20) NOT NULL,
-  `IngBase2` char(20) DEFAULT NULL,
-  `IngBase3` char(20) DEFAULT NULL,
-  `IngBase4` char(20) DEFAULT NULL,
-  `IngBase5` char(20) DEFAULT NULL,
-  `IngOpt1` char(20) DEFAULT NULL,
-  `IngOpt2` char(20) DEFAULT NULL,
-  `IngOpt3` char(20) DEFAULT NULL,
-  `IngOpt4` char(20) DEFAULT NULL,
-  `IngOpt5` char(20) DEFAULT NULL,
-  `IngOpt6` char(20) DEFAULT NULL,
-  `NbOptMax` int DEFAULT '0',
-  PRIMARY KEY (`NomPizza`),
-  UNIQUE KEY `ID_PIZZA_IND` (`NomPizza`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `pizza_ingredient`
---
-
-DROP TABLE IF EXISTS `pizza_ingredient`;
-CREATE TABLE IF NOT EXISTS `pizza_ingredient` (
-  `NomIngred` char(20) NOT NULL,
-  `NomPizza` char(25) NOT NULL,
-  `Quant` int NOT NULL,
-  PRIMARY KEY (`NomIngred`,`NomPizza`),
-  UNIQUE KEY `ID_Comporte_IND` (`NomIngred`,`NomPizza`),
-  KEY `FKCom_PRO` (`NomPizza`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
