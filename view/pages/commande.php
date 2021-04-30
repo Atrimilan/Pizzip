@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>Pizzip - Commande</title>
+	<title>Piz.zip - Commande</title>
 	<script src="https://code.jquery.com/jquery-latest.js"></script> <!-- Dernier Jquery -->
 </head>
 
