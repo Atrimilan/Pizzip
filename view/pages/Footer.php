@@ -1,4 +1,5 @@
 <?php
+// Flordin
 //  --  ---------------  FOOTER PRESENT SUR TOUTES LES PAGES  ---------------  -->
 ?>
 
