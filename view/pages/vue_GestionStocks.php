@@ -27,16 +27,16 @@
                     } catch (PDOException $e) {
                         print $e->getMessage();
                     }
-                    while ($four =$requete->fetch(PDO::FETCH_ASSOC)){ //FETCH POUR RECUPERER LES DONNEES
-                        echo "<option value=".$four['NomIngred'].">".$four['Frais']." || ".$four['Unite'].$four['StockMin']
-                        .$four['StockReel'].$four['PrixUHT_Moyen'].$four['Q_A_Com'].$four['DateArchiv']."</option>";
+                    while ($ingre =$requete->fetch(PDO::FETCH_ASSOC)){ //FETCH POUR RECUPERER LES DONNEES
+                        echo "<option value=".$ingre['NomIngred'].">".$ingre['Frais']." || ".$ingre['Unite'].$ingre['StockMin']
+                        .$ingre['StockReel'].$ingre['PrixUHT_Moyen'].$ingre['Q_A_Com'].$ingre['DateArchiv']."</option>";
                     }
                 ?>
             </select>
         </form>
     
     <div id="mesures">
-        <h1 id=t_mes> Liste de mesures </h1>
+        <h1 id=t_mes> Liste ingrédients </h1>
         <h1 id=t_fic> </h1>
         <ul> 
 
