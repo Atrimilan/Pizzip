@@ -149,14 +149,14 @@ alter table DETAIL_INGR add constraint FKUti_DETAIL
      references DETAIL (Num_Detail);
 
 -- Not implemented
-alter table DETAIL add constraint ID_DETAIL_CHK
-    check(exists(select * from DETAIL_INGR
-                 where DETAIL_INGR.Num_Detail = Num_Detail)); 
+-- alter table DETAIL add constraint ID_DETAIL_CHK
+--    check(exists(select * from DETAIL_INGR
+--                 where DETAIL_INGR.Num_Detail = Num_Detail)); 
 
 -- Not implemented
-alter table DETAIL add constraint ID_DETAIL_CHK
-    check(exists(select * from COM_DETAIL
-                 where COM_DETAIL.Num_Detail = Num_Detail)); 
+-- alter table DETAIL add constraint ID_DETAIL_CHK
+--    check(exists(select * from COM_DETAIL
+--                 where COM_DETAIL.Num_Detail = Num_Detail));
 
 alter table DETAIL add constraint FKEstChoisi
      foreign key (IdPizza)
@@ -179,9 +179,9 @@ alter table PIZZA_INGR add constraint FKCom_ING
      references INGREDIENT (IdIngred);
 
 -- Not implemented
-alter table PIZZA add constraint ID_PIZZA_CHK
-    check(exists(select * from PIZZA_INGR
-                 where PIZZA_INGR.IdPizza = IdPizza)); 
+-- alter table PIZZA add constraint ID_PIZZA_CHK
+--    check(exists(select * from PIZZA_INGR
+--                 where PIZZA_INGR.IdPizza = IdPizza)); 
 
 
 -- Index Section
