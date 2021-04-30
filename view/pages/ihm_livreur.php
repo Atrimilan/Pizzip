@@ -23,9 +23,9 @@
     ?>
 
 
-    <p> Livreur : <?php echo $_SESSION['prenom']; ?> <br/><br/> </p>
-    <p>Commandes à Livrer :</p> <br/><br/>
-
+    <!-- <p> Livreur : <?php echo $_SESSION['prenom']; ?> <br/><br/> </p> -->
+    <h1>Commandes à Livrer :</h1> <br/><br/>
+    <input type="button" value="AFFICHER" onclick="actionAffiche()">
 
 
 
