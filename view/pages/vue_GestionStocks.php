@@ -20,18 +20,12 @@ if (isset($_GET['fic'])){
             }
             try {
                 //REQUETE : JOINTURE ENTRE LA TABLE FOURS ET DATA
-            	$requete= $connex->query("SELECT data.date, data.heure, data.temperature, fours.four_marque "
-                        . "FROM data, fours WHERE data.four_id=".$fic." AND fours.four_id=".$fic);               
+            	/*$requete= $connex->query("SELECT data.date, data.heure, data.temperature, fours.four_marque "
+                        . "FROM data, fours WHERE data.four_id=".$fic." AND fours.four_id=".$fic);      */  
+                $requete= $connex->query("select* from INGREDIENT".$fic);       
             } catch (PDOException $e) {
                 print $e->getMessage();
             }
-	
-	$maListe = new stdClass();
-	foreach($requete as $key => $value){
-            $maListe->{$key} = $value;
-	}
-	echo json_encode($maListe, JSON_FORCE_OBJECT);
-    }
 }
 ?>
 
@@ -54,5 +48,3 @@ if (isset($_GET['fic'])){
         </div>
     </body>
 </html>
-
-<?php
