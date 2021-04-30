@@ -10,7 +10,7 @@
 <body>
 	<div class='listePizza'>
 	<?php
-	require_once("../../controller/connexion/connexion.php");
+	require_once("../../controller/connexion.php");
 
 	try {
 		$result = $pdo->query("SELECT * FROM PIZZA");    // Requete PDO
