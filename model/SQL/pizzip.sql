@@ -6,14 +6,14 @@
 -- _____________ 
 
 create table COM_DETAIL (
-     Num_OF int not null,
+     Num_Detail int not null,
      Quant int not null,
      NumCom int not null,
-     constraint FKCon_DETAIL_ID primary key (Num_OF))
+     constraint FKCon_DETAIL_ID primary key (Num_Detail))
      ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 create table COMMANDE (
-     NumCom int(5) not null,
+     NumCom int(5) not null AUTO_INCREMENT,
      NomClient char(25) not null,
      TelClient char(12) not null,
      AdrClient char(30),
@@ -31,13 +31,13 @@ create table COMMANDE (
      ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 create table DETAIL_INGR (
-     Num_OF int not null,
+     Num_Detail int not null,
      IdIngred int not null,
-     constraint ID_Utilise_ID primary key (IdIngred, Num_OF))
+     constraint ID_Utilise_ID primary key (IdIngred, Num_Detail))
       ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 create table DETAIL (
-     Num_OF int not null,
+     Num_Detail int not null AUTO_INCREMENT,
      NomPizza char(30) not null,
      IngBase1 char(20) not null,
      IngBase2 char(20),
@@ -49,7 +49,7 @@ create table DETAIL (
      IngOpt4 char(20),
      IdPizza int not null,
      DateArchiv date,
-     constraint ID_DETAIL_ID primary key (Num_OF))
+     constraint ID_DETAIL_ID primary key (Num_Detail))
      ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 create table FOURN_INGR (
@@ -71,7 +71,7 @@ create table FOURNISSEUR (
      ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 create table INGREDIENT (
-     IdIngred int not null,
+     IdIngred int not null AUTO_INCREMENT,
      NomIngred char(30) not null,
      Frais enum('O','N') COLLATE utf8_bin NOT NULL DEFAULT 'N',
      Unite char(10) default '"sans"' not null,
@@ -84,7 +84,7 @@ create table INGREDIENT (
      ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 create table LIVREUR (
-     IdLivreur int not null,
+     IdLivreur int not null AUTO_INCREMENT,
      Nom char(20) not null,
      Prenom char(20) not null,
      Tel char(16) not null,
@@ -101,7 +101,7 @@ create table PIZZA_INGR (
      ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 create table PIZZA (
-     IdPizza int not null,
+     IdPizza int not null AUTO_INCREMENT,
      NomPizza char(20) not null,
      Taille enum('L','XL') COLLATE utf8_bin DEFAULT 'L',
      NbIngBase int,
@@ -129,8 +129,8 @@ create table PIZZA (
 -- ___________________ 
 
 alter table COM_DETAIL add constraint FKCon_DETAIL_FK
-     foreign key (Num_OF)
-     references DETAIL (Num_OF);
+     foreign key (Num_Detail)
+     references DETAIL (Num_Detail);
 
 alter table COM_DETAIL add constraint FKCon_COM
      foreign key (NumCom)
@@ -145,18 +145,18 @@ alter table DETAIL_INGR add constraint FKUti_ING
      references INGREDIENT (IdIngred);
 
 alter table DETAIL_INGR add constraint FKUti_DETAIL
-     foreign key (Num_OF)
-     references DETAIL (Num_OF);
+     foreign key (Num_Detail)
+     references DETAIL (Num_Detail);
 
 -- Not implemented
 alter table DETAIL add constraint ID_DETAIL_CHK
     check(exists(select * from DETAIL_INGR
-                 where DETAIL_INGR.Num_OF = Num_OF)); 
+                 where DETAIL_INGR.Num_Detail = Num_Detail)); 
 
 -- Not implemented
 alter table DETAIL add constraint ID_DETAIL_CHK
     check(exists(select * from COM_DETAIL
-                 where COM_DETAIL.Num_OF = Num_OF)); 
+                 where COM_DETAIL.Num_Detail = Num_Detail)); 
 
 alter table DETAIL add constraint FKEstChoisi
      foreign key (IdPizza)
@@ -188,16 +188,16 @@ alter table PIZZA add constraint ID_PIZZA_CHK
 -- _____________ 
 
 create unique index FKCon_DETAIL_IND
-     on COM_DETAIL (Num_OF);
+     on COM_DETAIL (Num_Detail);
 
 create unique index ID_COMMANDE_IND
      on COMMANDE (NumCom);
 
 create unique index ID_Utilise_IND
-     on DETAIL_INGR (IdIngred, Num_OF);
+     on DETAIL_INGR (IdIngred, Num_Detail);
 
 create unique index ID_DETAIL_IND
-     on DETAIL (Num_OF);
+     on DETAIL (Num_Detail);
 
 create unique index ID_Provient_IND
      on FOURN_INGR (NomFourn, IdIngred);
