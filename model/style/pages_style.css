@@ -1,0 +1,47 @@
+
+#lien {
+    color:blue;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#basPage{
+    margin: auto;
+    margin-top: 100px;
+    color: white;
+    background-color: black;
+    text-align: center;
+    overflow: hidden;
+    /*padding-top: 10px;
+    padding-bottom: 10px;*/
+
+}
+
+#mailPizzip{
+    color: #f1c50e;
+    text-decoration: none;
+}
+
+.blockPizza {
+    display: inline-block;
+    width: 15%;
+    margin: 0 2%;
+}
+
+.divPizza {
+    border: solid 0.5px;
+}
+
+.listePizza {
+    text-align: center;
+    
+    /*Ne pas sélectionner le texte dans les divs*/
+    -moz-user-select: none; /* Firefox */
+    -webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
+    -ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
+    user-select: none; /* Propriété standard */
+}
+
+.divQuantite {
+    border: solid 0.5px;
+}
