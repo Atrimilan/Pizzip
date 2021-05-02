@@ -5,7 +5,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#bas_page{
+#basPage{
     margin: auto;
     margin-top: 100px;
     color: white;
@@ -17,7 +17,15 @@
 
 }
 
-#mail_PIZZIP{
+#mailPizzip{
     color: #f1c50e;
     text-decoration: none;
+}
+#test{
+    color: red;
+}
+.divPizza {
+    /*border: solid;*/
+    margin: 40px;
+    padding: 40px;
 }

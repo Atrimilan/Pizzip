@@ -5,9 +5,11 @@
 	<meta charset="utf-8" />
 	<title>Piz.zip - Commande</title>
 	<script src="https://code.jquery.com/jquery-latest.js"></script> <!-- Dernier Jquery -->
+    <link href="../../model/style/style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
+	<div class="divPizza"><p>test</p></div>
 	<div class='listePizza'>
 	<?php
 	require_once("../../controller/connexion.php");
