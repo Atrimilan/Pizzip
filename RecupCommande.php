@@ -14,11 +14,16 @@ and open the template in the editor.
         <?php
         require_once './Connexion.php';
         
+        $tabFinal =array();
+        $tabCom = recupNumcom($pdo);
+        foreach ($tabCom as $value) {
+            array_push($tabFinal,RecupPizza($value,$pdo)) ;
+        }
+        var_dump($tabFinal);
+        
 
-        recupNumcom();
-        RecupPizza($numCom);
-
-        function recupNumcom() {
+        function recupNumcom($pdo) {
+       
             try {
                 $tabResult = array();
                 $requete = "select NumCom from COMMANDE where Etat = 'nonTraitee'";
@@ -31,19 +36,22 @@ and open the template in the editor.
                 print $ex->getMessage();
             }
              var_dump($tabResult);
+             return $tabResult;
         }
 
-        function RecupPizza($numCom) {
+        function RecupPizza($numCom,$pdo) {
             try {
-                $requete = "select NumCom from COMMANDE where Etat = 'livree'";
+                $tabResult = array();
+                $requete = "select Num_Detail,Quant from COM_DETAIL where NumCom = $numCom";
                 $result = $pdo->query($requete);
                 while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
 
-                    array_push($tabResult, $ligne['NumCom']);
+                    array_push($tabResult, $ligne['Num_Detail']);
                 }
             } catch (PDOException $ex) {
                 print $ex->getMessage();
             }
+            return $tabResult;
         }
         ?>
 
