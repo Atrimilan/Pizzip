@@ -21,12 +21,12 @@
 
 		<div class="infosClient">
 			<!-- Informations sur le client -->
-			<input type="text" value="nom" placeholder="Nom">
-			<input type="text" value="prenom" placeholder="Prénom">
-			<input type="text" value="telephone" placeholder="Téléphone">
-			<input type="text" value="adresse" placeholder="Adresse">
-			<input type="text" value="codePostal" placeholder="Code Postal">
-			<input type="text" value="complementAdresse" placeholder="Complément d'adresse">
+			<input type="text" name="nom" placeholder="Nom">
+			<input type="text" name="prenom" placeholder="Prénom">
+			<input type="text" name="telephone" placeholder="Téléphone">
+			<input type="text" name="adresse" placeholder="Adresse">
+			<input type="text" name="codePostal" placeholder="Code Postal">
+			<input type="text" name="complementAdresse" placeholder="Complément d'adresse">
 		</div>
 
 		<div class='listePizza'>
@@ -40,10 +40,10 @@
 				while ($tabPizza = $result->fetch(PDO::FETCH_ASSOC)) {
 					echo "<div class='blockPizza'>";
 					echo "<div class='divPizza' id='pizza_" . $tabPizza['IdPizza'] . "' >";
-					echo "<p>Pizza : " . $tabPizza['NomPizza'] . "</p><br>";
-					echo "<p>Taille : " . $tabPizza['Taille'] . "</p><br>";
-					echo "<p>Ingrédients : " . $tabPizza['IngBase1'] . "</p><br>";
-					echo "<p>Prix : " . $tabPizza['PrixUHT'] . "</p>";
+					echo "<p>Pizza : " . $tabPizza['NomPizza'] . "</p>";
+					echo "<p>Taille : " . $tabPizza['Taille'] . "</p>";
+					echo "<p>Ingrédients : " . $tabPizza['IngBase1'] . "</p>";
+					echo "<p>Prix : <span class='prixPizza' id='prixPizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['PrixUHT'] . "</span> €</p>";
 					echo "</div>";
 
 					echo "<div class='divQuantite'>";
@@ -83,8 +83,13 @@
 			<input type="radio" id="boiteCarton" name="typeBoite" value="carton" checked>
 			<label for="boiteCarton">Boîte en carton - 0€</label>
 			<br>
-			<input type="radio" id="boiteIsotherme" name="typeBoite" value="isotheme">
-			<label for="boiteIsotherme">Boîte isotherme - 2€</label>
+			<input type="radio" id="boiteIsotherme" name="typeBoite" value="isotherme">
+			<label for="boiteIsotherme">Sac isotherme - 3€</label>
+		</div>
+
+		<div class="montantCommande">
+			<!-- Affichage du prix -->
+			<p>Montant total de la commande : <span id="montantTotal">0</span> €</p>
 		</div>
 
 		<button>Valider</button>
@@ -93,8 +98,21 @@
 
 	<script type="text/javascript">
 		var doc = document;
+		var currentBoxMod = "carton";
 
 		$(doc).ready(function() {
+
+			$('input[name=typeBoite]').click(function() {
+				var spanMontantTotal = $('#montantTotal');
+				var selectedBoxMod = $("input[name='typeBoite']:checked").val();
+				if (selectedBoxMod == "carton" && currentBoxMod != "carton") { // Si on clique sur Carton, et qu'il n'était pas déjà sélectionné
+					spanMontantTotal.text(parseInt(spanMontantTotal.text()) - 3);
+					currentBoxMod = "carton";
+				} else if (selectedBoxMod == "isotherme" && currentBoxMod != "isotherme") {
+					spanMontantTotal.text(parseInt(spanMontantTotal.text()) + 3);
+					currentBoxMod = "isotherme";
+				}
+			});
 
 			$('input[name=modeCommande]').click(function() {
 				var selectedMod = $("input[name='modeCommande']:checked").val();
@@ -108,7 +126,7 @@
 					$('#offreLivraison').hide();
 					$('#offreAEmporter').show();
 					$(".infosClient > input").each(function() {
-						if ($(this).val() != "nom" && $(this).val() != "prenom") {
+						if ($(this).attr('name') != "nom" && $(this).attr('name') != "prenom") {
 							$(this).hide();
 						}
 					});
@@ -117,27 +135,29 @@
 
 			$('.ajusterQuantite').click(function(event) {
 				var selectedButton = event.target.id;
-				if ($('#' + selectedButton).val() == "+") {
-					var spanQuantite = $('#' + selectedButton).parent().find("span");
-					spanQuantite.text(parseInt(spanQuantite.text()) + 1);
+				var spanQuantite = $('#' + selectedButton).parent().find("span");
+				var prixPizza = $('#' + selectedButton).parent().parent().find(".prixPizza");
+				var spanMontantTotal = $('#montantTotal');
 
-					var selectedPizza = $('#' + selectedButton).parent().parent().children(".divPizza");
-				} else {
-					var spanQuantite = $('#' + selectedButton).parent().find("span");
-					if (parseInt(spanQuantite.text()) != 0) {
+				if ($('#' + selectedButton).val() == "+") {
+					spanQuantite.text(parseInt(spanQuantite.text()) + 1);
+					spanMontantTotal.text(parseInt(spanMontantTotal.text()) + parseInt(prixPizza.text()))
+				} else if ($('#' + selectedButton).val() == "-") {
+					if (parseInt(spanQuantite.text()) != 0) { // Ne pas aller dans le négatif
 						spanQuantite.text(parseInt(spanQuantite.text()) - 1);
+						spanMontantTotal.text(parseInt(spanMontantTotal.text()) - parseInt(prixPizza.text()))
 					}
 				}
 
-				verifierSelections(selectedButton, spanQuantite);
+				verifierSelections(selectedButton, spanQuantite); // Repère visuel des sélections par coloration des divs 
 			});
 
 			function verifierSelections(selectedButton, spanQuantite) {
 				var selectedPizza = $('#' + selectedButton).parent().parent().children(".divPizza");
 				if (parseInt(spanQuantite.text()) > 0) {
-					selectedPizza.css("background-color", "rgb(120, 255, 200)");
+					selectedPizza.css("background-color", "rgba(120, 255, 200, 255)");
 				} else {
-					selectedPizza.css("background-color", "rgb(255, 255, 255)");
+					selectedPizza.css("background-color", "rgba(0, 0, 0, 0)");
 				}
 			}
 		});

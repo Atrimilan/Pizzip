@@ -1,6 +1,3 @@
-body {
-    color: red;
-}
 #lien {
     color:blue;
     font-weight: bold;
@@ -32,10 +29,29 @@ body {
 
 .divPizza {
     border: solid 0.5px;
+    padding: 5px;
+    text-align: left;
+}
+p {
+    margin: 0;
 }
 .listePizza {
     text-align: center;
     
+    /*Ne pas sélectionner le texte dans les divs*/
+    -moz-user-select: none; /* Firefox */
+    -webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
+    -ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
+    user-select: none; /* Propriété standard */
+}
+.modeCommande {
+    /*Ne pas sélectionner le texte dans les divs*/
+    -moz-user-select: none; /* Firefox */
+    -webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
+    -ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
+    user-select: none; /* Propriété standard */
+}
+.boitePizza {
     /*Ne pas sélectionner le texte dans les divs*/
     -moz-user-select: none; /* Firefox */
     -webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
