@@ -1,4 +1,4 @@
-<tr>
+
 <td>
     <p>commande numéro3</p>
 </td>
@@ -22,4 +22,3 @@
     </label>
 </div>
 </td> 
-</tr>

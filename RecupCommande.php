@@ -13,17 +13,40 @@ and open the template in the editor.
     <body>
         <?php
         require_once './Connexion.php';
-        $tabResult = array();
-        try {
-            $requete = "select NumCom from COMMANDE Where etat = 'Prêt à livrer'" ;
-            $result = $pdo->query($requete);
-            while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
-                $tabResult =  $ligne['NumCom'];
+        
+
+        recupNumcom();
+        RecupPizza($numCom);
+
+        function recupNumcom() {
+            try {
+                $tabResult = array();
+                $requete = "select NumCom from COMMANDE where Etat = 'nonTraitee'";
+                $result = $pdo->query($requete);
+                while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
+
+                    array_push($tabResult, $ligne['NumCom']);
+                }
+            } catch (PDOException $ex) {
+                print $ex->getMessage();
             }
-        } catch (PDOException $ex) {
-            print $ex->getMessage();
+             var_dump($tabResult);
         }
-        echo $tabResult 
+
+        function RecupPizza($numCom) {
+            try {
+                $requete = "select NumCom from COMMANDE where Etat = 'livree'";
+                $result = $pdo->query($requete);
+                while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
+
+                    array_push($tabResult, $ligne['NumCom']);
+                }
+            } catch (PDOException $ex) {
+                print $ex->getMessage();
+            }
+        }
         ?>
+
+
     </body>
 </html>
