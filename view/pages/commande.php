@@ -9,23 +9,24 @@
 </head>
 
 <body>
-	<form>
+	<form id="test">
+
 		<div class="modeCommande">
 			<!-- Mode de la commande (Livraison / A emporter) -->
-			<input type="radio" id="modeLivraison" name="modeCommande" checked>
+			<input type="radio" id="modeLivraison" name="modeCommande" value="livraison" checked>
 			<label for="modeLivraison">Livraison</label>
-			<input type="radio" id="modeAEmporter" name="modeCommande">
+			<input type="radio" id="modeAEmporter" name="modeCommande" value="aEmporter">
 			<label for="modeAEmporter">A emporter</label>
 		</div>
 
 		<div class="infosClient">
 			<!-- Informations sur le client -->
-			<input type="text" placeholder="Nom">
-			<input type="text" placeholder="Prénom">
-			<input type="text" placeholder="Téléphone">
-			<input type="text" placeholder="Adresse">
-			<input type="text" placeholder="Code Postal">
-			<input type="text" placeholder="Complément d'adresse">
+			<input type="text" value="nom" placeholder="Nom">
+			<input type="text" value="prenom" placeholder="Prénom">
+			<input type="text" value="telephone" placeholder="Téléphone">
+			<input type="text" value="adresse" placeholder="Adresse">
+			<input type="text" value="codePostal" placeholder="Code Postal">
+			<input type="text" value="complementAdresse" placeholder="Complément d'adresse">
 		</div>
 
 		<div class='listePizza'>
@@ -61,31 +62,60 @@
 			<div id="offreLivraison">
 				<p>La livraison est offerte à partir de 2 pizzas achetées.</p>
 			</div>
-			<div id="offreAEmporter">
+			<div id="offreAEmporter" hidden>
 				<p>La 6ème pizza est offerte.</p>
 			</div>
 		</div>
 
 		<div class="taillePizza">
+			<!-- Taille de la pizza (S / M / L) -->
 			<select name="taille" id="taillePizzaSelect">
-				<!-- Taille de la pizza (S / M / L) -->
 				<option value="S">Petite</option>
 				<option value="M" selected>Moyenne</option>
 				<option value="L">Grande</option>
 			</select>
 		</div>
 
+
+		<div class="boitePizza">
+			<!-- Type de boîte (Carton - 0€ / Isotherme - 2€) -->
+			<input type="radio" id="boiteCarton" name="typeBoite" value="carton" checked>
+			<label for="boiteCarton">Boîte en carton - 0€</label>
+			<br>
+			<input type="radio" id="boiteIsotherme" name="typeBoite" value="isotheme">
+			<label for="boiteIsotherme">Boîte isotherme - 2€</label>
+		</div>
+
 		<button>Valider</button>
+
 	</form>
+
 	<script type="text/javascript">
 		var doc = document;
-		var currentColor;
-		var selectedPizza;
 
 		$(doc).ready(function() {
 
+			$('input[name=modeCommande]').click(function() {
+				var selectedMod = $("input[name='modeCommande']:checked").val();
+				if (selectedMod == "livraison") {
+					$('#offreAEmporter').hide();
+					$('#offreLivraison').show();
+					$(".infosClient > input").each(function() {
+						$(this).show();
+					});
+				} else if (selectedMod == "aEmporter") {
+					$('#offreLivraison').hide();
+					$('#offreAEmporter').show();
+					$(".infosClient > input").each(function() {
+						if ($(this).val() != "nom" && $(this).val() != "prenom") {
+							$(this).hide();
+						}
+					});
+				}
+			});
+
 			$('.ajusterQuantite').click(function(event) {
-				selectedButton = event.target.id;
+				var selectedButton = event.target.id;
 				if ($('#' + selectedButton).val() == "+") {
 					var spanQuantite = $('#' + selectedButton).parent().find("span");
 					spanQuantite.text(parseInt(spanQuantite.text()) + 1);
