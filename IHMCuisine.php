@@ -14,7 +14,7 @@ and open the template in the editor.
     </head>
     <body>
         <div class="container">
-            <h1>Commande à préparer </h1>
+            <h1>INTERFACE CUISINER </h1>
             <button class="btn btn-primary" id="rafraichir">actualiser</button>
             <div class="row">
                 <table class="table">

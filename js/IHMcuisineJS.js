@@ -12,7 +12,7 @@ $(document).ready(function () {
         }
     }
     function afficher(){
-        $("tbody").append("<tr></tr>");
+        $("tbody").append("<tr class='alert alert-success'></tr>");
         $("tbody").children().last().load("dossierOF/commande.txt");
     }
     $("#rafraichir").click(function () {
