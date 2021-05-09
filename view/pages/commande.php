@@ -40,9 +40,10 @@
 				while ($tabPizza = $result->fetch(PDO::FETCH_ASSOC)) {
 					echo "<div class='blockPizza'>";
 					echo "<div class='divPizza' id='pizza_" . $tabPizza['IdPizza'] . "' >";
-					echo "Pizza : " . $tabPizza['NomPizza'] . "<br>";
-					echo "Taille : " . $tabPizza['Taille'] . "<br>";
-					echo "Ingrédients : " . $tabPizza['IngBase1'];
+					echo "<p>Pizza : " . $tabPizza['NomPizza'] . "</p><br>";
+					echo "<p>Taille : " . $tabPizza['Taille'] . "</p><br>";
+					echo "<p>Ingrédients : " . $tabPizza['IngBase1'] . "</p><br>";
+					echo "<p>Prix : " . $tabPizza['PrixUHT'] . "</p>";
 					echo "</div>";
 
 					echo "<div class='divQuantite'>";
@@ -89,7 +90,6 @@
 		<button>Valider</button>
 
 	</form>
-	
 
 	<script type="text/javascript">
 		var doc = document;

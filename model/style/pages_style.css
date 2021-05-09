@@ -1,4 +1,6 @@
-
+body {
+    color: red;
+}
 #lien {
     color:blue;
     font-weight: bold;
@@ -31,7 +33,6 @@
 .divPizza {
     border: solid 0.5px;
 }
-
 .listePizza {
     text-align: center;
     
