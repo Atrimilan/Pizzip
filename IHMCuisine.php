@@ -9,16 +9,25 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="IHMcuisine" content="IHMcuisine">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
     </head>
     <body>
-        <div>Commande à préparer</div>
-        <button id="rafraichir">actualiser</button>
+        <div class="container">
+            <h1>Commande à préparer </h1>
+            <button class="btn btn-primary" id="rafraichir">actualiser</button>
+            <div class="row">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr><th scope="col">Commande</th><th scope="col">etat Commande</th></tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- comment -->
+        <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/IHMcuisineJS.js"></script>
     </body>
-    <script type="text/javascript">
-            $(document).ready(function () {
-                $("#rafraichir").click(function () {
-                   
-                    })
-                });
-        </script>  
-</html>
+</html>>
