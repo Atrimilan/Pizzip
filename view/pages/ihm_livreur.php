@@ -17,12 +17,22 @@
     <meta charset="UTF-8">
     <title>Piz.zip - Livraison</title>
     <link href="../model/style/style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <style type="text/css">
+        .tftable {font-size:12px;color:#333333;width:90%;border-width: 5px;border-color: #729ea5;border-collapse: collapse;}
+        .tftable th {font-size:16px;background-color:#f1c50e;border-width: 3px;padding: 8px;border-style: solid;border-color: black;text-align:center;}
+        .tftable tr {background-color:#ffffd3;}
+        .tftable td {font-size:16px;border-width: 3px;padding: 8px;border-style: solid;border-color: black;text-align:center;}
+        .tftable tr:hover {background-color:#ffffff;}
+    </style>
+
 </head>
 
 <body>
     <?php
         //         -----  HEADER -----
-        include("../pages/Header.php");
+        //include("../pages/Header.php");
     ?>
 
 
@@ -38,7 +48,7 @@
                 <tr><th>COMMANDE</th><th>INFOS</th><th>ACTION</th></tr>
                 
                 <?php        
-                   $result = $connex -> query($requeteLivraisonCommande);                      
+                   $result = $connex -> query($requeteTouteCommande);                      
                    while ($tabCommande = $result -> fetch(PDO :: FETCH_ASSOC) ) {
 
                         $numcommande = $tabCommande['NumCom'];
@@ -56,12 +66,22 @@
                         $etatCommande = $tabCommande['Etat'];   
                 ?>
                 
-                <tr>
+                <tr id="ligne_<?php echo $numcommande?>">
                     <td> <?php echo $numcommande?></td>
                     <td><?php echo "Nom : $nomClient <br> Telephone : $telephoneClient <br> Adresse : $adresseClient <br> $codePostal <br> $VilleClient <br> Date : $dateCommande à $HeureDispo <br> Emballage : $emballage<br> Prix : $prix €<br> ETAT : $etatCommande<br>"; ?></td>
-                    <td><input type="button" value="LIVRE" onclick="action()"></td> 
-                </tr>        
+                    <td><input type="button" id="etat_commande<?php echo $numcommande?>" value="LIVRE" onclick="action()"></td> 
+                </tr> 
+                       
+                <script type="text/javascript">
+                    var commande = "<?php echo $numcommande?>";
+                    var livraison = document.getElementById("ligne_" + commande);
 
+                    function action() {
+                        livraison.style.background = "green";
+                        alert(commande);
+                    }
+
+                </script>    
                 <?php        
                     }				
                 ?>                            
@@ -75,7 +95,21 @@
     include("../pages/Footer.php");
     ?>
 
-    <script src="../../model/scripts/livraison.js"></script>    
+
+    <script src="../../model/scripts/livraison.js"></script>
+
+    <script type="text/javascript">
+    // bug : ne prend que le dernier
+        var commande = "<?php echo $numcommande?>";
+        var livraison = document.getElementById("ligne_" + commande);
+
+        function action() {
+            livraison.style.background = "green";
+            alert(commande);
+        }
+
+    </script> 
+
 </body>
 
 </html>
