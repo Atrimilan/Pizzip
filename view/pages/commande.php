@@ -39,18 +39,18 @@
 
 				while ($tabPizza = $result->fetch(PDO::FETCH_ASSOC)) {
 					echo "<div class='blockPizza'>";
-					echo "<div class='divPizza' id='pizza_" . $tabPizza['IdPizza'] . "' >";
-					echo "<p>Pizza : " . $tabPizza['NomPizza'] . "</p>";
-					echo "<p>Taille : " . $tabPizza['Taille'] . "</p>";
-					echo "<p>Ingrédients : " . $tabPizza['IngBase1'] . "</p>";
-					echo "<p>Prix : <span class='prixPizza' id='prixPizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['PrixUHT'] . "</span> €</p>";
-					echo "</div>";
+					echo 	"<div class='divPizza' id='pizza_" . $tabPizza['IdPizza'] . "' >";
+					echo 		"<p>Pizza : <span class='nomPizza' id='nomPizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['NomPizza'] . "</span></p>";
+					echo 		"<p>Taille : " . $tabPizza['Taille'] . "</p>";
+					echo 		"<p>Ingrédients : " . $tabPizza['IngBase1'] . "</p>";
+					echo 		"<p>Prix : <span class='prixPizza' id='prixPizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['PrixUHT'] . "</span> €</p>";
+					echo 	"</div>";
 
-					echo "<div class='divQuantite'>";
-					echo "Quantité : <span id='quantitePizza_" . $tabPizza['IdPizza'] . "'>0</span> ";
-					echo "<input type='button' class='ajusterQuantite' id='incrementQuantite_" . $tabPizza['IdPizza'] . "' value='+'> ";
-					echo "<input type='button' class='ajusterQuantite' id='decrementQuantite_" . $tabPizza['IdPizza'] . "' value='-'>";
-					echo "</div>";
+					echo 	"<div class='divQuantite'>";
+					echo 		"Quantité : <span class='quantitePizza' id='quantitePizza_" . $tabPizza['IdPizza'] . "'>0</span>";
+					echo 		"<input type='button' class='ajusterQuantite' id='incrementQuantite_" . $tabPizza['IdPizza'] . "' value='+'> ";
+					echo 		"<input type='button' class='ajusterQuantite' id='decrementQuantite_" . $tabPizza['IdPizza'] . "' value='-'>";
+					echo 	"</div>";
 					echo "</div>";
 				}
 			} catch (PDOException $e) {
@@ -92,7 +92,7 @@
 			<p>Montant total de la commande : <span id="montantTotal">0</span> €</p>
 		</div>
 
-		<button>Valider</button>
+		<button id="validerCommande" type="button">Valider</button>
 
 	</form>
 
@@ -157,9 +157,73 @@
 				if (parseInt(spanQuantite.text()) > 0) {
 					selectedPizza.css("background-color", "rgba(120, 255, 200, 255)");
 				} else {
-					selectedPizza.css("background-color", "rgba(0, 0, 0, 0)");
+					selectedPizza.css("background-color", "rgba(255, 255, 255, 255)");
 				}
 			}
+
+			$("#validerCommande").click(function() { // Valider la commande
+
+				var nom, prenom, tel, adresse, codePostal, complementAdresse; // infos client
+				var modeCommande, typeBoite, pizzaSelection, taillePizza; // infos commande
+
+				modeCommande = 'modeCommande=' + $(".modeCommande").children('input[name="modeCommande"]:checked').val().trim();
+				typeBoite = 'typeBoite=' + $(".boitePizza").children('input[name="typeBoite"]:checked').val().trim();
+				
+				
+				pizzaSelection = 'pizzaSelection=';
+				$(".listePizza > div").each(function() {
+					pizzaSelection += "nom:" + $(this).find('.nomPizza').text() + ",";
+					pizzaSelection += "quantité:" + $(this).find('.quantitePizza').text() + "/";
+				});
+
+				taillePizza = 'taillePizza=' + $('#taillePizzaSelect option:selected').val().trim();
+
+				nom = 'nom=' + $(".infosClient").children('input[name="nom"]').val().trim();
+				prenom = 'prenom=' + $(".infosClient").children('input[name="prenom"]').val().trim();
+
+				if (modeCommande == "modeCommande=livraison") {
+					// Données utiles seulement dans le cas d'une livraison
+					tel = 'tel=' + $(".infosClient").children('input[name="telephone"]').val().trim();
+					adresse = 'adresse=' + $(".infosClient").children('input[name="adresse"]').val().trim();
+					codePostal = 'codePostal=' + $(".infosClient").children('input[name="codePostal"]').val().trim();
+					complementAdresse = 'complementAdresse=' + $(".infosClient").children('input[name="complementAdresse"]').val().trim();
+				}
+
+				/*$.getJSON('http://localhost/CNAM/Pizzip/controller/enregistrerCommande.php?' + selec).done(function(result) {
+					let list = $('#ul');
+					list.html('');
+					//console.log(result);
+
+					incrementateur = 0;
+					for (element in result) {
+						switch (incrementateur) {
+							case 0:
+								list.append("Four n°" + result[element] + ":<br>"); // le premier élement est l'ID, et on ne l'afficher qu'une seule fois
+								break;
+							case 1:
+								list.append("<br>Date : " + result[element] + "<br>"); // afficher la date
+								incrementateur++;
+								break;
+							case 2:
+								list.append("Température : " + result[element] + "°C<br>"); // afficher la température
+								incrementateur = 1;
+						}
+					}
+				});*/
+				console.log("%c- Validation de la commande -", "color:red; font-weight:bold; font-size:15px")
+				console.log(nom);
+				console.log(prenom);
+				if (modeCommande == "modeCommande=livraison") {
+					console.log(tel);
+					console.log(adresse);
+					console.log(codePostal);
+					console.log(complementAdresse);
+				}
+				console.log(modeCommande);
+				console.log(typeBoite);
+				console.log(pizzaSelection);
+				console.log(taillePizza);
+			});
 		});
 	</script>
 </body>
