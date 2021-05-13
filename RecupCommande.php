@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="IHMcuisine" content="IHMcuisine">
-    </head>
-    <body>
         <?php
         require_once './Connexion.php';
 
         $tabCom = recupNumcom($pdo);
+        $tabNumCom=array();
         foreach ($tabCom as $key => $value) {
             $tabCom [$key] = RecupDetail($key, $pdo);
         }
@@ -23,9 +11,12 @@ and open the template in the editor.
                 $tabCom[$key][$key1] = recupPizza($key1, $pdo);
             }
         }
-        var_dump($tabCom);
+        foreach ($tabCom as $key => $value) {
+            array_push($tabNumCom,$key);
+        }
+        
+        echo json_encode($tabNumCom);
         createFichier($tabCom);
-       
         function createFichier($tabCom) {
             foreach ($tabCom as $key => $value) {
                 
@@ -106,7 +97,3 @@ and open the template in the editor.
             return $tabResult;
         }
         ?>
-
-
-    </body>
-</html>

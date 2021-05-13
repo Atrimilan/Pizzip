@@ -1,37 +1,24 @@
 
 $(document).ready(function () {
-    let interval ;
+    let interval;
 
-    function afficherCommande() {
+    function afficherCommande(numCom) {
         $("tbody").append("<tr class='alert alert-success'></tr>");
-        $("tbody").children().last().load("dossierOF/3.txt");
+        $("tbody").children().last().load("dossierOF/" + numCom + ".txt");
     }
-    $("#rafraichir").click(function () {
-        afficherCommande();
-    });
     $("#debut").click(function () {
-       interval = setInterval(function () {
-            alert("debut");
-       }, 5000);
+        interval = setInterval(function () {
+            $.ajax({
+                url: "./RecupCommande.php",
+                datatype: "json",
+                success: function (data, statut) {
+                    let tab = JSON.parse(data);
+                    tab.forEach(element => afficherCommande(element));
+                }
+            });
+        }, 5000);
     });
     $("#fin").click(function () {
         clearInterval(interval);
     });
-    $("#creer").click(function () {
-        $.ajax({
-            url: "RecupCommande.php",
-            success: function (statut) {
-                $("#feedback").html(statut);
-            }
-        });
-    });
-//    setInterval(function () {
-//        $.ajax({
-//            url: "ihm_livreur.php",
-//            success: function (statut) {
-//                $("#feedback").html(statut);
-//                //alert("ActualisÃ©");
-//            }
-//        });
-//    }, 5000);
 });

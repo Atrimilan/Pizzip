@@ -15,8 +15,6 @@ and open the template in the editor.
     <body>
         <div class="container">
             <h1>INTERFACE CUISINER </h1>
-            <button class="btn btn-primary" id="rafraichir">actualiser</button>
-            <button class="btn btn-primary" id="creer">creer</button>
             <button class="btn btn-primary" id="debut">debut</button>
             <button class="btn btn-primary" id="fin">fin</button>
             <div class="row">
