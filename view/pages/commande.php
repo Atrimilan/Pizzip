@@ -6,6 +6,7 @@
 	<title>Piz.zip - Commande</title>
 	<script src="https://code.jquery.com/jquery-latest.js"></script> <!-- Dernier Jquery -->
 	<link href="../../model/style/pages_style.css" rel="stylesheet" type="text/css">
+	<link href="../../model/style/pages_style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>

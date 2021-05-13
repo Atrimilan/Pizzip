@@ -1,7 +1,8 @@
 body {
     background-color: rgb(92, 92, 95);
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: red;
+    color: white;
+    text-shadow: 1px 1px 2px rgb(38, 38, 39), 0 0 1em rgb(38, 38, 39), 0 0 0.2em rgb(38, 38, 39);
 }
 
 p {
@@ -49,6 +50,8 @@ p {
 
 .listePizza {
     text-align: center;
+    color: black;
+    text-shadow: none;
 
     /*Ne pas sélectionner le texte dans les divs*/
     -moz-user-select: none; /* Firefox */
@@ -74,11 +77,19 @@ select, button {
     -webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
     -ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
     user-select: none; /* Propriété standard */
+
+    padding: 5px 15px;
+    background-color: rgb(65, 65, 65);
+    color: whitesmoke;
 }
 
 button {
-    padding: 10px;
     border-radius: 30px;
+}
+
+input[type=radio]{
+    padding: 5px 15px;
     background-color: rgb(65, 65, 65);
     color: whitesmoke;
+    border-radius: 30px;
 }
