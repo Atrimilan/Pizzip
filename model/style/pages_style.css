@@ -1,6 +1,7 @@
 body {
     background-color: rgb(92, 92, 95);
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: red;
 }
 
 p {
@@ -73,4 +74,11 @@ select, button {
     -webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
     -ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
     user-select: none; /* Propriété standard */
+}
+
+button {
+    padding: 10px;
+    border-radius: 30px;
+    background-color: rgb(65, 65, 65);
+    color: whitesmoke;
 }

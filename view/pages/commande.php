@@ -26,7 +26,7 @@
 			<input type="text" name="telephone" placeholder="Téléphone">
 			<input type="text" name="adresse" placeholder="Adresse">
 			<input type="text" name="codePostal" placeholder="Code Postal">
-			<input type="text" name="complementAdresse" placeholder="Complément d'adresse">
+			<input type="text" name="ville" placeholder="Ville">
 		</div>
 
 		<div class='listePizza'>
@@ -163,17 +163,20 @@
 
 			$("#validerCommande").click(function() { // Valider la commande
 
-				var nom, prenom, tel, adresse, codePostal, complementAdresse; // infos client
+				var nom, prenom, tel, adresse, codePostal, ville; // infos client
 				var modeCommande, typeBoite, pizzaSelection, taillePizza; // infos commande
 
 				modeCommande = 'modeCommande=' + $(".modeCommande").children('input[name="modeCommande"]:checked').val().trim();
 				typeBoite = 'typeBoite=' + $(".boitePizza").children('input[name="typeBoite"]:checked').val().trim();
-				
-				
+
+
 				pizzaSelection = 'pizzaSelection=';
+				pizzaSelectionQuantite = 'selectionQuantite=';
 				$(".listePizza > div").each(function() {
-					pizzaSelection += "nom:" + $(this).find('.nomPizza').text() + ",";
-					pizzaSelection += "quantité:" + $(this).find('.quantitePizza').text() + "/";
+					if (parseInt($(this).find('.quantitePizza').text()) > 0) {
+						pizzaSelection += $(this).find('.nomPizza').text() + ",";
+						pizzaSelectionQuantite += $(this).find('.quantitePizza').text() + ",";
+					}
 				});
 
 				taillePizza = 'taillePizza=' + $('#taillePizzaSelect option:selected').val().trim();
@@ -186,15 +189,17 @@
 					tel = 'tel=' + $(".infosClient").children('input[name="telephone"]').val().trim();
 					adresse = 'adresse=' + $(".infosClient").children('input[name="adresse"]').val().trim();
 					codePostal = 'codePostal=' + $(".infosClient").children('input[name="codePostal"]').val().trim();
-					complementAdresse = 'complementAdresse=' + $(".infosClient").children('input[name="complementAdresse"]').val().trim();
+					ville = 'ville=' + $(".infosClient").children('input[name="ville"]').val().trim();
 				}
 
-				/*$.getJSON('http://localhost/CNAM/Pizzip/controller/enregistrerCommande.php?' + selec).done(function(result) {
-					let list = $('#ul');
-					list.html('');
-					//console.log(result);
+				var lienAPI = 'http://localhost/CNAM/Pizzip/controller/enregistrerCommande.php';
+				var parametres = nom + '&' + prenom + '&' + modeCommande + '&' + typeBoite + '&' + tel + '&' + adresse + '&' + codePostal + '&' + ville;
+				$.getJSON(lienAPI + '?' + parametres).done(function(result) {
 
-					incrementateur = 0;
+					console.log(result);
+					console.log(result.success);
+
+					/*incrementateur = 0;
 					for (element in result) {
 						switch (incrementateur) {
 							case 0:
@@ -208,8 +213,8 @@
 								list.append("Température : " + result[element] + "°C<br>"); // afficher la température
 								incrementateur = 1;
 						}
-					}
-				});*/
+					}*/
+				});
 				console.log("%c- Validation de la commande -", "color:red; font-weight:bold; font-size:15px")
 				console.log(nom);
 				console.log(prenom);
@@ -217,11 +222,12 @@
 					console.log(tel);
 					console.log(adresse);
 					console.log(codePostal);
-					console.log(complementAdresse);
+					console.log(ville);
 				}
 				console.log(modeCommande);
 				console.log(typeBoite);
 				console.log(pizzaSelection);
+				console.log(pizzaSelectionQuantite);
 				console.log(taillePizza);
 			});
 		});
