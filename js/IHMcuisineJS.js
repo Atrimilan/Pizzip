@@ -1,23 +1,37 @@
 
 $(document).ready(function () {
-    
-    function Dossier() {
-         	var fso=new ActiveXObject("Scripting.FileSystemObject");
-        alert(fso.FolderExists("dossierOF"));
-        let monDossier;
-        monDossier = monDossier.getFolder("dossierOF");
-        index = new Enumerator(monDossier.files);
-        for (; !index.atEnd(); monDossier.moveNext()){
-            alert(monDossier.item());
-        }
-    }
-    function afficher(){
+    let interval ;
+
+    function afficherCommande() {
         $("tbody").append("<tr class='alert alert-success'></tr>");
-        $("tbody").children().last().load("dossierOF/commande.txt");
+        $("tbody").children().last().load("dossierOF/3.txt");
     }
     $("#rafraichir").click(function () {
-        afficher()
-        //setInterval("console.log('tata')", 5000); 
-        Dossier();
+        afficherCommande();
     });
+    $("#debut").click(function () {
+       interval = setInterval(function () {
+            alert("debut");
+       }, 5000);
+    });
+    $("#fin").click(function () {
+        clearInterval(interval);
+    });
+    $("#creer").click(function () {
+        $.ajax({
+            url: "RecupCommande.php",
+            success: function (statut) {
+                $("#feedback").html(statut);
+            }
+        });
+    });
+//    setInterval(function () {
+//        $.ajax({
+//            url: "ihm_livreur.php",
+//            success: function (statut) {
+//                $("#feedback").html(statut);
+//                //alert("ActualisÃ©");
+//            }
+//        });
+//    }, 5000);
 });
