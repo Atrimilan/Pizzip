@@ -7,6 +7,7 @@
     //            ----- REQUETE SQL -----    
     $requeteTouteCommande = "SELECT * FROM COMMANDE ";
     $requeteLivraisonCommande = "SELECT * FROM COMMANDE where Etat = 'pretALivrer'";
+    
 
 ?>
 
@@ -47,8 +48,9 @@
                 <table class="tftable" border="1">
                 <tr><th>COMMANDE</th><th>INFOS</th><th>ACTION</th></tr>
                 
-                <?php        
-                   $result = $connex -> query($requeteLivraisonCommande);                      
+                <?php
+
+                   $result = $connex -> query($requeteTouteCommande);                      
                    while ($tabCommande = $result -> fetch(PDO :: FETCH_ASSOC) ) {
 
                         $numcommande = $tabCommande['NumCom'];
@@ -63,26 +65,34 @@
                         $prix = $tabCommande['CoutLiv'];
                         //$livreur = $tabCommande['idLivreur'];
                         //$archive = $tabCommande['DateArchiv'];
-                        $etatCommande = $tabCommande['Etat'];   
+                        $etatCommande = $tabCommande['Etat'];
+
+                        $requeteDetailCommande = "SELECT * FROM COM_DETAIL where NumCom = $numcommande";
+                        $result1 = $connex -> query($requeteDetailCommande);                      
+                        while ($tabComDetail = $result1 -> fetch(PDO :: FETCH_ASSOC) ) {
+                            
+                            $numDetail = $tabComDetail['Num_Detail'];
+                            $quantite = $tabComDetail['Quant'];
+
+                            $requeteDetail = "SELECT * FROM DETAIL where Num_Detail = $numDetail";
+                            $result2 = $connex -> query($requeteDetail);                      
+                            while ($tabDetail = $result2 -> fetch(PDO :: FETCH_ASSOC) ) {
+                                
+                                $nomPizza = $tabDetail['NomPizza'];
+                                                        
+                        
                 ?>
                 
-                <tr id="ligne_<?php echo $numcommande?>">
+                <tr id="ligne_">
                     <td> <?php echo $numcommande?></td>
-                    <td><?php echo "Nom : $nomClient <br> Telephone : $telephoneClient <br> Adresse : $adresseClient <br> $codePostal <br> $VilleClient <br> Date : $dateCommande à $HeureDispo <br> Emballage : $emballage<br> Prix : $prix €<br> ETAT : $etatCommande<br>"; ?></td>
+                    <td><?php echo "Nom : $nomClient <br> Telephone : $telephoneClient <br> Adresse : $adresseClient  $codePostal $VilleClient <br> Date : $dateCommande à $HeureDispo <br> Emballage : $emballage<br> Prix : $prix €<br> ETAT : $etatCommande<br> Quantité : $quantite Pizza $nomPizza <br>"; ?></td>
                     <td><input type="button" id="etat_commande<?php echo $numcommande?>" value="LIVRE" onclick="action()"></td> 
                 </tr> 
                        
-                <script type="text/javascript">
-                    var commande = "<?php echo $numcommande?>";
-                    var livraison = document.getElementById("ligne_" + commande);
-
-                    function action() {
-                        livraison.style.background = "green";
-                        alert(commande);
+                
+                <?php
                     }
-
-                </script>    
-                <?php        
+                    }        
                     }				
                 ?>                            
                 </table> <br>
@@ -101,7 +111,7 @@
     <script type="text/javascript">
     // bug : ne prend que le dernier
         var commande = "<?php echo $numcommande?>";
-        var livraison = document.getElementById("ligne_" + commande);
+        var livraison = document.getElementById("ligne_");
 
         function action() {
             livraison.style.background = "green";
