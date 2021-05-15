@@ -5,8 +5,11 @@
         <group>
             <file>file:/C:/wamp64/www/pizzip/IHMCuisine.php</file>
             <file>file:/C:/wamp64/www/pizzip/Connexion.php</file>
+            <file>file:/C:/wamp64/www/pizzip/dossierOF/commande.html</file>
             <file>file:/C:/wamp64/www/pizzip/RecupCommande.php</file>
             <file>file:/C:/wamp64/www/pizzip/js/IHMcuisineJS.js</file>
+            <file>file:/C:/wamp64/www/pizzip/dossierOF/commande.txt</file>
+            <file>file:/C:/wamp64/www/pizzip/newEmptyPHP.php</file>
         </group>
     </open-files>
 </project-private>
