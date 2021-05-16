@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <link rel="stylesheet" href="../model/style.css">
+        <meta charset="UTF-8">
+        <title>Piz.zip - Administration</title>
+        <h1>IHM Administration - AJOUT INGREDIENT</h1><br>            
+    </head>
+    <body>
+        <form action="MUTH_Kevin_ex705Serveur.php" method="post">
+            <p>id ingrédient : <input type="number" min="1" name="IdIngred"></p>
+            <p>Nom ingrédient : <input type="text" name="NomIngred"></p>
+            Produit frais ?
+            <input type="radio" id="oui" name="frais">
+            <label for="oui">OUI</label>
+            <input type="radio" id="non" name="frais">
+            <label for="non">NON</label>
+            <p>Stock critique <input type="number" min=0 name="StockMin"></p>
+            <p>Stock réel <input type="number" min=0 name="StockReel"></p>
+            <p>Prix UHT <input type="number" min=0 step="any" name="PrixUHT_Moyen"></p>
+            <p>Quantité à commandé <input type="number" min=0 name="Q_A_Com"></p>
+            <p>Date Archivé <input type="date" name="DateArchiv"></p>
+            <input type="submit" value="Ajouter" name="ajout">
+            <input type="submit" value="Annuler" name="annulation">
+         </form>
+    </body>
+</html>
