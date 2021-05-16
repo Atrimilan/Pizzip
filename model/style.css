@@ -25,7 +25,7 @@ footer, header, hgroup, menu, nav, section {
     display: block;
 }
 /*--- FIN RESET ---*/
-li, form,p, input {
+li, p {
     line-height: 30px;
 }
 h1{
