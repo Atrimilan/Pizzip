@@ -12,7 +12,7 @@ and open the template in the editor.
         <h1>IHM Administration - AJOUT INGREDIENT</h1><br>            
     </head>
     <body>
-        <form action="MUTH_Kevin_ex705Serveur.php" method="post">
+        <form action="ajouter_ing.php" method="post">
             <p>id ingrédient : <input type="number" min="1" name="IdIngred"></p>
             <p>Nom ingrédient : <input type="text" name="NomIngred"></p>
             Produit frais ?
@@ -20,6 +20,7 @@ and open the template in the editor.
             <label for="oui">OUI</label>
             <input type="radio" id="non" name="frais">
             <label for="non">NON</label>
+            <p>Unite <input type="text" name="unite"></p>
             <p>Stock critique <input type="number" min=0 name="StockMin"></p>
             <p>Stock réel <input type="number" min=0 name="StockReel"></p>
             <p>Prix UHT <input type="number" min=0 step="any" name="PrixUHT_Moyen"></p>
