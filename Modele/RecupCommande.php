@@ -9,17 +9,17 @@ foreach ($tabCom as $key => $value) {
 }
 foreach ($tabCom as $key => $value) {
     foreach ($tabCom[$key] as $key1 => $value1) {
-        $tabCom[$key][$key1] = recupPizza($key1, $pdo);
+        $tabCom[$key][$key1] += recupPizza($key1, $pdo);
     }
 }
 foreach ($tabCom as $key => $value) {
     array_push($tabNumCom, $key);
 }
 foreach ($tabNumCom as $value) {
-   // changeEtat($value, $pdo);
+    //changeEtat($value, $pdo);
 }
-
-echo json_encode($tabNumCom);
+var_dump($tabCom);
+//echo json_encode($tabNumCom);
 createFichier($tabCom);
 
 function createFichier($tabCom) {
@@ -27,7 +27,8 @@ function createFichier($tabCom) {
     foreach ($tabCom as $key => $value) {
         
         $txt = "<td>";
-        $txt .= "    <p>commande $key</p>";
+        $txt .= "    <p>numéro de commande : $key</p>";
+        $txt .="<p>";
         $txt .= "</td>";
         $txt .= "<td>";
         $txt .= "<div class='form-check'>";
@@ -75,10 +76,38 @@ function recupPizza($numDetail, $pdo) {
 
     try {
         $tabResult = array();
-        $requete = "select NomPizza from DETAIL where Num_Detail = $numDetail";
+        $requete = "select NomPizza,IngBase1,IngBase2,IngBase3,IngBase4,IngOpt1,IngOpt2,IngOpt3,IngOpt4 from DETAIL where Num_Detail = $numDetail";
         $result = $pdo->query($requete);
         while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
             $tabResult['nomPizza'] = $ligne['NomPizza'];
+            
+//            if($ligne['IngBase1']!=null){
+//            $tabResult['nomPizza'] = $ligne['IngBase1'];
+//            }
+            if($ligne['IngBase1']!=null){
+                $tabResult['IngBase1'] = $ligne['IngBase1'];
+            }
+            if($ligne['IngBase2']!=null){
+                $tabResult['IngBase2'] = $ligne['IngBase2'];
+            }
+            if($ligne['IngBase3']!=null){
+                $tabResult['IngBase3'] = $ligne['IngBase3'];
+            }
+            if($ligne['IngBase4']!=null){
+                $tabResult['IngBase4'] = $ligne['IngBase4'];
+            }
+            if($ligne['IngOpt1']!=null){
+                $tabResult['IngOpt1'] = $ligne['IngOpt1'];
+            }
+            if($ligne['IngOpt2']!=null){
+                $tabResult['IngOpt2'] = $ligne['IngOpt2'];
+            }
+            if($ligne['IngOpt3']!=null){
+                $tabResult['IngOpt3'] = $ligne['IngOpt3'];
+            }
+            if($ligne['IngOpt4']!=null){
+                $tabResult['IngOpt4'] = $ligne['IngOpt4'];
+            }
         }
     } catch (PDOException $ex) {
         print $ex->getMessage();
@@ -109,7 +138,8 @@ function RecupDetail($numCom, $pdo) {
         $requete = "select Num_Detail,Quant from COM_DETAIL where NumCom = $numCom";
         $result = $pdo->query($requete);
         while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
-            $tabResult[$ligne['Num_Detail']] = null;
+            $tabResult[$ligne['Num_Detail']] = ['quantite'=>$ligne['Quant']];
+           
         }
     } catch (PDOException $ex) {
         print $ex->getMessage();

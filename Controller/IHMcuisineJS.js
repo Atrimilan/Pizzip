@@ -3,7 +3,7 @@ $(document).ready(function () {
     let interval;
 
     function afficherCommande(numCom) {
-        $("tbody").append("<tr class='ligne' id='" + numCom + "'></tr><br>");
+        $("tbody").append("<tr class='alert alert-success' id='" + numCom + "'></tr><br>");
         $("tbody").children().last().load("../Modele/dossierOF/" + numCom + ".txt");
     }
     $("#debut").click(function () {
@@ -20,7 +20,6 @@ $(document).ready(function () {
     });
     $("tbody").on('click', "input", function () {
         let numCom=((this).name)
-        $("ligne").css("background-Color","red");
         console.log(numCom);
         switch ((this).value) {
             case "accepter":
