@@ -49,7 +49,7 @@
 
 					echo 	"<div class='divQuantite'>";
 					echo 		"Quantité : <span class='quantitePizza' id='quantitePizza_" . $tabPizza['IdPizza'] . "'>0</span>";
-					echo 		"<input type='button' class='ajusterQuantite' id='incrementQuantite_" . $tabPizza['IdPizza'] . "' value='+'> ";
+					echo 		"<input type='button' class='ajusterQuantite' id='incrementQuantite_" . $tabPizza['IdPizza'] . "' value='+'>";
 					echo 		"<input type='button' class='ajusterQuantite' id='decrementQuantite_" . $tabPizza['IdPizza'] . "' value='-'>";
 					echo 	"</div>";
 					echo "</div>";
@@ -97,142 +97,7 @@
 
 	</form>
 
-	<script type="text/javascript">
-		var doc = document;
-		var currentBoxMod = "carton";
-
-		$(doc).ready(function() {
-
-			$('input[name=typeBoite]').click(function() {
-				var spanMontantTotal = $('#montantTotal');
-				var selectedBoxMod = $("input[name='typeBoite']:checked").val();
-				if (selectedBoxMod == "carton" && currentBoxMod != "carton") { // Si on clique sur Carton, et qu'il n'était pas déjà sélectionné
-					spanMontantTotal.text(parseInt(spanMontantTotal.text()) - 3);
-					currentBoxMod = "carton";
-				} else if (selectedBoxMod == "isotherme" && currentBoxMod != "isotherme") {
-					spanMontantTotal.text(parseInt(spanMontantTotal.text()) + 3);
-					currentBoxMod = "isotherme";
-				}
-			});
-
-			$('input[name=modeCommande]').click(function() {
-				var selectedMod = $("input[name='modeCommande']:checked").val();
-				if (selectedMod == "livraison") {
-					$('#offreAEmporter').hide();
-					$('#offreLivraison').show();
-					$(".infosClient > input").each(function() {
-						$(this).show();
-					});
-				} else if (selectedMod == "aEmporter") {
-					$('#offreLivraison').hide();
-					$('#offreAEmporter').show();
-					$(".infosClient > input").each(function() {
-						if ($(this).attr('name') != "nom" && $(this).attr('name') != "prenom") {
-							$(this).hide();
-						}
-					});
-				}
-			});
-
-			$('.ajusterQuantite').click(function(event) {
-				var selectedButton = event.target.id;
-				var spanQuantite = $('#' + selectedButton).parent().find("span");
-				var prixPizza = $('#' + selectedButton).parent().parent().find(".prixPizza");
-				var spanMontantTotal = $('#montantTotal');
-
-				if ($('#' + selectedButton).val() == "+") {
-					spanQuantite.text(parseInt(spanQuantite.text()) + 1);
-					spanMontantTotal.text(parseInt(spanMontantTotal.text()) + parseInt(prixPizza.text()))
-				} else if ($('#' + selectedButton).val() == "-") {
-					if (parseInt(spanQuantite.text()) != 0) { // Ne pas aller dans le négatif
-						spanQuantite.text(parseInt(spanQuantite.text()) - 1);
-						spanMontantTotal.text(parseInt(spanMontantTotal.text()) - parseInt(prixPizza.text()))
-					}
-				}
-
-				verifierSelections(selectedButton, spanQuantite); // Repère visuel des sélections par coloration des divs 
-			});
-
-			function verifierSelections(selectedButton, spanQuantite) {
-				var selectedPizza = $('#' + selectedButton).parent().parent().children(".divPizza");
-				if (parseInt(spanQuantite.text()) > 0) {
-					selectedPizza.css("background-color", "rgba(120, 255, 200, 255)");
-				} else {
-					selectedPizza.css("background-color", "rgba(255, 255, 255, 255)");
-				}
-			}
-
-			$("#validerCommande").click(function() { // Valider la commande
-
-				var nom, prenom, tel, adresse, codePostal, ville; // infos client
-				var modeCommande, typeBoite, pizzaSelection, taillePizza; // infos commande
-
-				modeCommande = 'modeCommande=' + $(".modeCommande").children('input[name="modeCommande"]:checked').val().trim();
-				typeBoite = 'typeBoite=' + $(".boitePizza").children('input[name="typeBoite"]:checked').val().trim();
-
-
-				pizzaSelection = 'pizzaSelection=';
-				pizzaSelectionQuantite = 'selectionQuantite=';
-				$(".listePizza > div").each(function() {
-					if (parseInt($(this).find('.quantitePizza').text()) > 0) {
-						pizzaSelection += $(this).find('.nomPizza').text() + ",";
-						pizzaSelectionQuantite += $(this).find('.quantitePizza').text() + ",";
-					}
-				});
-
-				taillePizza = 'taillePizza=' + $('#taillePizzaSelect option:selected').val().trim();
-
-				nom = 'nom=' + $(".infosClient").children('input[name="nom"]').val().trim();
-				prenom = 'prenom=' + $(".infosClient").children('input[name="prenom"]').val().trim();
-
-				if (modeCommande == "modeCommande=livraison") {
-					// Données utiles seulement dans le cas d'une livraison
-					tel = 'tel=' + $(".infosClient").children('input[name="telephone"]').val().trim();
-					adresse = 'adresse=' + $(".infosClient").children('input[name="adresse"]').val().trim();
-					codePostal = 'codePostal=' + $(".infosClient").children('input[name="codePostal"]').val().trim();
-					ville = 'ville=' + $(".infosClient").children('input[name="ville"]').val().trim();
-				}
-
-				var lienAPI = 'http://localhost/CNAM/Pizzip/controller/enregistrerCommande.php';
-				var parametres = nom + '&' + prenom + '&' + modeCommande + '&' + typeBoite + '&' + tel + '&' + adresse + '&' + codePostal + '&' + ville;
-				$.getJSON(lienAPI + '?' + parametres).done(function(result) {
-
-					console.log(result);
-					console.log(result.success);
-
-					/*incrementateur = 0;
-					for (element in result) {
-						switch (incrementateur) {
-							case 0:
-								list.append("Four n°" + result[element] + ":<br>"); // le premier élement est l'ID, et on ne l'afficher qu'une seule fois
-								break;
-							case 1:
-								list.append("<br>Date : " + result[element] + "<br>"); // afficher la date
-								incrementateur++;
-								break;
-							case 2:
-								list.append("Température : " + result[element] + "°C<br>"); // afficher la température
-								incrementateur = 1;
-						}
-					}*/
-				});
-				console.log("%c- Validation de la commande -", "color:red; font-weight:bold; font-size:15px")
-				console.log(nom);
-				console.log(prenom);
-				if (modeCommande == "modeCommande=livraison") {
-					console.log(tel);
-					console.log(adresse);
-					console.log(codePostal);
-					console.log(ville);
-				}
-				console.log(modeCommande);
-				console.log(typeBoite);
-				console.log(pizzaSelection);
-				console.log(pizzaSelectionQuantite);
-				console.log(taillePizza);
-			});
-		});
-	</script>
+	<script type="text/javascript" src="../../model/scripts/priseDeCommande.js"></script>
 </body>
 
 </html>

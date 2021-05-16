@@ -34,18 +34,24 @@ p {
     display: inline-block;
     width: 15%;
     margin: 0 2%;
+    box-shadow: 3px 3px 5px rgb(72, 72, 73);
 }
 
 .divPizza {
-    border: solid 0.5px;
     padding: 5px;
     text-align: left;
-    background-color: rgba(255, 255, 255, 255);
+    background-color: rgb(110, 110, 115);
+    color: whitesmoke;
+    border: solid 2px rgb(72, 72, 73);
+    border-bottom: none;
 }
 
 .divQuantite {
-    border: solid 0.5px;
-    background-color: rgba(255, 255, 255, 255);
+    padding: 5px;
+    background-color: rgb(82, 82, 87);
+    color: whitesmoke;
+    border: solid 2px rgb(72, 72, 73);
+    border-top: none;
 }
 
 .listePizza {
@@ -72,7 +78,8 @@ p {
     user-select: none; /* Propriété standard */
 }
 
-select, button {
+select,
+button {
     -moz-user-select: none; /* Firefox */
     -webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
     -ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
@@ -87,9 +94,40 @@ button {
     border-radius: 30px;
 }
 
-input[type=radio]{
-    padding: 5px 15px;
-    background-color: rgb(65, 65, 65);
-    color: whitesmoke;
+input[type="radio"] {
+    width: 15px;
+    height: 15px;
+    box-shadow: 3px 3px 3px rgb(72, 72, 73);
+    border-radius: 50px;
+    -webkit-appearance: inherit;
+    border: 2px solid rgb(72, 72, 73);
+    position: relative;
+    box-sizing: border-box;
+    background-color: whitesmoke;
+}
+input[type="radio"]:checked:before {
+    content: "";
+    position: absolute;
+    border-radius: 50px;
+    left: 25%;
+    top: 25%;
+    width: 50%;
+    height: 50%;
+    background: rgb(82, 82, 87);
+}
+
+input[type="button"] {
+    margin: 2px;
+    padding: 1px 5px;
     border-radius: 30px;
+    background-color: rgb(65, 65, 70);
+    color: whitesmoke;
+}
+
+input[type="text"] {
+    background-color: whitesmoke;
+    border-style: solid;
+    color: rgb(82, 82, 87);
+    box-shadow: 3px 3px 5px rgb(72, 72, 73);
+    padding: 5px;
 }
