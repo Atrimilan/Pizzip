@@ -1,7 +1,15 @@
 <html>
     <?php
-    function ajouter_ing (){
-        echo "fonction afficher";
-    }
+    require_once("../controller/connexion.php");
+    $idIngred=$_POST['IdIngred'];
+    $frais=$_POST['NomIngred'];
+    $NomIngred=$_POST['NomIngred'];
+    $NomIngred=$_POST['NomIngred'];
+    $NomIngred=$_POST['NomIngred'];
+    $NomIngred=$_POST['NomIngred'];
+    $NomIngred=$_POST['NomIngred'];
+    $NomIngred=$_POST['NomIngred'];
+    $NomIngred=$_POST['NomIngred'];
+    $NomIngred=$_POST['NomIngred'];
     ?>
 </html>
