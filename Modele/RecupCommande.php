@@ -1,15 +1,18 @@
 <?php
 
 require_once './Connexion.php';
+ini_set('xdebug.var_display_max_depth', 10);
+ini_set('xdebug.var_display_max_children', 256);
+ini_set('xdebug.var_display_max_data', 1024);
 
 $tabCom = recupNumcom($pdo);
 $tabNumCom = array();
 foreach ($tabCom as $key => $value) {
-    $tabCom [$key] = RecupDetail($key, $pdo);
+    $tabCom [$key]["Commande"] = RecupDetail($key, $pdo);
 }
 foreach ($tabCom as $key => $value) {
-    foreach ($tabCom[$key] as $key1 => $value1) {
-        $tabCom[$key][$key1] += recupPizza($key1, $pdo);
+foreach ($tabCom[$key]["Commande"] as $key1 => $value1) {
+        $tabCom[$key]["Commande"][$key1] += recupPizza($key1, $pdo);
     }
 }
 foreach ($tabCom as $key => $value) {
@@ -119,10 +122,10 @@ function recupNumcom($pdo) {
 
     try {
         $tabResult = array();
-        $requete = "select NumCom from COMMANDE where Etat = 'nonTraitee'";
+        $requete = "select NomClient,NumCom,TelClient,AdrClient,TypeEmbal,A_Livrer,PrixCom from COMMANDE where Etat = 'nonTraitee'";
         $result = $pdo->query($requete);
         while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
-            $tabResult[$ligne['NumCom']] = null;
+        $tabResult[$ligne['NumCom']] =["Nom"=>$ligne["NomClient"],"NumTel"=>$ligne['TelClient'],"adresse"=>$ligne["AdrClient"],"A_Livrer"=>$ligne["A_Livrer"],"emballage"=>$ligne["TypeEmbal"],"prix"=>$ligne["PrixCom"]];
         }
     } catch (PDOException $ex) {
         print $ex->getMessage();
@@ -130,7 +133,6 @@ function recupNumcom($pdo) {
 
     return $tabResult;
 }
-
 function RecupDetail($numCom, $pdo) {
 
     try {
