@@ -21,6 +21,7 @@ $(document).ready(function () {
     $("tbody").on('click', "input", function () {
         let numCom=((this).name)
         console.log(numCom);
+        console.log((this).value);
         switch ((this).value) {
             case "accepter":
                  console.log("1");
@@ -34,13 +35,12 @@ $(document).ready(function () {
                 console.log("3");
                 changementEtat("prete",numCom);
                 break;
-            case "livree":
+            case "N":
                 console.log("4");
                 changementEtat("livree",numCom);
                 break;
         }
     });
-
     function changementEtat(etat,numCom) {
         console.log(numCom);
         $.post("../Modele/ChangementEtat.php", {etat: etat,numCom:numCom});
