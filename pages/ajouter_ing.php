@@ -14,15 +14,21 @@
     // ------------------------ AJOUT INGREDIENT ------------------------------
     if (isset($_POST['ajout'])){ //condition pour vérifié que les champs sont remplis
         if (empty($idIngred) || empty($NomIngred) || empty($StockMin) ||
-        empty($StockReel) || empty($PrixUHT) || empty($Q_A_Com) || empty($DateArchiv)){
+        empty($StockReel) || empty($PrixUHT) || empty($Q_A_Com) || empty($DateArchiv) || empty($unite)){
             echo "<p style='color:red'>veuillez compléter svp.</p>";
         }
-        echo "bien remplis : very good";
+        else{echo "bien remplis : very good";}
     };
 
-    $req=$bdd->query("INSERT INTO 'INGREDIENT' ('IdIngred', 'NomIngred', 'Frais', 'Unite', 'StockMin',
-                                    'StockReel', 'PrixUHT_Moyen', 'Q_A_Com', 'DateArchiv')"
-                                    ." VALUES (".$idIngred.",".$NomIngred.",".$frais.",".$unite.",".$StockMin.
-                                    ",".$StockReel.",".$PrixUHT.",".$Q_A_Com.",".$DateArchiv.")");
+    try{
+        $req=$pdo->exec("INSERT INTO INGREDIENT (IdIngred, NomIngred, Frais, Unite, StockMin,
+                                    StockReel, PrixUHT_Moyen, Q_A_Com, DateArchiv)
+                                    VALUES ('".$idIngred."','".$NomIngred."','".$frais."','".$unite."','".$StockMin.
+                                    "','".$StockReel."','".$PrixUHT."','".$Q_A_Com."','".$DateArchiv."')");
+        echo " ingredient ajouté";
+        echo " ".$idIngred." ".$NomIngred." ".$frais." ".$unite." ".$StockMin." ".$StockReel." ".$PrixUHT." ".$Q_A_Com." ".$DateArchiv;
+    }catch(PDOException $e){
+        print $e->getMessage();
+    }
     ?>
 </html>
