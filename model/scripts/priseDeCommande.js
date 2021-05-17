@@ -118,15 +118,33 @@ $(doc).ready(function () {
         } catch (error) {
             console.log("%cPas de pizza sélectionnée\nImpossible de passer la commande", "color:salmon");
         }
-        pizzaCommandeAjax = 'pizzaCommande=' + JSON.stringify(pizzaCommande);
 
         var lienAPI = 'http://localhost/CNAM/Pizzip/controller/enregistrerCommande.php';
         var parametres = nom + '&' + prenom + '&' + modeCommande + '&' + typeBoite + '&' + tel + '&' + adresse + '&' + codePostal + '&' + ville + '&' + verifierPizzaNom + '&' + verifierPizzaQuantite;
         console.log("Requete : " + lienAPI + '?' + parametres);
 
-        $.getJSON(lienAPI + '?' + parametres).done(function (result) { // Requete AJAX
+        $.getJSON(lienAPI + '?' + parametres).done(function (result) { // Requete AJAX - Save + Check des données utilisateur
+            console.log("%cSuccess - COMMANDE: %c" + result.success, "color:gold", "color:white");
 
-            console.log("%cSuccess: %c" + result.success, "color:gold", "color:white");
+            if (result.success == true) {   // Si les données utilisateurs ont pu être enregistrées, on peut enregistrer les pizzas
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost/CNAM/Pizzip/controller/enregistrerPizza.php',
+                    data: JSON.stringify(pizzaCommande),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (resultat) {
+                        console.log("-------1-------");
+                        console.log(resultat);
+                        console.log("-------1-------");
+                        //console.log("%cSuccess - DETAIL: %c" + resultat.success, "color:gold", "color:white");
+                        //console.log(resultat.data);
+                    },
+                    error: function (errMsg) {
+                        console.log("Erreur" + errMsg);
+                    }
+                });
+            }
         });
     });
 });
