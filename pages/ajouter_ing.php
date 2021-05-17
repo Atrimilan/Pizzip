@@ -19,12 +19,12 @@
         }
         else{
             echo "pas vide";
+            // TESTE echo " ".$idIngred." ".$NomIngred." ".$frais." ".$unite." ".$StockMin." ".$StockReel." ".$PrixUHT." ".$Q_A_Com." ".$DateArchiv;
             try{
                 $req = "INSERT INTO INGREDIENT (IdIngred, NomIngred, Frais, Unite, StockMin,StockReel, PrixUHT_Moyen, Q_A_Com, DateArchiv) 
                 VALUES ("."'".$idIngred."','".$NomIngred."','".$frais."','".$unite."','".$StockMin."','".$StockReel."','".$PrixUHT."','".$Q_A_Com."','".$DateArchiv."')";
                 $requete=$pdo->exec($req);
                 echo " ingredient ajouté";
-                echo " ".$idIngred." ".$NomIngred." ".$frais." ".$unite." ".$StockMin." ".$StockReel." ".$PrixUHT." ".$Q_A_Com." ".$DateArchiv;
             }catch(PDOException $e){
                 print $e->getMessage();
             }
