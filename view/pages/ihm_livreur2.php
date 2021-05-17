@@ -6,7 +6,7 @@
 
     //            ----- REQUETE SQL -----    
     $requeteTouteCommande = "SELECT * FROM COMMANDE ";
-    $requeteLivraisonCommande = "SELECT * FROM COMMANDE where Etat = 'pretALivrer'";
+    $requeteLivraisonCommande = "SELECT * FROM COMMANDE where Etat = 'prete' and A_Livrer = 'O' ";
     
 
 ?>
@@ -50,7 +50,7 @@
                 
                 <?php
 
-                   $result = $connex -> query($requeteTouteCommande);                      
+                   $result = $connex -> query($requeteLivraisonCommande);                      
                    while ($tabCommande = $result -> fetch(PDO :: FETCH_ASSOC) ) {
 
                         $numcommande = $tabCommande['NumCom'];
@@ -86,7 +86,7 @@
                 <tr id="ligne_">
                     <td> <?php echo $numcommande?></td>
                     <td><?php echo "Nom : $nomClient <br> Telephone : $telephoneClient <br> Adresse : $adresseClient  $codePostal $VilleClient <br> Date : $dateCommande à $HeureDispo <br> Emballage : $emballage<br> Prix : $prix €<br> ETAT : $etatCommande<br> Quantité : $quantite Pizza $nomPizza <br>"; ?></td>
-                    <td><input type="button" id="etat_commande<?php echo $numcommande?>" value="LIVRE" onclick="action()"></td> 
+                    <td><input type="button" id="etat_commande_<?php echo $numcommande?>" value="LIVRE" onclick="action()"></td> 
                 </tr> 
                        
                 
