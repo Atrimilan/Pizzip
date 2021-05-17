@@ -17,18 +17,18 @@
         empty($StockReel) || empty($PrixUHT) || empty($Q_A_Com) || empty($DateArchiv) || empty($unite)){
             echo "<p style='color:red'>veuillez compléter svp.</p>";
         }
-        else{echo "bien remplis : very good";}
+        else{
+            echo "pas vide";
+            try{
+                $req = "INSERT INTO INGREDIENT (IdIngred, NomIngred, Frais, Unite, StockMin,StockReel, PrixUHT_Moyen, Q_A_Com, DateArchiv) 
+                VALUES ("."'".$idIngred."','".$NomIngred."','".$frais."','".$unite."','".$StockMin."','".$StockReel."','".$PrixUHT."','".$Q_A_Com."','".$DateArchiv."')";
+                $requete=$pdo->exec($req);
+                echo " ingredient ajouté";
+                echo " ".$idIngred." ".$NomIngred." ".$frais." ".$unite." ".$StockMin." ".$StockReel." ".$PrixUHT." ".$Q_A_Com." ".$DateArchiv;
+            }catch(PDOException $e){
+                print $e->getMessage();
+            }
+        }
     };
-
-    try{
-        $req=$pdo->exec("INSERT INTO INGREDIENT (IdIngred, NomIngred, Frais, Unite, StockMin,
-                                    StockReel, PrixUHT_Moyen, Q_A_Com, DateArchiv)
-                                    VALUES ('".$idIngred."','".$NomIngred."','".$frais."','".$unite."','".$StockMin.
-                                    "','".$StockReel."','".$PrixUHT."','".$Q_A_Com."','".$DateArchiv."')");
-        echo " ingredient ajouté";
-        echo " ".$idIngred." ".$NomIngred." ".$frais." ".$unite." ".$StockMin." ".$StockReel." ".$PrixUHT." ".$Q_A_Com." ".$DateArchiv;
-    }catch(PDOException $e){
-        print $e->getMessage();
-    }
     ?>
 </html>
