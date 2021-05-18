@@ -4,7 +4,7 @@ header('Access-Control-Allow-Origin: *');	// CORS policy
 require_once("./connexion.php");	// Connexion à la BDD
 
 $success = true;
-
+$idAutoInc;
 if (!empty($_GET['modeCommande']) && !empty($_GET['nom']) && !empty($_GET['prenom'])  && !empty($_GET['tel']) && !empty($_GET['typeBoite']) && !empty($_GET['verifPizza']) && !empty($_GET['verifPizzaQuant'])) {
 
 	$modeCommande = $_GET['modeCommande'];
@@ -51,55 +51,29 @@ if (!empty($_GET['modeCommande']) && !empty($_GET['nom']) && !empty($_GET['preno
 			try {
 				$insert = $pdo->exec("INSERT INTO COMMANDE(NomClient,TelClient,AdrClient,CP_Client,VilClient,Date,HeureDispo,TypeEmbal,
 				A_Livrer,PrixCom,CoutLiv,Etat) VALUES ('" . $nom . " " . $prenom . "','" . $tel . "','" . $adresse . "','" . $codePostal . "','" . $ville . "',
-				CURRENT_DATE,CURRENT_TIME,'" . $typeBoite . "','O','100','15','enLivraison')");	// Requete PDO
+				CURRENT_DATE,CURRENT_TIME,'" . $typeBoite . "','O','100','15','nonTraitee')");	// Requete PDO
 			} catch (PDOException $e) {
 				print $e->getMessage();
 			}
+			$idAutoInc = $pdo->lastInsertId();
 		}
 	} else if ($modeCommande == "aEmporter" && $success == true) {
 		if ($success == true) {
 			try {
 				$insert = $pdo->exec("INSERT INTO COMMANDE(NomClient,TelClient,Date,HeureDispo,TypeEmbal,
 				A_Livrer,PrixCom,Etat) VALUES ('" . $nom . " " . $prenom . "','" . $tel . "',
-				CURRENT_DATE,CURRENT_TIME,'" . $typeBoite . "','N','100','enLivraison')");	// Requete PDO
+				CURRENT_DATE,CURRENT_TIME,'" . $typeBoite . "','N','100','nonTraitee')");	// Requete PDO
 			} catch (PDOException $e) {
 				print $e->getMessage();
 			}
+			$idAutoInc = $pdo->lastInsertId();
 		}
 	} else {
 		$success = false;
 	}
-	/*$fic = $_GET['fic'];
-
-	$fourId = "";
-	$timestamp = array();
-	$value = array();
-
-	// Connexion à la BDD
-	require_once("./connexion.php");
-
-	// Requete SQL par PDO
-	$result = $pdo->query("SELECT data_four_id,data_timestamp,data_value FROM four_data WHERE data_four_id = '" . $fic . "'");
-
-	while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
-		$fourId = $ligne['data_four_id'];	// on a qu'un seul ID, pas besoin de l'enregistrer dans un array
-		array_push($timestamp, $ligne['data_timestamp']);	// enregistrer chaque date
-		array_push($value, $ligne['data_value']);			// enregistrer chaque température
-	}
-
-	$contenu = $fourId;	// créer une chaine d'elements, commencant pas l'ID du four
-	foreach ($timestamp as $temps => $t) {
-		$contenu .= "," . $timestamp[$temps] . "," . $value[$temps];	// puis pour toutes les dates disponibles, ont ajoute la date
-	}																	// et la température correspondante, dans la chaine
-	$cont = explode(",", $contenu);
-
-	$obj = new stdClass();
-	foreach ($cont as $key => $value) {
-		$obj->{" " . $key} = $value;
-	}*/
 } else {
 	$success = false;
 }
 
-$resultat = ["success" => $success];
+$resultat = ["success" => $success, "numCom" => $idAutoInc];
 echo json_encode($resultat);	// envoyer le tout au format JSON

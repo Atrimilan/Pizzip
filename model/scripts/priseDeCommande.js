@@ -69,6 +69,7 @@ $(doc).ready(function () {
     $("#validerCommande").click(function () { // Validation de la commande
 
         let pizzaCommande = { // JSON pour contenir des pizzas et leur quantité
+            numCommande: 0,
             pizza: []
         };
         let verifierPizzaNom, verifierPizzaQuantite;
@@ -125,7 +126,8 @@ $(doc).ready(function () {
 
         $.getJSON(lienAPI + '?' + parametres).done(function (result) { // Requete AJAX - Save + Check des données utilisateur
             console.log("%cSuccess - COMMANDE: %c" + result.success, "color:gold", "color:white");
-
+            console.log("%cNuméro de commande: %c" + result.numCom, "color:lightgreen", "color:white");
+            pizzaCommande.numCommande = result.numCom;
             if (result.success == true) {   // Si les données utilisateurs ont pu être enregistrées, on peut enregistrer les pizzas
                 $.ajax({
                     type: 'POST',
@@ -134,9 +136,8 @@ $(doc).ready(function () {
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (resultat) {
-                        console.log("-------1-------");
+                        console.log("---------------");
                         console.log(resultat);
-                        console.log("-------1-------");
                         //console.log("%cSuccess - DETAIL: %c" + resultat.success, "color:gold", "color:white");
                         //console.log(resultat.data);
                     },

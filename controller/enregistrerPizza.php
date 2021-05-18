@@ -11,6 +11,7 @@ $json = file_get_contents('php://input');   // Récupérer les données JSON de 
 if (!empty($json)) {
     $data = json_decode($json); // Convertir le JSON en objet PHP
     $pizza = $data->pizza;  // Récupérer le tableau de Pizza
+    $numCommande = $data->numCommande;
 
     for ($i = 0; $i < sizeof($pizza); $i++) { // Parcourir une première fois toutes les pizzas pour s'assurer qu'elles existent
         $verifPizza = $pizza[$i]->nomPizza;
@@ -45,16 +46,21 @@ if (!empty($json)) {
                 $IngOpt3 = $element['IngOpt3'];
                 $IngOpt4 = $element['IngOpt4'];
             }
-            $idAutoInc = $pdo->lastInsertId();
 
-            try {
+            try {   // Insérer un DETAIL
                 $insert = $pdo->exec("INSERT INTO DETAIL(NomPizza,IdPizza,IngBase1,IngBase2,IngBase3,IngBase4,IngOpt1,IngOpt2,IngOpt3,IngOpt4)
                 VALUES ('" . $nomPizzaActuelle . "','" . $IdPizza . "','" . $IngBase1 . "','" . $IngBase2 . "','" . $IngBase3 . "','" . $IngBase4 . "'
                 ,'" . $IngOpt1 . "','" . $IngOpt2 . "','" . $IngOpt3 . "','" . $IngOpt4 . "')");    // Requete PDO
             } catch (PDOException $e) {
                 print $e->getMessage();
             }
-            //$NumDetailActuel = $pdo->query("SELECT MAX(Num_Detail) FROM DETAIL");   // Prendre le dernier
+            $numDetail = $pdo->lastInsertId();  // Prendre le dernier Num_Detail (celui qu'on vient d'insérer)
+
+            try {   // Insérer un COM_DETAIL
+                $insert = $pdo->exec("INSERT INTO COM_DETAIL (Num_Detail, Quant, NumCom) VALUES ('" . $numDetail . "','" . $quantitePizzaActuelle . "','" . $numCommande . "')");    // Requete PDO
+            } catch (PDOException $e) {
+                print $e->getMessage();
+            }
 
             $test = 3;
         }
@@ -63,7 +69,7 @@ if (!empty($json)) {
     $success = false;
 }
 
-$resultat = ["success" => $success, "test" => $test];
+$resultat = ["success" => $success, "test" => $test, "dernierNumDetail" => $numDetail, "numCommande" => $numCommande];
 echo json_encode($resultat);	// envoyer le tout au format JSON
 
 
