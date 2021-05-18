@@ -17,8 +17,7 @@ and open the template in the editor.
         <div class="container">
             <h1>INTERFACE CUISINER </h1>
             <button class="btn btn-primary" id="debut">debut</button>
-            <button class="btn btn-primary" id="fin">fin</button>
-            <button class="btn btn-primary" id="test">test</button>
+            <button class="btn btn-primary" id="fin">fin</button> 
             <div class="row">
                 <table class="table table-bordered ", style="margin-top:15px;">
                     <thead class="thead-dark">

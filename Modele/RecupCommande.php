@@ -19,7 +19,7 @@ foreach ($tabCom as $key => $value) {
     array_push($tabNumCom, $key);
 }
 foreach ($tabNumCom as $value) {
-    //changeEtat($value, $pdo);
+    changeEtat($value, $pdo);
 }
 
 echo json_encode($tabNumCom);
@@ -34,7 +34,7 @@ function createFichier($tabCom) {
             if ($key != "Commande") {
                 $infoClientString .= " <b>$key</b> : $infoClient ";
             }
-            if ($key == "A_Livrer") {
+            if ($key == "type de livraison") {
                 $infoLivraison = $infoClient;
             }
         }
@@ -45,10 +45,10 @@ function createFichier($tabCom) {
             }
             $infoPizza.="<br>";
         }
-        //var_dump($infoLivraison);
+       
 
         $txt = "<td>";
-        $txt .= "    <h3>numéro de commande : $numCOm</h3>";
+        $txt .= "    <h3>Numéro de commande : $numCOm</h3>";
         $txt .= $infoClientString;
         $txt .= "<br>";
         $txt .= $infoPizza;
@@ -94,12 +94,10 @@ function createFichier($tabCom) {
         $fichier = fopen($chemin, "w");
         fwrite($fichier, $txt);
         fclose($fichier);
-        //echo($txt);
     }
 }
 
 function changeEtat($numCom, $pdo) {
-    // traitee livree pretALivree nonTraitee 
     try {
         $requete = "UPDATE COMMANDE SET Etat = 'acceptee' WHERE NumCom = $numCom ";
         $result = $pdo->exec($requete);
@@ -115,30 +113,30 @@ function recupPizza($numDetail, $pdo) {
         $requete = "select NomPizza,IngBase1,IngBase2,IngBase3,IngBase4,IngOpt1,IngOpt2,IngOpt3,IngOpt4 from DETAIL where Num_Detail = $numDetail";
         $result = $pdo->query($requete);
         while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
-            $tabResult['nomPizza'] = $ligne['NomPizza'];
+            $tabResult['Nom de la Pizza'] = $ligne['NomPizza'];
             if ($ligne['IngBase1'] != null) {
-                $tabResult['IngBase1'] = $ligne['IngBase1'];
+                $tabResult['Ingredient 1'] = $ligne['IngBase1'];
             }
             if ($ligne['IngBase2'] != null) {
-                $tabResult['IngBase2'] = $ligne['IngBase2'];
+                $tabResult['Ingredient 2'] = $ligne['IngBase2'];
             }
             if ($ligne['IngBase3'] != null) {
-                $tabResult['IngBase3'] = $ligne['IngBase3'];
+                $tabResult['Ingredient 3'] = $ligne['IngBase3'];
             }
             if ($ligne['IngBase4'] != null) {
-                $tabResult['IngBase4'] = $ligne['IngBase4'];
+                $tabResult['Ingredient 4'] = $ligne['IngBase4'];
             }
             if ($ligne['IngOpt1'] != null) {
-                $tabResult['IngOpt1'] = $ligne['IngOpt1'];
+                $tabResult['Option 1'] = $ligne['IngOpt1'];
             }
             if ($ligne['IngOpt2'] != null) {
-                $tabResult['IngOpt2'] = $ligne['IngOpt2'];
+                $tabResult['Option 2'] = $ligne['IngOpt2'];
             }
             if ($ligne['IngOpt3'] != null) {
-                $tabResult['IngOpt3'] = $ligne['IngOpt3'];
+                $tabResult['Option 3'] = $ligne['IngOpt3'];
             }
             if ($ligne['IngOpt4'] != null) {
-                $tabResult['IngOpt4'] = $ligne['IngOpt4'];
+                $tabResult['Option 4'] = $ligne['IngOpt4'];
             }
         }
     } catch (PDOException $ex) {
@@ -154,7 +152,7 @@ function recupNumcom($pdo) {
         $requete = "select NomClient,NumCom,TelClient,AdrClient,TypeEmbal,A_Livrer,PrixCom from COMMANDE where Etat = 'nonTraitee'";
         $result = $pdo->query($requete);
         while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
-            $tabResult[$ligne['NumCom']] = ["Nom" => $ligne["NomClient"], "NumTel" => $ligne['TelClient'], "adresse" => $ligne["AdrClient"], "A_Livrer" => $ligne["A_Livrer"], "emballage" => $ligne["TypeEmbal"], "prix" => $ligne["PrixCom"]];
+            $tabResult[$ligne['NumCom']] = ["Nom" => $ligne["NomClient"], "N°" => $ligne['TelClient'], "Adresse" => $ligne["AdrClient"], "type de livraison" => $ligne["A_Livrer"], "Emballage" => $ligne["TypeEmbal"], "Prix" => $ligne["PrixCom"]];
         }
     } catch (PDOException $ex) {
         print $ex->getMessage();
@@ -170,12 +168,11 @@ function RecupDetail($numCom, $pdo) {
         $requete = "select Num_Detail,Quant from COM_DETAIL where NumCom = $numCom";
         $result = $pdo->query($requete);
         while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
-            $tabResult[$ligne['Num_Detail']] = ['quantite' => $ligne['Quant']];
+            $tabResult[$ligne['Num_Detail']] = ['Quantite' => $ligne['Quant']];
         }
     } catch (PDOException $ex) {
         print $ex->getMessage();
     }
     return $tabResult;
 }
-
 ?>
