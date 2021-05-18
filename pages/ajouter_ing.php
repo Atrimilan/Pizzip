@@ -1,18 +1,18 @@
 <html>
     <?php
     require_once("../controller/connexion.php");
-    $idIngred=$_POST['IdIngred'];
-    $NomIngred=$_POST['NomIngred'];
-    $frais=$_POST['frais'];
-    $unite=$_POST['unite'];
-    $StockMin=$_POST['StockMin'];
-    $StockReel=$_POST['StockReel'];
-    $PrixUHT=$_POST['PrixUHT_Moyen'];
-    $Q_A_Com=$_POST['Q_A_Com'];
-    $DateArchiv=$_POST['DateArchiv'];
+    $idIngred=$_GET['IdIngred'];
+    $NomIngred=$_GET['NomIngred'];
+    $frais=$_GET['frais'];
+    $unite=$_GET['unite'];
+    $StockMin=$_GET['StockMin'];
+    $StockReel=$_GET['StockReel'];
+    $PrixUHT=$_GET['PrixUHT_Moyen'];
+    $Q_A_Com=$_GET['Q_A_Com'];
+    $DateArchiv=$_GET['DateArchiv'];
 
     // ------------------------ AJOUT INGREDIENT ------------------------------
-    if (isset($_POST['ajout'])){ //condition pour vérifié que les champs sont remplis
+    if (isset($_GET['ajout'])){ //condition pour vérifié que les champs sont remplis
         if (empty($idIngred) || empty($NomIngred) || empty($StockMin) ||
         empty($StockReel) || empty($PrixUHT) || empty($Q_A_Com) || empty($DateArchiv) || empty($unite)){
             echo "<p style='color:red'>veuillez compléter svp.</p>";

@@ -6,15 +6,16 @@ and open the template in the editor.
 -->
 <html>
     <head>
+        <script src="https://code.jquery.com/jquery-latest.js"></script> <!-- Dernier Jquery -->
         <link rel="stylesheet" href="../model/style.css">
         <meta charset="UTF-8">
         <title>Piz.zip - Administration</title>
         <h1>IHM Administration - AJOUT INGREDIENT</h1><br>            
     </head>
     <body>
-        <form action="ajouter_ing.php" method="post">
+        <form id="idForm">
             <p>id ingrédient : <input type="number" min="1" name="IdIngred"></p>
-            <p>Nom ingrédient : <input type="text" name="NomIngred"></p>
+            <p>Nom ingrédient : <input type="text" name="NomIngred" id="nomIngred"></p>
             <!-- radion boutton frais ou non -->
             Produit frais ?
             <input type="radio" id="oui" name="frais" value='O'>
@@ -36,5 +37,15 @@ and open the template in the editor.
             <input type="submit" value="Ajouter" name="ajout">
             <input type="submit" value="Annuler" name="annulation">
          </form>
+
+         <script>
+             $(doc).ready(function () {
+             // IdIngred=5&NomIngred=Kim+Jong+Muth&frais=N&unite=gramme&StockMin=15&StockReel=12&PrixUHT_Moyen=1&Q_A_Com=1&DateArchiv=2021-05-17&ajout=Ajouter
+             maVariable = $('#nomIngred').val();
+             console.log(maVariable);
+             });
+        </script>
+
     </body>
 </html>
+
