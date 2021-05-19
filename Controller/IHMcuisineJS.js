@@ -1,9 +1,10 @@
 
 $(document).ready(function () {
     let interval;
+    let Index;
 
     function afficherCommande(numCom) {
-        $("tbody").append("<tr class='alert alert-light' id='" + numCom + "'></tr><br>");
+        $("tbody").append("<tr class='alert alert-light' id='" + numCom + "'></tr>");
         $("tbody").children().last().load("../Modele/dossierOF/" + numCom + ".txt");
     }
     $("#debut").click(function () {
@@ -11,7 +12,7 @@ $(document).ready(function () {
         console.log("click");
         interval = setInterval(function () {
             $.ajax({
-                url: "../Modele/RecupCommande.php",
+                url: "../Controller/RecupData.php",
                 datatype: "json",
                 success: function (data) {
                     let tab = JSON.parse(data);
@@ -21,15 +22,12 @@ $(document).ready(function () {
         }, 10000);
     });
     $("tbody").on('click', "input", function () {
-
         let numCom = ((this).name);
-        console.log(numCom);
         let classe = $("#" + numCom).attr('class');
         $("#" + numCom).removeClass(classe);
-        console.log(classe);
-        console.log((this).value);
         switch ((this).value) {
             case "accepter":
+                $(this).prop("disabled", true);
                 changementEtat("acceptee", numCom);
                 $("#" + numCom).addClass("alert alert-light");
                 break;

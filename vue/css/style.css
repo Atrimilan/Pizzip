@@ -1,3 +1,15 @@
-table { 
-    border-collapse: collapse; 
+
+body{
+    background-color: windowframe;
+}
+button{
+    background-color: #34ce57 !important;
+    Color:Black!important;
+    font-weight: bold!important;
+    padding: 10px 40px!important;
+    border-radius: 3px!important;
+    cursor: pointer!important;
+    box-shadow: 0 8px 16px 0 grey!important;
+    text-decoration: none!important;
+    width:550px
 }
