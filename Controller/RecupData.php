@@ -26,7 +26,7 @@ foreach ($tabCom as $key => $value) {
     array_push($tabNumCom, $key);
 }
 foreach ($tabNumCom as $value) {
-    $takeData->changeEtat($value, $pdo);
+    $takeData->changeEtat("acceptee",$value, $pdo);
 }
 echo json_encode($tabNumCom);
 createFichier($tabCom);

@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     let interval;
     let Index;
@@ -10,7 +9,7 @@ $(document).ready(function () {
     $("#debut").click(function () {
         $("#debut").prop("disabled", true);
         console.log("click");
-        interval = setInterval(function () {
+        interval = setInterval(function () {          
             $.ajax({
                 url: "../Controller/RecupData.php",
                 datatype: "json",
@@ -49,7 +48,7 @@ $(document).ready(function () {
         }
     });
     function changementEtat(etat, numCom) {
-        $.post("../Modele/ChangementEtat.php", {etat: etat, numCom: numCom});
+        $.post("../Controller/ChangementEtat.php", {etat: etat, numCom: numCom});
     }
 
     $("#fin").click(function () {

@@ -18,10 +18,11 @@ and open the template in the editor.
             <h1>INTERFACE CUISINIER </h1>
             <button class=" btn btn-primary btn-lg mb-2" id="debut">debut</button>
             <button class="btn btn-primary btn-lg mb-2" id="fin">fin</button> 
-            <h2>nombres de commande accepter :</h2>
-            <h2>nombres de commande en cours de préparation :</h2>
-            <h2>nombres de commande prete : </h2>
-            <h2>nombres de commande fini : </h2>
+<!--            <h4>nombres de commande accepter : <span id="accepter"></span> </h4>
+            <h4>nombres de commande en cours de préparation :<span id="enPrepa"></span></h4>
+            <h4>nombres de commande prete : <span id="prete"></span></h4>
+            <h4>nombres de commande en livraison : <span id="enLivraison"></span></h4>
+            <h4>nombres de commande livree : <span id="livree"></span></h4>-->
            
                 <table class="table table-bordered ", style="margin-top:15px;">
                     <thead class="thead-dark">

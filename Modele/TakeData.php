@@ -4,15 +4,14 @@ require_once '../Modele/Connexion.php';
 
 class TakeData {
 
-    function changeEtat($numCom, $pdo) {
+    function changeEtat($etat, $numCom, $pdo) {
         try {
-            $requete = "UPDATE COMMANDE SET Etat = 'acceptee' WHERE NumCom = $numCom ";
+            $requete = "UPDATE COMMANDE SET Etat = '$etat' WHERE NumCom = $numCom ";
             $result = $pdo->exec($requete);
         } catch (PDOException $ex) {
             print $ex->getMessage();
         }
     }
-
     function recupPizza($numDetail, $pdo) {
 
         try {
