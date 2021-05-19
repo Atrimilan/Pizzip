@@ -1,5 +1,5 @@
 <?php
-//Author MUTH Kévin
+
 $host = "remotemysql.com";
 $user = "eEPfirnc1C";
 $pwd = "vZFMsKIeXw";

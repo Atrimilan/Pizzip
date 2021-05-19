@@ -3,15 +3,9 @@
 // ----- Actualiser la page -----
 setInterval(function() {
     $.ajax({
-        url: "ihm_livreur.php",
+        url: "action_chargerCommandeLivraison.php",
         success: function (data) {
-            $("#feedback").html(data);
-            //alert("Actualisé");
-            window.location.reload(); // rafraichit la page
+            console.log("Actualisé");
         }
     });
 }, 100 * 60);
-
-
-req.open("GET", "ihm_livreur.php", true);
-$('#IDbalise').load('ihm_livreur.php');

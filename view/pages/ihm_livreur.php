@@ -1,12 +1,10 @@
-<?php
-    // Se connecter a la BDD
-    require_once("../../controller/connexion.php");
+<?php   
     //      ----- CONNEXION A LA BASE DE DONNEES -----
-    $connex = new PDO('mysql:host=' . $host . ';dbname=' . $bdd, $user, $pwd);
+    require_once("../../controller/connexion.php");
+    $connex = new PDO('mysql:host=' . $host . ';dbname=' . $bdd, $user, $pwd);   
 
     //            ----- REQUETE SQL -----    
-    $requeteTouteCommande = "SELECT * FROM COMMANDE ";
-    $requeteLivraisonCommande = "SELECT * FROM COMMANDE where Etat = 'prete' and A_Livrer = 'O' ";
+    //require_once("../../controller/action_chargerCommandeLivraison.php");
 
 ?>
 
@@ -17,7 +15,8 @@
     <meta charset="UTF-8">
     <title>Piz.zip - Livraison</title>
     <link href="../model/style/style.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.js"> </script> <!-- Dernier Jquery -->
+
 
     <style type="text/css">
         .tftable {font-size:12px;color:#333333;width:90%;border-width: 5px;border-color: #729ea5;border-collapse: collapse;}
@@ -40,56 +39,23 @@
     <h1>Commandes à Livrer :</h1> <br/><br/>
 
     <div id="informations"></div>
+    <p id="espace_nombre">nombre de commandes à livrer passées : </p>
 
-<!--                    -------- TABLEAU Commande ---------->
 <center>
-                <table class="tftable" border="1">
-                <tr><th>COMMANDE</th><th>INFOS</th><th>ACTION</th></tr>
-                
-                <?php        
-                   $result = $connex -> query($requeteLivraisonCommande);                      
-                   while ($tabCommande = $result -> fetch(PDO :: FETCH_ASSOC) ) {
+<input type="button" id="but" value="APPEL Commandes">
+    
+    <br><br>
 
-                        $numcommande = $tabCommande['NumCom'];
-                        $nomClient = $tabCommande['NomClient'];
-                        $telephoneClient = $tabCommande['TelClient'];
-                        $adresseClient = $tabCommande['AdrClient'];
-                        $codePostal = $tabCommande['CP_Client'];
-                        $VilleClient = $tabCommande['VilClient'];
-                        $dateCommande = $tabCommande['Date'];
-                        $HeureDispo = $tabCommande['HeureDispo'];
-                        $emballage = $tabCommande['TypeEmbal'];
-                        $prix = $tabCommande['CoutLiv'];
-                        //$livreur = $tabCommande['idLivreur'];
-                        //$archive = $tabCommande['DateArchiv'];
-                        $etatCommande = $tabCommande['Etat'];   
-                ?>
-                
-                <tr id="ligne_<?php echo $numcommande?>">
+    <!--                    -------- TABLEAU COMMANDES ---------->                
+    <table id="tabe" class="tftable" border="1">
+        <tr><th>COMMANDE</th><th>INFORMATIONS</th><th>ACTIONS</th></tr>              
+    </table> <br>
+    <!--                    -------- TABLEAU COMMANDES ---------->
+    
+    
 
-                <!-- <form method="post" action="../../model/scripts/etat.php?ID_Commande=<?php echo $numcommande?>"> -->
-                <form method="post" action="../../model/scripts/etat.php?ID_Commande=<?php echo $numcommande?>" ?>> 
-                    <td> <?php echo "N°$numcommande"?></td>
-                    <td><?php echo "Nom : $nomClient <br> Telephone : $telephoneClient <br> Adresse : $adresseClient <br> $codePostal <br> $VilleClient <br> Date : $dateCommande à $HeureDispo <br> Emballage : $emballage<br> Prix : $prix €<br> ETAT : $etatCommande<br>"; ?></td>
-                    <td><input type="submit" id="etat_commande<?php echo $numcommande?>" name="BoutonChangeEtat" value="Commencer la Livraison" onclick="action()"></td> 
-                </form>
-                    
-                </tr> 
-   
-                <?php
-                    if ( isset ($_POST['BoutonChangeEtat']) ) {  // se déclenche au clic
-                        //$commandeSelectionne = $numcommande;
-                        //      ----- L'ACTION ----- 
-                       include("../../model/scripts/etat.php?ID_Commande=$numcommande");
-                       //require_once("../../model/scripts/etat.php");
-                    }
+</center>
 
-                    }				
-                ?>                            
-                </table> <br>
-    </center>
-
-<!--                    -------- FIN TABLEAU Commande ---------->
 
     <?php
         
@@ -99,19 +65,11 @@
     ?>
 
 
-    <script src="../../model/scripts/livraison.js"></script>
+    <script src="../../model/scripts/chargerLivraison.js"></script>
+    <!-- <script src="../../model/scripts/livraison.js"></script> -->
+    
 
-    <script type="text/javascript">
-    // bug : ne prend que le dernier
-        var commande = "<?php echo $numcommande?>";
-        var livraison = document.getElementById("ligne_" + commande);
 
-        function action() {
-            livraison.style.background = "green";
-            alert(commande);
-        }
-
-    </script> 
 
 </body>
 
