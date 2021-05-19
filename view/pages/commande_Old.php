@@ -50,8 +50,8 @@
 
 							echo 	"<div class='divQuantite'>";
 							echo 		"Quantité : <span class='quantitePizza' id='quantitePizza_" . $tabPizza['IdPizza'] . "'>0</span>";
-							echo 		"<input type='button' class='ajusterQuantite' id='incrementQuantite_" . $tabPizza['IdPizza'] . "' value='Ajouter'>";
-							echo 		"<input type='button' class='ajusterQuantite' id='decrementQuantite_" . $tabPizza['IdPizza'] . "' value='Supprimer'>";
+							echo 		"<input type='button' class='ajusterQuantite' id='incrementQuantite_" . $tabPizza['IdPizza'] . "' value='+'>";
+							echo 		"<input type='button' class='ajusterQuantite' id='decrementQuantite_" . $tabPizza['IdPizza'] . "' value='-'>";
 							echo 	"</div>";
 							echo "</div>";
 						}
