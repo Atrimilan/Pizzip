@@ -70,12 +70,13 @@ $(doc).ready(function () {
 
         let pizzaCommande = { // JSON pour contenir des pizzas et leur quantité
             numCommande: 0,
+            /*taillePizza: 'L',*/
             pizza: []
         };
         let verifierPizzaNom, verifierPizzaQuantite;
 
         var nom, prenom, tel, adresse, codePostal, ville; // infos client
-        var modeCommande, typeBoite, pizzaSelection, taillePizza; // infos commande
+        var modeCommande, typeBoite, pizzaSelection; // infos commande
 
         modeCommande = 'modeCommande=' + $(".modeCommande").children('input[name="modeCommande"]:checked').val().trim();
         typeBoite = 'typeBoite=' + $(".boitePizza").children('input[name="typeBoite"]:checked').val().trim();
@@ -96,8 +97,6 @@ $(doc).ready(function () {
                 pizzaCommande['pizza'].push(unePizza);
             }
         });
-
-        taillePizza = 'taillePizza=' + $('#taillePizzaSelect option:selected').val().trim();
 
         nom = 'nom=' + $(".infosClient").children('input[name="nom"]').val().trim();
         prenom = 'prenom=' + $(".infosClient").children('input[name="prenom"]').val().trim();
@@ -128,6 +127,8 @@ $(doc).ready(function () {
             console.log("%cSuccess - COMMANDE: %c" + result.success, "color:gold", "color:white");
             console.log("%cNuméro de commande: %c" + result.numCom, "color:lightgreen", "color:white");
             pizzaCommande.numCommande = result.numCom;
+            /*pizzaCommande.taillePizza = $('#taillePizzaSelect option:selected').val().trim();
+            console.log(pizzaCommande.taillePizza + "-------");*/
             if (result.success == true) {   // Si les données utilisateurs ont pu être enregistrées, on peut enregistrer les pizzas
                 $.ajax({
                     type: 'POST',

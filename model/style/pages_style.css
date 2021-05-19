@@ -9,6 +9,23 @@ p {
     margin: 0;
 }
 
+.commande {
+    width: 80%;
+    float: left;
+}
+.panier {
+    background-color: rgb(52, 52, 55);
+    border-left: solid 2px rgb(32, 32, 35);;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    word-wrap: break-word;
+    min-height: fit-content;
+    height: 100%;
+    width: 20%;
+    padding: 10px;
+}
+
 #lien {
     color: blue;
     font-weight: bold;
@@ -33,7 +50,7 @@ p {
 .blockPizza {
     display: inline-block;
     width: 15%;
-    margin: 0 2%;
+    margin: 0 20px;
     box-shadow: 3px 3px 5px rgb(72, 72, 73);
 }
 
@@ -54,8 +71,25 @@ p {
     border-top: none;
 }
 
+.infosClient {
+    text-align: left;
+    width: 70%;
+    margin: 10px 0;
+}
+input[type="text"] {
+    text-align: left;
+    display: inline-block;
+    background-color: whitesmoke;
+    border-style: solid;
+    color: rgb(82, 82, 87);
+    box-shadow: 3px 3px 5px rgb(72, 72, 73);
+    padding: 5px;
+    margin: 2px 20px;
+}
+
+
 .listePizza {
-    text-align: center;
+    text-align: left;
     color: black;
     text-shadow: none;
 
@@ -122,12 +156,4 @@ input[type="button"] {
     border-radius: 30px;
     background-color: rgb(65, 65, 70);
     color: whitesmoke;
-}
-
-input[type="text"] {
-    background-color: whitesmoke;
-    border-style: solid;
-    color: rgb(82, 82, 87);
-    box-shadow: 3px 3px 5px rgb(72, 72, 73);
-    padding: 5px;
 }

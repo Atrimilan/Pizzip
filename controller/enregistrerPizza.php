@@ -12,6 +12,7 @@ if (!empty($json)) {
     $data = json_decode($json); // Convertir le JSON en objet PHP
     $pizza = $data->pizza;  // Récupérer le tableau de Pizza
     $numCommande = $data->numCommande;
+    //$taillePizza = $data->taillePizza;
 
     for ($i = 0; $i < sizeof($pizza); $i++) { // Parcourir une première fois toutes les pizzas pour s'assurer qu'elles existent
         $verifPizza = $pizza[$i]->nomPizza;
