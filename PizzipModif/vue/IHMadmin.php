@@ -40,20 +40,20 @@ and open the template in the editor.
                                 </select>
                             </div>
                             <div>
-                                <p>Stock min : </p>
-                                <input type="number" required name="price" min="0" value="0" >
+                                <span>Stock min : </span>
+                                <input type="number" required name="price" min="0">
                             </div>
                             <div>
-                                <p>Stock Réel :</p>
-                                <input type="number" required name="price" min="0" value="0" >
+                                <span>Stock Réel :</span>
+                                <input type="number" required name="price" min="0">
                             </div>
                             <div>
-                                <p>PUHT : </p>
-                                <input type="number" required name="price" min="0" value="0">
+                                <span>PUHT : </span>
+                                <input type="number" required name="price" min="0">
                             </div>
                             <div>
-                                <p>Quantité à commander : </p>
-                                <input type="number" required name="price" min="0" value="0">
+                                <span>Quantité à commander : </span>
+                                <input type="number" required name="price" min="0">
                             </div>
 
 
