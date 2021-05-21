@@ -24,6 +24,5 @@
         // --- MESSAGE ---
         echo"La commande n°$ID_Commande vient de passer En livraison";
         echo"<div style=color:green><p> MODIFICATIONS ENREGISTREES <br> </p></div>";
-        header('../../view/pages/ihm_livreur.php');
     }
 ?>

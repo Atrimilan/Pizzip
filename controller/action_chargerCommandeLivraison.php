@@ -2,9 +2,10 @@
 header('Access-Control-Allow-Origin: *');	// CORS policy
 
 require_once("../controller/connexion.php");	// Connexion à la BDD
+//include("../controller/connexion.php");	// Connexion à la BDD
 
     //            ----- REQUETE SQL -----
-$requeteLivraisonCommande = "SELECT * FROM COMMANDE where Etat = 'prete' and A_Livrer = 'O' ";
+$requeteLivraisonCommande = "SELECT * FROM COMMANDE where A_Livrer = 'O' AND (Etat = 'prete' or Etat = 'enLivraison')";
 
     //            ----- donnée recuperees du PHP -----
 $result = $pdo -> query($requeteLivraisonCommande);                      
