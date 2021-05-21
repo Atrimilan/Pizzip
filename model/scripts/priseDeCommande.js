@@ -3,7 +3,7 @@ var currentBoxMod = "carton";
 
 $(doc).ready(function () {
 
-    
+
     $('input[name=typeBoite]').click(function () { // changer le type de boite : carton - thermo        
         var spanMontantTotal = $('#montantTotal');
         var selectedBoxMod = $("input[name='typeBoite']:checked").val();
@@ -35,36 +35,70 @@ $(doc).ready(function () {
         }
     });
 
-    $('.ajusterQuantite').click(function (event) { // modifier la quantité par pizza
+    $('.ajouterPizza').click(function (event) { // Ajouter une pizza au panier
         var selectedButton = event.target.id;
-        var spanQuantite = $('#' + selectedButton).parent().find("span");
-        var prixPizza = $('#' + selectedButton).parent().parent().find(".prixPizza");
-        var spanMontantTotal = $('#montantTotal');
+        var idElement = $('#' + selectedButton).attr('id').replace("incrementQuantite_", "");   // Récupérer ID de la pizza
+        console.log("%cAjouter une pizza : " + $('#' + selectedButton).parent().find(".divPizza").attr('id'), "color:lightgreen");
 
-        if ($('#' + selectedButton).val() == "+") {
-            spanQuantite.text(parseInt(spanQuantite.text()) + 1);
-            spanMontantTotal.text(parseInt(spanMontantTotal.text()) + parseInt(prixPizza.text()))
-        } else if ($('#' + selectedButton).val() == "-") {
-            if (parseInt(spanQuantite.text()) != 0) { // Ne pas aller dans le négatif
-                spanQuantite.text(parseInt(spanQuantite.text()) - 1);
-                spanMontantTotal.text(parseInt(spanMontantTotal.text()) - parseInt(prixPizza.text()))
-            }
+
+        if (document.getElementById("panierPizza_" + idElement) == null) {  // Si l'élément n'existe pas dans le panier
+
+            var divInfosPizza = $('#' + selectedButton).parent().find('.divPizza').attr('id');   // Div-parent des infos
+            var panierNomPizza = $('#' + divInfosPizza).find('.nomPizza').text();       // Infos des pizzas
+            var panierPrixPizza = $('#' + divInfosPizza).find('.prixPizza').text();     // *
+            var panierTaillePizza = $('#' + divInfosPizza).find('.taillePizza').text(); // *
+            var panierIngBase1 = $('#' + divInfosPizza).find('.ingBase1').text();       // *
+
+            var panierQuantitePizza = 1;    // Quantité par défaut à 1
+            $("#montantTotal").text(parseInt($("#montantTotal").text()) + parseInt(panierPrixPizza));
+
+            console.log($('#' + divInfosPizza).find('.prixPizza').text());
+            $('.listePanier').append("<div class='panierPizza' id='panierPizza_" + idElement + "'></div>");   // Ajouter une div dans le panier
+            $('#panierPizza_' + idElement).append("<p>Pizza : <span class='nomPizza' id='panierNomPizza_" + idElement + "'>" + panierNomPizza + "</span></p>");
+            $('#panierPizza_' + idElement).append("<p>Prix : <span class='prixPizza' id='panierPrixPizza_" + idElement + "'>" + panierPrixPizza + "</span> €</p>");
+            $('#panierPizza_' + idElement).append("<p>Taille : <span class='taillePizza' id='panierTaillePizza_" + idElement + "'>" + panierTaillePizza + "</p>");
+            $('#panierPizza_' + idElement).append("<p>Ingrédients : <span class='ingBase1' id='panierIngBase1_pizza_" + idElement + "'>" + panierIngBase1 + "</p>");
+            $('#panierPizza_' + idElement).append("<p>Quantité : <span class='quantitePizza' id='panierQuantitePizza_" + idElement + "'>" + panierQuantitePizza + "</p>");
+            $('#panierPizza_' + idElement).append("<input type='button' class='modifierPizza' id='modifierDetails_" + idElement + "' value='Modifier'>");
+            $('#panierPizza_' + idElement).append("<input type='button' class='decrementQuantite' id='decrementQuantite_" + idElement + "' value='-'>");
+            $('#panierPizza_' + idElement).append("<input type='button' class='supprimerPizza' id='supprimerPizza_" + idElement + "' value='Supprimer'>");
+            $('#panierPizza_' + idElement).append("<div class='separationElementsPanier'><div>");   // ligne de séparation décorative
+        } else {
+            var panierElement = '#panierPizza_' + idElement;
+            $(panierElement).find(".quantitePizza").text(parseInt($(panierElement).find(".quantitePizza").text()) + 1);
+
+            var divInfosPizza = $('#' + selectedButton).parent().find('.divPizza').attr('id');   // Div-parent des infos
+            var panierPrixPizza = $('#' + divInfosPizza).find('.prixPizza').text();
+            $("#montantTotal").text(parseInt($("#montantTotal").text()) + parseInt(panierPrixPizza));
         }
-
-        verifierSelections(selectedButton, spanQuantite); // Repère visuel des sélections par coloration des divs
     });
 
-    function verifierSelections(selectedButton, spanQuantite) { // changer la couleurs des pizzas sélectionnées
-        var selectedPizza = $('#' + selectedButton).parent().parent().children(".divPizza");
-        var selectedPizzaQuantite = $('#' + selectedButton).parent().parent().children(".divQuantite");
-        if (parseInt(spanQuantite.text()) > 0) {
-            selectedPizza.css("background-color", "rgb(130, 130, 135)");
-            selectedPizzaQuantite.css("background-color", "rgb(102, 102, 107)");
+    $(document).on('click', '.decrementQuantite', function (event) { // Décrémenter UNE pizza
+        var selectedButton = event.target.id;
+        var idElement = $('#' + selectedButton).attr('id').replace("decrementQuantite_", "");   // Récupérer ID de la pizza
+        console.log("%cDécrementer une pizza : " + $('#' + selectedButton).parent().attr('id'), "color:orange");
+
+        var idPanierPizza = '#panierPizza_' + idElement;
+        var panierPrixPizza = $(idPanierPizza).find('.prixPizza').text();   // Prix de la pizza
+        $("#montantTotal").text(parseInt($("#montantTotal").text()) - parseInt(panierPrixPizza));   // Total = Total - PrixPizza
+
+        if ($(idPanierPizza).parent().find('.quantitePizza').text() > 1) {  // Si quantité de pizza > 1
+            $(idPanierPizza).find(".quantitePizza").text(parseInt($(idPanierPizza).find(".quantitePizza").text()) - 1); // Décrémenter quantité
         } else {
-            selectedPizza.css("background-color", "rgb(110, 110, 115)");
-            selectedPizzaQuantite.css("background-color", "rgb(82, 82, 87)");
+            $('#' + selectedButton).parent().remove();  // Si quantité == 1, Supprimer élément
         }
-    }
+    });
+
+    $(document).on('click', '.supprimerPizza', function (event) { // Supprimer une pizza du panier
+        var selectedButton = event.target.id;
+        var idElement = $('#' + selectedButton).attr('id').replace("supprimerPizza_", "");   // Récupérer ID de la pizza
+        console.log("%cSupprimer une pizza : " + $('#' + selectedButton).parent().attr('id'), "color:red");
+
+        var panierPrixPizza = $('#panierPizza_' + idElement).find('.prixPizza').text();
+        $("#montantTotal").text(parseInt($("#montantTotal").text()) - ((parseInt(panierPrixPizza) * $('#panierPizza_' + idElement).find('.quantitePizza').text())));
+
+        $('#panierPizza_' + idElement).remove();
+    });
 
     $("#validerCommande").click(function () { // Validation de la commande
 
@@ -84,7 +118,7 @@ $(doc).ready(function () {
 
         pizzaSelection = 'pizzaSelection=';
         pizzaSelectionQuantite = 'selectionQuantite=';
-        $(".listePizza > div").each(function () {
+        $(".listePanier > div").each(function () {
             if (parseInt($(this).find('.quantitePizza').text()) > 0) {
                 pizzaSelection = $(this).find('.nomPizza').text() + ",";
                 pizzaSelectionQuantite = $(this).find('.quantitePizza').text() + ",";

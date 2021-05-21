@@ -102,7 +102,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="../../model/scripts/priseDeCommande.js"></script>
+	<script type="text/javascript" src="../../model/scripts/priseDeCommande_Old.js"></script>
 </body>
 
 </html>

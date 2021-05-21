@@ -43,16 +43,11 @@
 							echo "<div class='blockPizza'>";
 							echo 	"<div class='divPizza' id='pizza_" . $tabPizza['IdPizza'] . "' >";
 							echo 		"<p>Pizza : <span class='nomPizza' id='nomPizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['NomPizza'] . "</span></p>";
-							echo 		"<p>Taille : " . $tabPizza['Taille'] . "</p>";
-							echo 		"<p>Ingrédients : " . $tabPizza['IngBase1'] . "</p>";
+							echo 		"<p>Taille : <span class='taillePizza' id='taillePizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['Taille'] . "</p>";
+							echo 		"<p>Ingrédients : <span class='ingBase1' id='ingBase1_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngBase1'] . "</p>";
 							echo 		"<p>Prix : <span class='prixPizza' id='prixPizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['PrixUHT'] . "</span> €</p>";
 							echo 	"</div>";
-
-							echo 	"<div class='divQuantite'>";
-							echo 		"Quantité : <span class='quantitePizza' id='quantitePizza_" . $tabPizza['IdPizza'] . "'>0</span>";
-							echo 		"<input type='button' class='ajusterQuantite' id='incrementQuantite_" . $tabPizza['IdPizza'] . "' value='Ajouter'>";
-							echo 		"<input type='button' class='ajusterQuantite' id='decrementQuantite_" . $tabPizza['IdPizza'] . "' value='Supprimer'>";
-							echo 	"</div>";
+							echo 		"<input type='button' class='ajouterPizza' id='incrementQuantite_" . $tabPizza['IdPizza'] . "' value='Ajouter'>";
 							echo "</div>";
 						}
 					} catch (PDOException $e) {
@@ -88,17 +83,20 @@
 					<label for="boiteIsotherme">Sac isotherme - 3€</label>
 				</div>
 
-				<div class="montantCommande">
-					<!-- Affichage du prix -->
-					<p>Montant total de la commande : <span id="montantTotal">0</span> €</p>
-				</div>
-
 				<button id="validerCommande" type="button">Valider</button>
 
 			</form>
 		</div>
 		<div class=panier>
-			<p>testffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffftestfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
+			<div class="titrePanier">
+				<h1>Mon Panier</h1>
+			</div>
+			<div class="montantCommande">
+				<!-- Affichage du prix -->
+				<h3 class="montantCommande">Total : <span id="montantTotal">0</span> €</h3>
+			</div>
+			<div class="separationPanier"></div>
+			<div class="listePanier"></div>
 		</div>
 	</div>
 

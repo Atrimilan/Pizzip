@@ -4,7 +4,23 @@ body {
     color: white;
     text-shadow: 1px 1px 2px rgb(38, 38, 39), 0 0 1em rgb(38, 38, 39), 0 0 0.2em rgb(38, 38, 39);
 }
-
+h1 {
+    margin: 0;
+    text-align: center;
+}
+h3 {
+    margin: 10px 0 20px 0;
+    text-align: center;
+}
+.separationPanier, .separationElementsPanier {
+    margin: 15px auto;
+    width: 300px;
+    height: 2px;
+    background-color: whitesmoke;
+}
+.separationElementsPanier {
+    background-color: rgb(92, 92, 95);
+}
 p {
     margin: 0;
 }
