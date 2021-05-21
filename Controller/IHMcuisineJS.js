@@ -26,7 +26,6 @@ $(document).ready(function () {
         $("#" + numCom).removeClass(classe);
         switch ((this).value) {
             case "accepter":
-                $(this).prop("disabled", true);
                 changementEtat("acceptee", numCom);
                 $("#" + numCom).addClass("alert alert-light");
                 break;

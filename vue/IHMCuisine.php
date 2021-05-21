@@ -26,7 +26,7 @@ and open the template in the editor.
            
                 <table class="table table-bordered ", style="margin-top:15px;">
                     <thead class="thead-dark">
-                        <tr><th scope="col">Commande</th><th scope="col">etat de la Commande</th></tr>
+                        <tr><th class="col-md-4">Commande</th><th class="col-md-2">etat de la Commande</th></tr>
                     </thead>
                     <tbody>
                     </tbody>
