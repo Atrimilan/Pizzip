@@ -1,12 +1,11 @@
-<?php   
+<?php  
+    header('Access-Control-Allow-Origin: *');	// CORS policy 
     //      ----- CONNEXION A LA BASE DE DONNEES -----
-    require_once("../../controller/connexion.php");
-    $connex = new PDO('mysql:host=' . $host . ';dbname=' . $bdd, $user, $pwd);   
+    include("../../controller/connexion.php");
+    //$connex = new PDO('mysql:host=' . $host . ';dbname=' . $bdd, $user, $pwd);   
 
-    //            ----- REQUETE SQL ----- 
-    //$output=file_get_contents('action_chargerCommandeLivraison.php');   
-    //include("localhost/coursphp/Pizzip/controller/action_chargerCommandeLivraison.php");
-    //include("file:///d:/wamp64/www/coursphp/Pizzip/controller/action_chargerCommandeLivraison.php");
+    //            ----- REQUETE SQL -----  
+    include("../../controller/action_chargerCommandeLivraison.php");
 
 ?>
 
@@ -44,7 +43,6 @@
     <p id="espace_nombre"> </p>
 
 <center>
-<input type="button" id="but" value="bouton test">
     
     <br><br>
 
