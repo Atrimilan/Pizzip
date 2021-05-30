@@ -38,7 +38,7 @@ $(doc).ready(function () {
     $('.ajouterPizza').click(function (event) { // Ajouter une pizza au panier
         var selectedButton = event.target.id;
         var idElement = $('#' + selectedButton).attr('id').replace("incrementQuantite_", "");   // Récupérer ID de la pizza
-        console.log("%cAjouter une pizza : " + $('#' + selectedButton).parent().find(".divPizza").attr('id'), "color:lightgreen");
+        console.log("%cAjout d'une pizza : " + $('#' + selectedButton).parent().find(".divPizza").attr('id'), "color:lightgreen");
 
 
         if (document.getElementById("panierPizza_" + idElement) == null) {  // Si l'élément n'existe pas dans le panier
@@ -52,20 +52,21 @@ $(doc).ready(function () {
             var panierQuantitePizza = 1;    // Quantité par défaut à 1
             $("#montantTotal").text(parseInt($("#montantTotal").text()) + parseInt(panierPrixPizza));
 
-            console.log($('#' + divInfosPizza).find('.prixPizza').text());
+            console.log("%c>>> Prix : "+$('#' + divInfosPizza).find('.prixPizza').text() +" €", "color:lightgreen");
             $('.listePanier').append("<div class='panierPizza' id='panierPizza_" + idElement + "'></div>");   // Ajouter une div dans le panier
+            $('#panierPizza_' + idElement).append("<input type='button' class='supprimerPizza' id='supprimerPizza_" + idElement + "' value='X'>");  // BOUTON SUPPRESSION
             $('#panierPizza_' + idElement).append("<p>Pizza : <span class='nomPizza' id='panierNomPizza_" + idElement + "'>" + panierNomPizza + "</span></p>");
             $('#panierPizza_' + idElement).append("<p>Prix : <span class='prixPizza' id='panierPrixPizza_" + idElement + "'>" + panierPrixPizza + "</span> €</p>");
             $('#panierPizza_' + idElement).append("<p>Taille : <span class='taillePizza' id='panierTaillePizza_" + idElement + "'>" + panierTaillePizza + "</p>");
             $('#panierPizza_' + idElement).append("<p>Ingrédients : <span class='ingBase1' id='panierIngBase1_pizza_" + idElement + "'>" + panierIngBase1 + "</p>");
             $('#panierPizza_' + idElement).append("<p>Quantité : <span class='quantitePizza' id='panierQuantitePizza_" + idElement + "'>" + panierQuantitePizza + "</p>");
-            $('#panierPizza_' + idElement).append("<input type='button' class='modifierPizza' id='modifierDetails_" + idElement + "' value='Modifier'>");
-            $('#panierPizza_' + idElement).append("<input type='button' class='decrementQuantite' id='decrementQuantite_" + idElement + "' value='-'>");
-            $('#panierPizza_' + idElement).append("<input type='button' class='supprimerPizza' id='supprimerPizza_" + idElement + "' value='Supprimer'>");
+            $('#panierPizza_' + idElement).append("<input type='button' class='modifierPizza' id='modifierDetails_" + idElement + "' value='Editer'>"); // BOUTON EDITION
+            $('#panierPizza_' + idElement).append("<input type='button' class='decrementQuantite' id='decrementQuantite_" + idElement + "' value='Enlever une'>");  // BOUTON DECREMENTATION
             $('#panierPizza_' + idElement).append("<div class='separationElementsPanier'><div>");   // ligne de séparation décorative
         } else {
             var panierElement = '#panierPizza_' + idElement;
-            $(panierElement).find(".quantitePizza").text(parseInt($(panierElement).find(".quantitePizza").text()) + 1);
+            var nouvelleQuantite = parseInt( parseInt( $(panierElement).find(".quantitePizza").text() ) + 1 );
+            $(panierElement).find(".quantitePizza").text(nouvelleQuantite);
 
             var divInfosPizza = $('#' + selectedButton).parent().find('.divPizza').attr('id');   // Div-parent des infos
             var panierPrixPizza = $('#' + divInfosPizza).find('.prixPizza').text();
@@ -82,7 +83,7 @@ $(doc).ready(function () {
         var panierPrixPizza = $(idPanierPizza).find('.prixPizza').text();   // Prix de la pizza
         $("#montantTotal").text(parseInt($("#montantTotal").text()) - parseInt(panierPrixPizza));   // Total = Total - PrixPizza
 
-        if ($(idPanierPizza).parent().find('.quantitePizza').text() > 1) {  // Si quantité de pizza > 1
+        if ($(idPanierPizza).find('.quantitePizza').text() > 1) {  // Si quantité de pizza > 1
             $(idPanierPizza).find(".quantitePizza").text(parseInt($(idPanierPizza).find(".quantitePizza").text()) - 1); // Décrémenter quantité
         } else {
             $('#' + selectedButton).parent().remove();  // Si quantité == 1, Supprimer élément
@@ -175,6 +176,9 @@ $(doc).ready(function () {
                         console.log(resultat);
                         //console.log("%cSuccess - DETAIL: %c" + resultat.success, "color:gold", "color:white");
                         //console.log(resultat.data);
+                        if (resultat.success == true) {
+                            window.location.replace("http://localhost/CNAM/Pizzip/view/pages/finCommande.php");
+                        }
                     },
                     error: function (errMsg) {
                         console.log("Erreur" + errMsg);
