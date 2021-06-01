@@ -177,7 +177,13 @@ $(doc).ready(function () {
                         //console.log("%cSuccess - DETAIL: %c" + resultat.success, "color:gold", "color:white");
                         //console.log(resultat.data);
                         if (resultat.success == true) {
-                            window.location.replace("http://localhost/CNAM/Pizzip/view/pages/finCommande.php");
+                            adresseComplete = encodeURI(adresse + ' - ' + ville);
+                            let prixTotal = $('#montantTotal').text();
+                            let timeMax = 55;
+                            let timeMin = 35;
+                            let time = Math.floor(Math.random()*(timeMax-timeMin+1)+timeMin);
+                            let firstname = encodeURI($("input[name='typeprenomBoite']").text());
+                            window.location.replace("http://localhost/CNAM/Pizzip/view/pages/finCommande.php?name=" + firstname + "&adr="+ adresseComplete + "&total=" + prixTotal + "&time=" + time);
                         }
                     },
                     error: function (errMsg) {
