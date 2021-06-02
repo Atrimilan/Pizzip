@@ -52,7 +52,7 @@ $(doc).ready(function () {
             var panierQuantitePizza = 1;    // Quantité par défaut à 1
             $("#montantTotal").text(parseInt($("#montantTotal").text()) + parseInt(panierPrixPizza));
 
-            console.log("%c>>> Prix : "+$('#' + divInfosPizza).find('.prixPizza').text() +" €", "color:lightgreen");
+            console.log("%c>>> Prix : " + $('#' + divInfosPizza).find('.prixPizza').text() + " €", "color:lightgreen");
             $('.listePanier').append("<div class='panierPizza' id='panierPizza_" + idElement + "'></div>");   // Ajouter une div dans le panier
             $('#panierPizza_' + idElement).append("<input type='button' class='supprimerPizza' id='supprimerPizza_" + idElement + "' value='X'>");  // BOUTON SUPPRESSION
             $('#panierPizza_' + idElement).append("<p>Pizza : <span class='nomPizza' id='panierNomPizza_" + idElement + "'>" + panierNomPizza + "</span></p>");
@@ -65,7 +65,7 @@ $(doc).ready(function () {
             $('#panierPizza_' + idElement).append("<div class='separationElementsPanier'><div>");   // ligne de séparation décorative
         } else {
             var panierElement = '#panierPizza_' + idElement;
-            var nouvelleQuantite = parseInt( parseInt( $(panierElement).find(".quantitePizza").text() ) + 1 );
+            var nouvelleQuantite = parseInt(parseInt($(panierElement).find(".quantitePizza").text()) + 1);
             $(panierElement).find(".quantitePizza").text(nouvelleQuantite);
 
             var divInfosPizza = $('#' + selectedButton).parent().find('.divPizza').attr('id');   // Div-parent des infos
@@ -172,18 +172,27 @@ $(doc).ready(function () {
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (resultat) {
-                        console.log("---------------");
                         console.log(resultat);
                         //console.log("%cSuccess - DETAIL: %c" + resultat.success, "color:gold", "color:white");
                         //console.log(resultat.data);
                         if (resultat.success == true) {
-                            adresseComplete = encodeURI(adresse + ' - ' + ville);
-                            let prixTotal = $('#montantTotal').text();
+                            let url = 'http://localhost/CNAM/Pizzip/view/pages/finCommande.php';    // URL - Page de fin de commande
+
+                            adresseComplete = $("input[name='adresse']").val() + ' - ' + $("input[name='ville']").val();  // $_POST['adr']
+                            let prixTotal = $('#montantTotal').text();  // $_POST['total']
                             let timeMax = 55;
                             let timeMin = 35;
-                            let time = Math.floor(Math.random()*(timeMax-timeMin+1)+timeMin);
-                            let firstname = encodeURI($("input[name='typeprenomBoite']").text());
-                            window.location.replace("http://localhost/CNAM/Pizzip/view/pages/finCommande.php?name=" + firstname + "&adr="+ adresseComplete + "&total=" + prixTotal + "&time=" + time);
+                            let time = Math.floor(Math.random() * (timeMax - timeMin + 1) + timeMin);   // $_POST['time']
+                            let firstname = $("input[name='prenom']").val();  // $_POST['name']
+
+                            var form = $('<form action="' + url + '" method="post" hidden>' +
+                                '<input type="text" name="name" value="' + firstname + '" />' +
+                                '<input type="text" name="adr" value="' + adresseComplete + '" />' +
+                                '<input type="text" name="total" value="' + prixTotal + '" />' +
+                                '<input type="text" name="time" value="' + time + '" />' +
+                                '</form>');
+                            $('body').append(form); // placer le form dans la fenêtre
+                            form.submit();  // submit le formulaire => donc redirection avec les paramètres POST
                         }
                     },
                     error: function (errMsg) {
