@@ -1,11 +1,7 @@
 <?php  
     header('Access-Control-Allow-Origin: *');	// CORS policy 
     //      ----- CONNEXION A LA BASE DE DONNEES -----
-    include("../../controller/connexion.php");
-    //$connex = new PDO('mysql:host=' . $host . ';dbname=' . $bdd, $user, $pwd);   
-
-    //            ----- REQUETE SQL -----  
-    include("../../controller/action_chargerCommandeLivraison.php");
+    include("../../controller/connexion.php");  
 
 ?>
 
@@ -39,7 +35,6 @@
     <!-- <p> Livreur : <?php echo $_SESSION['prenom']; ?> <br/><br/> </p> -->
     <h1>Commandes à Livrer :</h1> <br/><br/>
 
-    <div id="informations"></div>
     <p id="espace_nombre"> </p>
 
 <center>
@@ -65,8 +60,9 @@
     ?>
 
 
-    <script src="../../model/scripts/chargerLivraison2.js"></script> 
-    <!-- <script src="../../model/scripts/livraison.js"></script> -->
+    <script src="../../model/scripts/chargerLivraison1.js"></script> 
+    
+    
     
 
 
