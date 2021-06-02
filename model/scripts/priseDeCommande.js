@@ -180,8 +180,8 @@ $(doc).ready(function () {
 
                             adresseComplete = $("input[name='adresse']").val() + ' - ' + $("input[name='ville']").val();  // $_POST['adr']
                             let prixTotal = $('#montantTotal').text();  // $_POST['total']
-                            let timeMax = 55;
-                            let timeMin = 35;
+                            let timeMax = 45;
+                            let timeMin = 30;
                             let time = Math.floor(Math.random() * (timeMax - timeMin + 1) + timeMin);   // $_POST['time']
                             let firstname = $("input[name='prenom']").val();  // $_POST['name']
 

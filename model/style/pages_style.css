@@ -343,12 +343,12 @@ input[type="button"] {
     margin: 20px 0;
 }
 
-#lien {
+.lien {
     color: rgb(255, 174, 67);
     text-decoration: none;
     font-size: 18px;
 }
-#lien:hover {
+.lien:hover {
     color: whitesmoke;
 }
 #logoFinCommande {
@@ -356,4 +356,86 @@ input[type="button"] {
     top: 25%;
     right: 20%;
     width: 15%;
+}
+
+/* -------------------------------------- Page index.html ci-dessous -------------------------------------- */
+
+.headerAccueil {
+    background-color: rgb(32, 32, 35);
+    border-top: solid 1px rgb(32, 32, 35);
+    border-bottom: solid 1px rgb(32, 32, 35);
+    box-shadow: 0px 10px 10px rgb(52, 52, 55), 0px -10px 10px rgb(52, 52, 55); /*rgb(52, 52, 55)*/ /*rgb(72, 72, 73)*/
+    height: fit-content;
+    width: 100%;
+    padding: 30px 0;
+    margin: 50px 0;
+}
+#informationsSite {
+    padding: 20px;
+    text-align: center;
+}
+#informationsSite > a {
+    font-size: 30px;
+}
+
+#logoAccueil {
+    margin-left: 50px;
+    width: 100px;
+    display: inline-block;
+    vertical-align: middle;
+
+    /*Ne pas sélectionner les images*/
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+}
+
+#titreSite {
+    font-size: 80px;
+    font-weight: bold;
+    text-shadow: 0px 0px 30px rgba(255, 255, 255, 0.4); /*rgb(52, 52, 55)*/ /*rgb(72, 72, 73)*/
+    margin: 20px 50px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.iconAccueil {
+    display: inline-block;
+    height: 100px;
+    margin: 0 60px;
+    filter: drop-shadow(0px 0px 10px rgb(72, 72, 73));
+
+    /*Ne pas sélectionner les images*/
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+}
+
+.piedPageAccueil {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    text-align: center;
+}
+.blockImageAccueil {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.separationElementsAccueil {
+    margin: 30px auto;
+    width: 50%;
+    height: 2px;
+    background-color: rgb(126, 126, 133);
+}
+
+.wrapperAccueil {
+    /*Ne pas sélectionner le texte dans les divs*/
+    -moz-user-select: none; /* Firefox */
+    -webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
+    -ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
+    user-select: none; /* Propriété standard */
 }

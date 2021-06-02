@@ -18,7 +18,7 @@
             <p>Elle arrivera dans <span id='time'>45</span> minutes, à l'adresse : <span id='adr'></span></p>
             <p>Vous avez dépensé <span id='total'>45</span> € aujourd'hui !</p>
         </div>
-        <a href="../pages/commande.php" id="lien">Retour au menu</a>
+        <a href="../pages/commande.php" class="lien">Retour au menu</a>
 
     </div>
     <img id="logoFinCommande" src="http://localhost/CNAM/Pizzip/model/images/pizzipLogo.png" alt="LogoPizzip">
