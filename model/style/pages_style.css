@@ -363,7 +363,7 @@ input[type="button"] {
 
 .editionIng {
     padding-left: 10px;
-    box-shadow: 5px 5px 10px rgb(47, 47, 50);
+    box-shadow: 1px 1px 5px rgb(47, 47, 50);
 }
 
 .editionContainer > h2 {
@@ -408,7 +408,7 @@ input[type="button"] {
     background-color: rgb(121, 44, 44);
     border: solid 2px rgb(80, 30, 30);
     border-radius: 5px;
-    padding: 7px 10px;
+    padding: 7px 13px;
     color: whitesmoke;
     text-shadow: none;
     text-decoration: none;
