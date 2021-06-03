@@ -11,17 +11,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Piz.zip - Livraison</title>
-    <link href="../model/style/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../model/style/style.css" media="screen">
     <script src="https://code.jquery.com/jquery-latest.js"> </script> <!-- Dernier Jquery -->
-
-
-    <style type="text/css">
-        .tftable {font-size:12px;color:#333333;width:90%;border-width: 5px;border-color: #729ea5;border-collapse: collapse;}
-        .tftable th {font-size:16px;background-color:#f1c50e;border-width: 3px;padding: 8px;border-style: solid;border-color: black;text-align:center;}
-        .tftable tr {background-color:#ffffd3;}
-        .tftable td {font-size:16px;border-width: 3px;padding: 8px;border-style: solid;border-color: black;text-align:left;}
-        .tftable tr:hover {background-color:#ffffff;}
-    </style>
 
 </head>
 

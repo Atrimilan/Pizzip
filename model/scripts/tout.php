@@ -9,8 +9,7 @@ header('Access-Control-Allow-Origin: *');	// CORS policy
 include("../../controller/connexion.php"); // Connexion à la BDD
 
 $tabComplet = array();
-//$tabComplet1 = array();
-//$tabComplet2 = array();
+$tabComplet1 = array();
 
 
     //            ----- REQUETE SQL -----
@@ -35,7 +34,6 @@ while ($tabCommande = $result -> fetch(PDO :: FETCH_ASSOC) ) {
     $etatCommande = $tabCommande['Etat'];
 
     $tabComplet[] = $tabCommande;
-
           
     //            ----- REQUETE SQL -----    
     $requeteDetailCommande = "SELECT * FROM COM_DETAIL where NumCom = $numcommande";
@@ -44,22 +42,30 @@ while ($tabCommande = $result -> fetch(PDO :: FETCH_ASSOC) ) {
     while ($tabComDetail = $result1 -> fetch(PDO :: FETCH_ASSOC) ) {
           
         $numDetail = $tabComDetail['Num_Detail'];
+        $quantite = $tabComDetail['Quant'];
 
         $tabComplet[] = $tabComDetail;
-        $text1 = $numDetail;
 
     //            ----- REQUETE SQL -----    
         $requeteDetail = "SELECT NomPizza FROM DETAIL where Num_Detail = $numDetail";
 
         $result2 = $pdo -> query($requeteDetail);
         while ($tabDetail = $result2 -> fetch(PDO :: FETCH_ASSOC) ) {
+            $nomPizza = $tabDetail['NomPizza'];
             $tabComplet[] = $tabDetail;
 
         }
-    }           
+    }
+               
 }
+/*$tabComplet1 = array (
+    'NumCom' => $numcommande,
+    'NomClient' => $nomClient,
+    'Quant' => $quantite,
+    'NomPizza' => $nomPizza);*/
 
     //            ----- TRANSFORMER EN JSON -----
+    print_r($tabComplet1);
     echo"<br><br>";
     print_r($tabComplet);
     echo"<br><br>";
