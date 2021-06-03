@@ -236,6 +236,7 @@ button {
     text-shadow: 0px 0px 30px rgba(255, 255, 255, 0.5);
     border: none;
     padding: 10px;
+    cursor: pointer;
 }
 
 .footerPanier {
@@ -275,6 +276,7 @@ input[type="radio"]:checked:before {
 
 input[type="button"] {
     color: whitesmoke;
+    cursor: pointer;
 }
 .ajouterPizza {
     border: none;
@@ -283,11 +285,21 @@ input[type="button"] {
     padding: 10px;
     width: 100%;
 }
-.modifierPizza,
-.decrementQuantite {
+.modifierPizza {
+    text-align: center;
+    color: whitesmoke;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
     background-color: rgb(65, 65, 70);
     border: solid 2px rgb(36, 36, 39);
     border-radius: 5px;
+    margin-top: 5px;
+    padding: 5px 0;
+    width: 98%;
+    display: block;
+}
+.decrementQuantite {
     padding: 5px 10px;
     margin-top: 5px;
     width: 100%;
@@ -323,6 +335,84 @@ input[type="button"] {
     .espaceTopPanier {
         padding: 55px;
     }
+}
+/* -------------------------------------- Pop Up d'édition de commande.php ci-dessous -------------------------------------- */
+.editionTitre {
+    margin-top: 5px;
+    /*text-shadow: 5px 5px 5px rgb(42, 42, 45);*/
+    text-shadow: 1px 1px 5px rgb(32, 32, 35), 0 0 1em rgb(32, 32, 35), 0 0 0.2em rgb(32, 32, 35);
+}
+.editionBlock {
+    position: relative;
+    margin: 0 0 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+}
+
+@media screen and (max-width: 970px) {
+    /* Reponsive Panier */
+    .editionBlock {
+        width: 250px;
+        font-size: 13px;
+    }
+    .editionContainer > h2 {
+        font-size: 20px;
+    }
+}
+
+.editionIng {
+    padding-left: 10px;
+    box-shadow: 5px 5px 10px rgb(47, 47, 50);
+}
+
+.editionContainer > h2 {
+    float: left;
+    margin: 0;
+    margin-left: 20px;
+    padding-bottom: 20px;
+    width: 80%;
+}
+
+.contourNoir{
+	display: none;
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	z-index:1001;
+	-moz-opacity: 0.8;
+	opacity:.80;
+	filter: alpha(opacity=80);
+}
+
+.editionContainer {
+	display: none;
+	position: fixed;
+	top: 25%;
+	left: 25%;
+	width: 50%;
+	height: 50%;
+	padding: 16px;
+	border: solid 2px rgb(32, 32, 35);
+	background-color: rgb(52, 52, 55);
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+	z-index:1002;
+	overflow: auto;
+}
+.fermerModifierPizza {
+    
+    background-color: rgb(121, 44, 44);
+    border: solid 2px rgb(80, 30, 30);
+    border-radius: 5px;
+    padding: 7px 10px;
+    color: whitesmoke;
+    text-shadow: none;
+    text-decoration: none;
+    float: right;
 }
 
 /* -------------------------------------- Page finCommande.php ci-dessous -------------------------------------- */

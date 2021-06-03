@@ -55,7 +55,7 @@
 				require_once("../../controller/connexion.php");
 
 				try {
-					$result = $pdo->query("SELECT * FROM PIZZA");    // Requete PDO
+					$result = $pdo->query("SELECT * FROM PIZZA");    // Requete PDO pour afficher les pizzas
 
 					while ($tabPizza = $result->fetch(PDO::FETCH_ASSOC)) {
 						echo "<div class='blockPizza'>";
@@ -95,6 +95,13 @@
 				</select>
 			</div>
 
+			<div class="editionPopUp">
+				<div class="editionContainer">
+					<h2>Edition des ingrédients</h2>
+					<a class="fermerModifierPizza" href="javascript:void(0)">X</a><br><br>
+				</div>
+				<div class="contourNoir"></div>
+			</div>
 		</div>
 		<div class="fondPanier"></div>
 		<div class=panier>

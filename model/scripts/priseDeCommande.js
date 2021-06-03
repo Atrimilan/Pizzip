@@ -1,8 +1,12 @@
 var doc = document;
 var currentBoxMod = "carton";
+var listeIngredientsJSON;   // JSON Ingrédients - Récupération AJAX des ingrédients ligne 7
 
 $(doc).ready(function () {
 
+    $.getJSON("http://localhost/CNAM/Pizzip/controller/listeIngred.php").done(function (result) {   // Requete AJAX - Récupérer tous les ingrédients
+        listeIngredientsJSON = result;
+    });
 
     $('input[name=typeBoite]').click(function () { // changer le type de boite : carton - thermo        
         var spanMontantTotal = $('#montantTotal');
@@ -60,7 +64,7 @@ $(doc).ready(function () {
             $('#panierPizza_' + idElement).append("<p>Taille : <span class='taillePizza' id='panierTaillePizza_" + idElement + "'>" + panierTaillePizza + "</p>");
             $('#panierPizza_' + idElement).append("<p>Ingrédients : <span class='ingBase1' id='panierIngBase1_pizza_" + idElement + "'>" + panierIngBase1 + "</p>");
             $('#panierPizza_' + idElement).append("<p>Quantité : <span class='quantitePizza' id='panierQuantitePizza_" + idElement + "'>" + panierQuantitePizza + "</p>");
-            $('#panierPizza_' + idElement).append("<input type='button' class='modifierPizza' id='modifierDetails_" + idElement + "' value='Editer'>"); // BOUTON EDITION
+            $('#panierPizza_' + idElement).append("<a href='javascript:void(0)' class='modifierPizza' id='modifierDetails_" + idElement + "'> Editer</a>"); // BOUTON EDITION
             $('#panierPizza_' + idElement).append("<input type='button' class='decrementQuantite' id='decrementQuantite_" + idElement + "' value='Enlever une'>");  // BOUTON DECREMENTATION
             $('#panierPizza_' + idElement).append("<div class='separationElementsPanier'><div>");   // ligne de séparation décorative
         } else {
@@ -72,6 +76,45 @@ $(doc).ready(function () {
             var panierPrixPizza = $('#' + divInfosPizza).find('.prixPizza').text();
             $("#montantTotal").text(parseInt($("#montantTotal").text()) + parseInt(panierPrixPizza));
         }
+    });
+
+    $(document).on('click', '.modifierPizza', function (event) { // Modifier une pizza
+        $('.editionContainer').css("display", "block");
+        $('.contourNoir').css("display", "block");
+        $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Ingrédient 1 :</p><select class='editionIng' name='editionIngBase1'><select></div>");   // ajouter un select pour tous les ingrédients
+        $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Ingrédient 2 :</p><select class='editionIng' name='editionIngBase2'><select></div>");   // de base et ingrédients optionnels (ingBase1 à 4
+        $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Ingrédient 3 :</p><select class='editionIng' name='editionIngBase3'><select></div>");   // et ingOpt1 à 4)
+        $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Ingrédient 4 :</p><select class='editionIng' name='editionIngBase4'><select></div>");   // ..
+        $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Option 1 :</p><select class='editionIng' name='editionIngOpt1'><select></div>");    // ..
+        $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Option 2 :</p><select class='editionIng' name='editionIngOpt2'><select></div>");    // ..
+        $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Option 3 :</p><select class='editionIng' name='editionIngOpt3'><select></div>");    // ..
+        $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Option 4 :</p><select class='editionIng' name='editionIngOpt4'><select></div>");    // ..
+
+        listeIngredientsJSON.forEach(function (ingredActuel) {  // pour chaque ingrédient, on l'ajoute en option à chaque select
+            $('select[name="editionIngBase1"]').append("<option value=\"IngBase1_element\">" + ingredActuel + "</option>"); // ..
+            $('select[name="editionIngBase2"]').append("<option value=\"IngBase2_element\">" + ingredActuel + "</option>"); // ..
+            $('select[name="editionIngBase3"]').append("<option value=\"IngBase3_element\">" + ingredActuel + "</option>"); // ..
+            $('select[name="editionIngBase4"]').append("<option value=\"IngBase4_element\">" + ingredActuel + "</option>"); // ..
+            $('select[name="editionIngOpt1"]').append("<option value=\"IngBase5_element\">" + ingredActuel + "</option>");  // ..
+            $('select[name="editionIngOpt2"]').append("<option value=\"IngBase6_element\">" + ingredActuel + "</option>");  // ..
+            $('select[name="editionIngOpt3"]').append("<option value=\"IngBase7_element\">" + ingredActuel + "</option>");  // ..
+            $('select[name="editionIngOpt4"]').append("<option value=\"IngBase8_element\">" + ingredActuel + "</option>");  // ..
+        });
+        $('select[name="editionIngBase1"]').prop("selectedIndex", 1);
+    });
+
+    $(document).on('keyup', function(e) {   // Appuyer sur Echap pour fermer le Pop Up
+        if (e.key == "Escape") $('.fermerModifierPizza').click();
+    });
+
+    $('.contourNoir').on('click', function (e) {    // Click dans la zone sombre pour fermer le Pop Up
+        $('.fermerModifierPizza').click();
+    });
+
+    $(document).on('click', '.fermerModifierPizza', function (event) { // Fermer le Pop Up d'édition (avec la croix)
+        $('.editionContainer').css("display", "none");
+        $('.contourNoir').css("display", "none");
+        $(".editionBlock").remove();  // Supprimer tous les select pour eviter une fuite de mémoire par duplication
     });
 
     $(document).on('click', '.decrementQuantite', function (event) { // Décrémenter UNE pizza
