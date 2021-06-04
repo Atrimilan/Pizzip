@@ -61,8 +61,22 @@
 						echo "<div class='blockPizza'>";
 						echo 	"<div class='divPizza' id='pizza_" . $tabPizza['IdPizza'] . "' >";
 						echo 		"<p>Pizza : <span class='nomPizza' id='nomPizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['NomPizza'] . "</span></p>";
-						echo 		"<p>Taille : <span class='taillePizza' id='taillePizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['Taille'] . "</p>";
-						echo 		"<p>Ingrédients : <span class='ingBase1' id='ingBase1_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngBase1'] . "</p>";
+						echo 		"<p>Taille : <span class='taillePizza' id='taillePizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['Taille'] . "</span></p>";
+						echo 		"<p>Ingrédients : ";
+						echo			"<span class='ingBase1' id='ingBase1_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngBase1'] . "</span> ";
+						echo			"<span class='ingBase2' id='ingBase2_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngBase2'] . "</span> ";
+						echo			"<span class='ingBase3' id='ingBase3_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngBase3'] . "</span> ";
+						echo			"<span class='ingBase4' id='ingBase4_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngBase4'] . "</span> ";
+						echo		"</p>";
+						echo 		"<p class='optionsPizza'>";	// Insérer le texte Options Pizza
+						if (isset($tabPizza['IngOpt1']) || isset($tabPizza['IngOpt2']) || isset($tabPizza['IngOpt3']) || isset($tabPizza['IngOpt4'])) {	// Vérifier la présence d'options
+							echo			"Options : ";
+							echo			"<span class='ingOpt1' id='ingOpt1_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngOpt1'] . "</span> ";	// Mettre des options dans des spans
+							echo			"<span class='ingOpt2' id='ingOpt2_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngOpt2'] . "</span> ";	// s'il en existe au moins une 
+							echo			"<span class='ingOpt3' id='ingOpt3_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngOpt3'] . "</span> ";	// ...
+							echo			"<span class='ingOpt4' id='ingOpt4_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngOpt4'] . "</span> ";	// ...
+						}
+						echo		"</p>";
 						echo 		"<p>Prix : <span class='prixPizza' id='prixPizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['PrixUHT'] . "</span> €</p>";
 						echo 	"</div>";
 						echo 		"<input type='button' class='ajouterPizza' id='incrementQuantite_" . $tabPizza['IdPizza'] . "' value='Ajouter'>";

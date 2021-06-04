@@ -103,6 +103,7 @@ p {
     margin: 10px 20px;
     box-shadow: 3px 3px 5px rgb(72, 72, 73);
     border: solid 2px rgb(52, 52, 55);
+    vertical-align: middle;
 }
 
 .divPizza {
