@@ -205,7 +205,7 @@ $(doc).ready(function () {
 
         let pizzaCommande = { // JSON pour contenir des pizzas et leur quantité
             numCommande: 0,
-            /*taillePizza: 'L',*/
+            taillePizza: $('select[name="taille"]').val(),
             pizza: []
         };
         let verifierPizzaNom, verifierPizzaQuantite;
@@ -263,20 +263,29 @@ $(doc).ready(function () {
         try {
             verifierPizzaNom = "verifPizza=" + pizzaCommande.pizza[0].nomPizza; // Envoyer une pizza (une commande ne peut pas être vide)
             verifierPizzaQuantite = "verifPizzaQuant=" + pizzaCommande.pizza[0].quantitePizza; // Quantité supérieure à 0 (si on touche au code source)
+            verifierTaille = "verifTaille=" + pizzaCommande.taillePizza; // Taille == L ou Taille == XL
+            verifierIngBase1 = "ingBase1=" + pizzaCommande.pizza[0].ingBase1;   // On voudra vérifier la présence d'au moins un ingrédient valide
+            verifierIngBase2 = "ingBase2=" + pizzaCommande.pizza[0].ingBase2;   // ...
+            verifierIngBase3 = "ingBase3=" + pizzaCommande.pizza[0].ingBase3;   // + Controller la validité des ingrédients
+            verifierIngBase4 = "ingBase4=" + pizzaCommande.pizza[0].ingBase4;   // ...
+            verifierIngOpt1 = "ingOpt1=" + pizzaCommande.pizza[0].ingOpt1;    // + Controller la validité des options
+            verifierIngOpt2 = "ingOpt2=" + pizzaCommande.pizza[0].ingOpt2;    // ...
+            verifierIngOpt3 = "ingOpt3=" + pizzaCommande.pizza[0].ingOpt3;    // ...
+            verifierIngOpt4 = "ingOpt4=" + pizzaCommande.pizza[0].ingOpt4;    // ...
         } catch (error) {
             console.log("%cPas de pizza sélectionnée\nImpossible de passer la commande", "color:salmon");
         }
 
         var lienAPI = 'http://localhost/CNAM/Pizzip/controller/enregistrerCommande.php';
-        var parametres = nom + '&' + prenom + '&' + modeCommande + '&' + typeBoite + '&' + tel + '&' + adresse + '&' + codePostal + '&' + ville + '&' + verifierPizzaNom + '&' + verifierPizzaQuantite;
+        var parametres = nom + '&' + prenom + '&' + modeCommande + '&' + typeBoite + '&' + tel + '&' + adresse + '&' + codePostal + '&' + ville + '&' +
+            verifierPizzaNom + '&' + verifierPizzaQuantite + '&' + verifierIngBase1 + '&' + verifierIngBase2 + '&' + verifierIngBase3 + '&' + verifierIngBase4 +
+            '&' + verifierIngOpt1 + '&' + verifierIngOpt2 + '&' + verifierIngOpt3 + '&' + verifierIngOpt4 + '&' + verifierTaille;
         console.log("Requete : " + lienAPI + '?' + parametres);
 
         $.getJSON(lienAPI + '?' + parametres).done(function (result) { // Requete AJAX - Save + Check des données utilisateur
             console.log("%cSuccess - COMMANDE: %c" + result.success, "color:gold", "color:white");
             console.log("%cNuméro de commande: %c" + result.numCom, "color:lightgreen", "color:white");
             pizzaCommande.numCommande = result.numCom;
-            /*pizzaCommande.taillePizza = $('#taillePizzaSelect option:selected').val().trim();
-            console.log(pizzaCommande.taillePizza + "-------");*/
             if (result.success == true) {   // Si les données utilisateurs ont pu être enregistrées, on peut enregistrer les pizzas
                 $.ajax({
                     type: 'POST',
@@ -286,7 +295,6 @@ $(doc).ready(function () {
                     dataType: "json",
                     success: function (resultat) {
                         console.log(resultat);
-                        console.log("test");
                         //console.log("%cSuccess - DETAIL: %c" + resultat.success, "color:gold", "color:white");
                         //console.log(resultat.data);
                         if (resultat.success == true) {
@@ -304,12 +312,14 @@ $(doc).ready(function () {
                                 '<input type="text" name="adr" value="' + adresseComplete + '" />' +
                                 '<input type="text" name="total" value="' + prixTotal + '" />' +
                                 '<input type="text" name="time" value="' + time + '" />' +
+                                '<input type="text" name="typeCom" value="' + modeCommande + '" />' +
                                 '</form>');
                             $('body').append(form); // placer le form dans la fenêtre
-                            //form.submit();  // submit le formulaire => donc redirection avec les paramètres POST
+                            form.submit();  // submit le formulaire => donc redirection avec les paramètres POST
                         }
                     },
                     error: function (errMsg) {
+                        console.log(3);
                         console.log("Erreur" + errMsg);
                     }
                 });

@@ -30,11 +30,7 @@ while ($ligne = $resultPizza->fetch(PDO::FETCH_ASSOC)) {
     $IngOpt4 = verifierNull($ligne['IngOpt4']);
 
     $listePizza[$nomPizza] = ['IngBase1' => $IngBase1, 'IngBase2' => $IngBase2, 'IngBase3' => $IngBase3, 'IngBase4' => $IngBase4, 'IngOpt1' => $IngOpt1, 'IngOpt2' => $IngOpt2,
-    'IngOpt3' => $IngOpt3, 'IngOpt4' => $IngOpt4];
-    /*$listePizza[$nomPizza] = array(
-        'IngBase1' => $IngBase1, 'IngBase2' => $IngBase2, 'IngBase3' => $IngBase3, 'IngBase4' => $IngBase4, 'IngOpt1' => $IngOpt1, 'IngOpt2' => $IngOpt2,
-        'IngOpt3' => $IngOpt3, 'IngOpt4' => $IngOpt4
-    );  // Mettre les ingrédients dans le JSON, dans l'objet portant le nom de la pizza*/
+    'IngOpt3' => $IngOpt3, 'IngOpt4' => $IngOpt4];  // Mettre les ingrédients dans le JSON, dans l'objet portant le nom de la pizza
 }
 $ingredients['listePizza'] = $listePizza;   // Mettre la liste de pizza dans un objet du JSON du même nom
 

@@ -12,18 +12,47 @@ if (!empty($json)) {
     $data = json_decode($json); // Convertir le JSON en objet PHP
     $pizza = $data->pizza;  // Récupérer le tableau de Pizza
     $numCommande = $data->numCommande;
-    //$taillePizza = $data->taillePizza;
+    $taillePizza = $data->taillePizza;
 
-    for ($i = 0; $i < sizeof($pizza); $i++) { // Parcourir une première fois toutes les pizzas pour s'assurer qu'elles existent
-        $verifPizza = $pizza[$i]->nomPizza;
-        $verifPizza = str_replace(',', '', $verifPizza);    // enlever la virgule finale
-        $verifPizzaQuant = $pizza[$i]->quantitePizza;
-        $verifPizzaQuant = str_replace(',', '', $verifPizzaQuant);    // enlever la virgule finale
+    for ($i = 0; $i < sizeof($pizza); $i++) {   // Parcourir les pizza = Controller Pizzas existantes + Quantité valide + Ingrédients existants
+        $verifPizza = str_replace(',', '', $pizza[$i]->nomPizza);   // enlever la virgule finale
+        $verifPizzaQuant = str_replace(',', '', $pizza[$i]->quantitePizza);
+        $verifTaille = str_replace(',', '', $taillePizza);
 
         $resultVerifPizza = $pdo->query("SELECT * FROM PIZZA WHERE NomPizza='" . $verifPizza . "'");
         $ligneVerifPizza = $resultVerifPizza->fetch(PDO::FETCH_ASSOC);
         if (!$ligneVerifPizza || $verifPizzaQuant <= 0) {
             $success = false;    // Si la pizza n'est pas trouvée
+        }
+        if ($verifTaille != "L" && $verifTaille != "XL"){	// Taille forcement soit L, soit XL
+            $success = false;
+        }
+
+        $listeVerifIng = array();   // Mettre tous les ingrédients dans un tableau
+        array_push($listeVerifIng, str_replace(',', '', $pizza[$i]->ingBase1));
+        array_push($listeVerifIng, str_replace(',', '', $pizza[$i]->ingBase2));
+        array_push($listeVerifIng, str_replace(',', '', $pizza[$i]->ingBase3));
+        array_push($listeVerifIng, str_replace(',', '', $pizza[$i]->ingBase4));
+        array_push($listeVerifIng, str_replace(',', '', $pizza[$i]->ingOpt1));
+        array_push($listeVerifIng, str_replace(',', '', $pizza[$i]->ingOpt2));
+        array_push($listeVerifIng, str_replace(',', '', $pizza[$i]->ingOpt3));
+        array_push($listeVerifIng, str_replace(',', '', $pizza[$i]->ingOpt4));
+
+        for ($j = 0; $j < sizeof($listeVerifIng); $j++) {   // Parcourir le tableau d'ingrédients
+            if ($listeVerifIng[$j] != "") { // Si l'ingrédient n'est pas null ...
+                $resultVerifIng = $pdo->query("SELECT * FROM INGREDIENT WHERE NomIngred='" . $listeVerifIng[$j] . "'"); // ... On vérifie son
+                $ligneVerifIng = $resultVerifIng->fetch(PDO::FETCH_ASSOC);                              // existence dans la BDD
+                if (!$ligneVerifIng) {
+                    $success = false;    // Si l'ingrédient n'est pas trouvé
+                }
+            }
+        }
+
+        if (
+            str_replace(',', '', $pizza[$i]->ingBase1) == "" && str_replace(',', '', $pizza[$i]->ingBase2) == "" &&
+            str_replace(',', '', $pizza[$i]->ingBase3) == "" && str_replace(',', '', $pizza[$i]->ingBase4) == ""
+        ) {
+            $success = false;    // Si les 4 ingrédients sont vides, ca ne peut pas marcher
         }
     }
 
@@ -55,19 +84,11 @@ if (!empty($json)) {
             $infosPizza = $pdo->query("SELECT IdPizza FROM PIZZA WHERE NomPizza='" . $nomPizzaActuelle . "'");
             while ($element = $infosPizza->fetch(PDO::FETCH_ASSOC)) { // récupération par association de noms
                 $IdPizza = $element['IdPizza'];
-                /*$IngBase1 = $element['IngBase1'];
-                $IngBase2 = $element['IngBase2'];
-                $IngBase3 = $element['IngBase3'];
-                $IngBase4 = $element['IngBase4'];
-                $IngOpt1 = $element['IngOpt1'];
-                $IngOpt2 = $element['IngOpt2'];
-                $IngOpt3 = $element['IngOpt3'];
-                $IngOpt4 = $element['IngOpt4'];*/
             }
 
             try {   // Insérer un DETAIL
-                $insert = $pdo->exec("INSERT INTO DETAIL(NomPizza,IdPizza,IngBase1,IngBase2,IngBase3,IngBase4,IngOpt1,IngOpt2,IngOpt3,IngOpt4)
-                VALUES ('" . $nomPizzaActuelle . "','" . $IdPizza . "','" . $IngBase1 . "','" . $IngBase2 . "','" . $IngBase3 . "','" . $IngBase4 . "'
+                $insert = $pdo->exec("INSERT INTO DETAIL(NomPizza,IdPizza,Taille,IngBase1,IngBase2,IngBase3,IngBase4,IngOpt1,IngOpt2,IngOpt3,IngOpt4)
+                VALUES ('" . $nomPizzaActuelle . "','" . $IdPizza . "','" . $taillePizza . "','" . $IngBase1 . "','" . $IngBase2 . "','" . $IngBase3 . "','" . $IngBase4 . "'
                 ,'" . $IngOpt1 . "','" . $IngOpt2 . "','" . $IngOpt3 . "','" . $IngOpt4 . "')");    // Requete PDO
             } catch (PDOException $e) {
                 print $e->getMessage();
@@ -87,10 +108,5 @@ if (!empty($json)) {
     $success = false;
 }
 
-$resultat = ["success" => $success, "test" => $test, "dernierNumDetail" => $numDetail, "numCommande" => $numCommande, "test" => $data];
+$resultat = ["success" => $success, "test" => $test, "dernierNumDetail" => $numDetail, "numCommande" => $numCommande];
 echo json_encode($resultat);	// envoyer le tout au format JSON
-
-
-
-//$resultat = ["success" => $success, "data" => $data];
-//echo json_encode($resultat);	// envoyer le tout au format JSON
