@@ -295,8 +295,6 @@ $(doc).ready(function () {
                     dataType: "json",
                     success: function (resultat) {
                         console.log(resultat);
-                        //console.log("%cSuccess - DETAIL: %c" + resultat.success, "color:gold", "color:white");
-                        //console.log(resultat.data);
                         if (resultat.success == true) {
                             let url = 'http://localhost/CNAM/Pizzip/view/pages/finCommande.php';    // URL - Page de fin de commande
 
@@ -306,20 +304,19 @@ $(doc).ready(function () {
                             let timeMin = 30;
                             let time = Math.floor(Math.random() * (timeMax - timeMin + 1) + timeMin);   // $_POST['time'] - aléatoire pour le moment
                             let firstname = $("input[name='prenom']").val();  // $_POST['name']
-
+                            let modCom = $(".modeCommande").children('input[name="modeCommande"]:checked').val().trim();
                             var form = $('<form action="' + url + '" method="post" hidden>' +
                                 '<input type="text" name="name" value="' + firstname + '" />' +
                                 '<input type="text" name="adr" value="' + adresseComplete + '" />' +
                                 '<input type="text" name="total" value="' + prixTotal + '" />' +
                                 '<input type="text" name="time" value="' + time + '" />' +
-                                '<input type="text" name="typeCom" value="' + modeCommande + '" />' +
+                                '<input type="text" name="typeCom" value="' + modCom + '" />' +
                                 '</form>');
                             $('body').append(form); // placer le form dans la fenêtre
                             form.submit();  // submit le formulaire => donc redirection avec les paramètres POST
                         }
                     },
                     error: function (errMsg) {
-                        console.log(3);
                         console.log("Erreur" + errMsg);
                     }
                 });

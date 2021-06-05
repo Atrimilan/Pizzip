@@ -42,7 +42,8 @@
                             'name' => $_POST['name'],
                             'adr' => $_POST['adr'],
                             'total' => $_POST['total'],
-                            'time' => $_POST['time']
+                            'time' => $_POST['time'],
+                            'typeCom' => $_POST['typeCom']
                         ]
                     )
                     ?>,
@@ -54,7 +55,7 @@
         $('#total').text(getJsonData['infos'].total);
         $('#time').text(getJsonData['infos'].time);
 
-        if (getJsonData['infos'].typeCom != "livraison"){
+        if (getJsonData['infos'].typeCom != "livraison") {
             $("#informationsLivraison").hide();
         }
     });
