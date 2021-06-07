@@ -88,6 +88,9 @@ $(document).ready(function () {
    }, 3000);
 
 //        ---------- FONCTION ----------
+   function error () { return true; }
+   window.onerror
+   = error;
 
    function changementEtat(etat, numCom) {
       $.post("../../model/scripts/modifRequete.php", {etat: etat, numCom: numCom});

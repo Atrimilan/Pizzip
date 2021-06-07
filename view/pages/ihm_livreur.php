@@ -10,6 +10,10 @@
 <html lang="fr">
 
 <head>
+function error () { return true; }
+window.onerror
+= error;
+
     <meta charset="UTF-8">
     <title>Piz.zip - Livraison</title>
     <link rel="stylesheet" href="../../model/style/style.css" media="screen">
