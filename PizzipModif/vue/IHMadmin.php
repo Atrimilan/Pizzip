@@ -26,34 +26,33 @@ and open the template in the editor.
                     <tr>
                         <td>Tomate</td>
                         <td>   
-                            <div>
-                                <span>est frais</span>
+                            <div class="form-check">
+                                <span>est frais : </span><span id="estfraiss"> dije </span>
                                 <input type="checkbox" checked data-toggle="toggle">
                             </div>
 
-                            <div>
-                                <span>Unité : </span>
-                                <select name="unite" id="unite">
-                                    <option value="">--choisir unite--</option>
+                            <div class="form-check">
+                                <span>Unité : </span><span id="Unite"></span>
+                                <select class="pull-right" name="unite" id="unite">
                                     <option value="kg">kilogramme</option>
                                     <option value="litre">Litre</opt>
                                 </select>
                             </div>
-                            <div>
+                            <div class="form-check">
                                 <span>Stock min : </span>
-                                <input type="number" required name="price" min="0">
+                                <input class="pull-right" type="text" min="0">
                             </div>
-                            <div>
+                            <div class="form-check">
                                 <span>Stock Réel :</span>
-                                <input type="number" required name="price" min="0">
+                                <input class="pull-right" type="text" required name="price" min="0">
                             </div>
-                            <div>
+                            <div class="form-check">
                                 <span>PUHT : </span>
-                                <input type="number" required name="price" min="0">
+                                <input class="pull-right" type="text" required name="price" min="0">
                             </div>
-                            <div>
+                            <div class="form-check">
                                 <span>Quantité à commander : </span>
-                                <input type="number" required name="price" min="0">
+                                <input class="pull-right" type="text" required name="price" min="0">
                             </div>
 
 
@@ -70,6 +69,6 @@ and open the template in the editor.
         </div>
         <!-- comment -->
         <script src=" js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="../Controller/IHMadminJS.js"></script>
+        <script type="text/javascript" src="../controlleur/IHMadminJS.js"></script>
     </body>
 </html>
