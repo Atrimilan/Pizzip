@@ -24,24 +24,26 @@ $(document).ready(function () {
         let numCom = ((this).name);
         let classe = $("#" + numCom).attr('class');
         $("#" + numCom).removeClass(classe);
+         $('input[name='+numCom+']').css('background-color', '#C0C0C0');
+         $(this).css('background-color', '#34ce57');
         switch ((this).value) {
-            case "accepter":
+            case "acceptée":          
                 changementEtat("acceptee", numCom);
                 $("#" + numCom).addClass("alert alert-light");
                 break;
-            case "enPrepa":
+            case "en cours de préparation":
                 changementEtat("enPreparation", numCom);
                 $("#" + numCom).addClass("alert alert-danger");
                 break;
-            case "prete":
+            case "préte":
                 changementEtat("prete", numCom);
                 $("#" + numCom).addClass("alert alert-warning");
                 break;
-            case "N":
+            case "récupérée par le client":
                 changementEtat("livree", numCom);
                 $("#" + numCom).addClass("alert alert-success");
                 break;
-            case "O":
+            case "récupérée par le livreur":
                 $("#" + numCom).addClass("alert alert-success");
                 break;
         }

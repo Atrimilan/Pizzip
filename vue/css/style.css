@@ -13,3 +13,10 @@ button{
     text-decoration: none!important;
     width:550px
 }
+input{
+    margin-bottom: 5px!important;
+    height: 50px!important;
+    width: 300px!important;
+    border-radius: 8px!important;
+    background-color: #C0C0C0;
+}
