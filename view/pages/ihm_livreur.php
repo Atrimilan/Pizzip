@@ -1,7 +1,8 @@
 <?php  
     header('Access-Control-Allow-Origin: *');	// CORS policy 
     //      ----- CONNEXION A LA BASE DE DONNEES -----
-    include("../../controller/connexion.php");  
+    include("../../controller/connexion.php");
+    include("../../model/scripts/chargerTouteLivraison.php");  
 
 ?>
 
@@ -28,36 +29,23 @@
 
     <p id="espace_nombre"> </p>
 
-<center>
-    
+<center>   
     <br><br>
-
     <!--                    -------- TABLEAU COMMANDES ---------->                
     <table id="tabe" class="tftable" border="1">
         <tr><th>COMMANDE</th><th>INFORMATIONS</th><th>ACTIONS</th></tr>           
     </table> <br>
     <!--                    -------- TABLEAU COMMANDES ---------->
-    
-    
-
 </center>
 
 
-    <?php
-        
-
+    <?php    
         //         -----  FOOTER -----
         include("../pages/Footer.php");
     ?>
 
 
-    <script src="../../model/scripts/chargerLivraison1.js"></script> 
-    
-    
-    
-
-
-
+    <script src="../../model/scripts/chargerLivraison.js"></script> 
 </body>
 
 </html>

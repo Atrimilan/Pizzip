@@ -1,17 +1,9 @@
 
 // ----- Actualiser la page -----
-setInterval(function() {
-    $.ajax({
-        url: "http://localhost/coursphp/Pizzip/controller/action_chargerCommandeLivraison.php",
-        success: function (data) {
-            console.log("Actualisé JSON 1");
-        }
-    });
-}, 100 * 60);
 
 setInterval(function() {
     $.ajax({
-        url: "http://localhost/coursphp/Pizzip/model/scripts/tout.php",
+        url: "http://localhost/coursphp/Pizzip/model/scripts/chargerTouteLivraison.php",
         success: function (data) {
             console.log("Actualisé JSON Complet");
         }

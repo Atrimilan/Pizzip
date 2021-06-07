@@ -1,15 +1,8 @@
 <?php
 header('Access-Control-Allow-Origin: *');	// CORS policy
-
-    //            ----- N'affiche pas les erreurs PHP -----
-//ini_set('display_errors', false); // false pour cacher
-//ini_set('display_startup_errors', false);
-
-//require_once("../controller/connexion.php");	
 include("../../controller/connexion.php"); // Connexion à la BDD
 
 $tabComplet = array();
-$tabComplet1 = array();
 
 
     //            ----- REQUETE SQL -----
@@ -53,30 +46,21 @@ while ($tabCommande = $result -> fetch(PDO :: FETCH_ASSOC) ) {
         while ($tabDetail = $result2 -> fetch(PDO :: FETCH_ASSOC) ) {
             $nomPizza = $tabDetail['NomPizza'];
             $tabComplet[] = $tabDetail;
-
         }
-    }
-               
+    }              
 }
-/*$tabComplet1 = array (
-    'NumCom' => $numcommande,
-    'NomClient' => $nomClient,
-    'Quant' => $quantite,
-    'NomPizza' => $nomPizza);*/
+   
+    /*echo"<br><br>";
+    print_r($tabComplet);
+    echo"<br><br>";*/
 
     //            ----- TRANSFORMER EN JSON -----
-    print_r($tabComplet1);
-    echo"<br><br>";
-    print_r($tabComplet);
-    echo"<br><br>";
-
 $tableauJsonCommande = json_encode($tabComplet);
-
-echo"<br><br>";
-echo $tableauJsonCommande;  
-
 $fichierJson1 = file_put_contents('livraisonTotal.json',$tableauJsonCommande);
-         
+
+/*echo"<br><br>";
+echo $tableauJsonCommande; */ 
+       
 ?>
 
 <body>
