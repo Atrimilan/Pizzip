@@ -6,7 +6,7 @@
 	<title>Piz.zip - Commande</title>
 	<script src="https://code.jquery.com/jquery-latest.js"></script> <!-- Dernier Jquery -->
 	<link href="../../model/style/pages_style.css" rel="stylesheet" type="text/css">
-	<link rel="shortcut icon" href="http://localhost/CNAM/Pizzip/model/images/pizzipLogo.png">
+	<link rel="shortcut icon" href="../../model/images/pizzipLogo.png">
 </head>
 
 <body>
@@ -60,6 +60,7 @@
 					while ($tabPizza = $result->fetch(PDO::FETCH_ASSOC)) {
 						echo "<div class='blockPizza'>";
 						echo 	"<div class='divPizza' id='pizza_" . $tabPizza['IdPizza'] . "' >";
+						echo		"<img class='photoPizza' id='img_" . $tabPizza['NomPizza'] . "' src='../../model/images/" . $tabPizza['NomPizza'] . ".jpg' alt='Image " . $tabPizza['NomPizza'] . "'>";
 						echo 		"<p>Pizza : <span class='nomPizza' id='nomPizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['NomPizza'] . "</span></p>";
 						echo 		"<p>Taille : <span class='taillePizza' id='taillePizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['Taille'] . "</span></p>";
 						echo 		"<p>Ingrédients : ";
@@ -108,6 +109,7 @@
 					<option value="XL">Grande</option>
 				</select>
 			</div>
+			<a href="../.." id="lienAccueilCommande" class="lien">Accueil</a>
 
 			<div class="editionPopUp">
 				<div class="editionContainer">

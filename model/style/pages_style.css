@@ -105,6 +105,12 @@ p {
     border: solid 2px rgb(52, 52, 55);
     vertical-align: middle;
 }
+.photoPizza {
+    max-width:100%;
+    max-height:100%;
+    border: solid 1px rgb(0, 0, 0);
+    border-radius: 3%;
+}
 
 .divPizza {
     padding: 5px;
@@ -318,6 +324,9 @@ input[type="button"] {
     padding: 7px 10px;
 }
 
+#lienAccueilCommande {
+    padding: 20px;
+}
 @media screen and (max-width: 970px) {
     /* Reponsive Panier */
     h1 {
