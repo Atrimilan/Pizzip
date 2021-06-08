@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="training">
+        <input id="variable1" class="variable1" type="text">variable 1</input>
+        <input id="variable2" class="variable2" type="text">variable 2</input>
+        <button type="button" id="valider">Valider</button>
+    </form>
+    <script src="https://code.jquery.com/jquery-latest.js"></script> <!-- Dernier Jquery -->
+    <script>
+        $(document).ready(function () { //toujours mettre cette ligne
+            var button = document.querySelector('#valider');
+            button.addEventListener('click', event => {
+                var a = $('#variable1').val();
+                var b = $('#variable2').val();
+                console.log(parseInt(a) + parseInt(b));
+
+                var lienAPI = "http://localhost/pizzipprojet/pages/trainAjax.php"
+                var param1 = "var1=" . a;
+                var param2 = "var2=" . b;
+               // $.getJSON(lienAPI + '?' + param1 + '&' + param2).done(function (result) {
+                $.getJSON("http://localhost/pizzipprojet/pages/trainAjax.php?var1=15&var2=15").done(function (result) {
+                    console.log(result);
+                    console.log(result.valeur1);
+                    console.log(result.valeur2);
+                    console.log('resultat:'.result.valeur3);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
