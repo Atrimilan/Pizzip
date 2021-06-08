@@ -1,6 +1,5 @@
 
 // ----- Actualiser la page -----
-
 setInterval(function() {
     $.ajax({
         url: "http://localhost/coursphp/Pizzip/model/scripts/chargerTouteLivraison.php",
