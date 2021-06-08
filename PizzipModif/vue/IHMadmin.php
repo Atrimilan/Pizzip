@@ -17,55 +17,40 @@ and open the template in the editor.
     </head>
     <body>
         <div class="container">
-            <h1>Modification </h1>    
+            <h1>IHM Administration</h1><br>
+            <h2>Ajout d'ingrédients</h2>
+            <input type="text" id="ajouterIngChamp">
+            <button id="bouttonAjouter">Ajouter</button>
+            <script type="text/javascript" src="QueryAjax.js"></script>
+            <h2>Modification d'ingrédients</h2>    
             <table class="table table-bordered ", style="margin-top:15px;">
                 <thead class="thead-dark">
                     <tr><th class="col-md-1">Nom Ingredient</th><th class="col-md-4">Option</th><th class="col-md-2">actions</th></tr>
                 </thead>
                 <tbody>
+                <div>
                     <tr>
-                        <td>Tomate</td>
-                        <td>   
-                            <div class="form-check">
-                                <span>est frais : </span><span id="estfraiss"> dije </span>
-                                <input type="checkbox" checked data-toggle="toggle">
-                            </div>
-
-                            <div class="form-check">
-                                <span>Unité : </span><span id="Unite"></span>
-                                <select class="pull-right" name="unite" id="unite">
-                                    <option value="kg">kilogramme</option>
-                                    <option value="litre">Litre</opt>
-                                </select>
-                            </div>
-                            <div class="form-check">
-                                <span>Stock min : </span>
-                                <input class="pull-right" type="text" min="0">
-                            </div>
-                            <div class="form-check">
-                                <span>Stock Réel :</span>
-                                <input class="pull-right" type="text" required name="price" min="0">
-                            </div>
-                            <div class="form-check">
-                                <span>PUHT : </span>
-                                <input class="pull-right" type="text" required name="price" min="0">
-                            </div>
-                            <div class="form-check">
-                                <span>Quantité à commander : </span>
-                                <input class="pull-right" type="text" required name="price" min="0">
-                            </div>
-
-
-
-
-                        </td>
-                        <td>
-                            <button class=" btn btn-success">ajouter</button>
-                            <button class=" btn btn-danger">supprimer</button>
-                        </td>
                     </tr>
+                </div>
                 </tbody>
             </table>
+            <h2>Ajout d'une pizza</h2>
+            <input type="text" id="ajouterIngChamp">
+            <button id="bouttonAjouter">Ajouter</button>
+            <script type="text/javascript" src="QueryAjax.js"></script>
+            <h2>Modification des pizza</h2>    
+            <table class="table table-bordered ", style="margin-top:15px;">
+                <thead class="thead-dark">
+                    <tr><th class="col-md-1">Nom Ingredient</th><th class="col-md-4">Option</th><th class="col-md-2">actions</th></tr>
+                </thead>
+                <tbody>
+                <div>
+                    <tr>
+                    </tr>
+                </div>
+                </tbody>
+            </table>
+            
         </div>
         <!-- comment -->
         <script src=" js/bootstrap.min.js"></script>
