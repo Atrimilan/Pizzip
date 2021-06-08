@@ -34,23 +34,6 @@ and open the template in the editor.
                 </div>
                 </tbody>
             </table>
-            <h2>Ajout d'une pizza</h2>
-            <input type="text" id="ajouterIngChamp">
-            <button id="bouttonAjouter">Ajouter</button>
-            <script type="text/javascript" src="QueryAjax.js"></script>
-            <h2>Modification des pizza</h2>    
-            <table class="table table-bordered ", style="margin-top:15px;">
-                <thead class="thead-dark">
-                    <tr><th class="col-md-1">Nom Ingredient</th><th class="col-md-4">Option</th><th class="col-md-2">actions</th></tr>
-                </thead>
-                <tbody>
-                <div>
-                    <tr>
-                    </tr>
-                </div>
-                </tbody>
-            </table>
-            
         </div>
         <!-- comment -->
         <script src=" js/bootstrap.min.js"></script>
