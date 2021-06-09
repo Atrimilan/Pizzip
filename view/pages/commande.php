@@ -55,7 +55,7 @@
 				require_once("../../controller/client/connexion.php");
 
 				try {
-					$result = $pdo->query("SELECT * FROM PIZZA");    // Requete PDO pour afficher les pizzas
+					$result = $pdo->query("SELECT * FROM PIZZA where IngBase2 in (select");    // Requete PDO pour afficher les pizzas
 
 					while ($tabPizza = $result->fetch(PDO::FETCH_ASSOC)) {
 						echo "<div class='blockPizza'>";
@@ -69,7 +69,7 @@
 						echo			"<span class='ingBase3' id='ingBase3_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngBase3'] . "</span> ";
 						echo			"<span class='ingBase4' id='ingBase4_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngBase4'] . "</span> ";
 						echo		"</p>";
-						echo 		"<p class='optionsPizza'>";	// Insérer le texte Options Pizza
+						/*echo 		"<p class='optionsPizza'>";	// Insérer le texte Options Pizza
 						if (isset($tabPizza['IngOpt1']) || isset($tabPizza['IngOpt2']) || isset($tabPizza['IngOpt3']) || isset($tabPizza['IngOpt4'])) {	// Vérifier la présence d'options
 							echo			"Options : ";
 							echo			"<span class='ingOpt1' id='ingOpt1_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngOpt1'] . "</span> ";	// Mettre des options dans des spans
@@ -77,7 +77,7 @@
 							echo			"<span class='ingOpt3' id='ingOpt3_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngOpt3'] . "</span> ";	// ...
 							echo			"<span class='ingOpt4' id='ingOpt4_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngOpt4'] . "</span> ";	// ...
 						}
-						echo		"</p>";
+						echo		"</p>";*/
 						echo 		"<p>Prix : <span class='prixPizza' id='prixPizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['PrixUHT'] . "</span> €</p>";
 						echo 	"</div>";
 						echo 		"<input type='button' class='ajouterPizza' id='incrementQuantite_" . $tabPizza['IdPizza'] . "' value='Ajouter'>";
