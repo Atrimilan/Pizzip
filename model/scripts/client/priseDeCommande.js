@@ -5,7 +5,7 @@ var boutonEditer;
 
 $(doc).ready(function () {
 
-    $.getJSON("http://localhost/Pizzip/controller/listeIngred.php").done(function (result) {   // Requete AJAX - Récupérer tous les ingrédients
+    $.getJSON("http://localhost/Pizzip/controller/client/listeIngred.php").done(function (result) {   // Requete AJAX - Récupérer tous les ingrédients
         listeIngredientsJSON = result;
         console.log(result);
     });
@@ -276,7 +276,7 @@ $(doc).ready(function () {
             console.log("%cPas de pizza sélectionnée\nImpossible de passer la commande", "color:salmon");
         }
 
-        var lienAPI = 'http://localhost/Pizzip/controller/enregistrerCommande.php';
+        var lienAPI = 'http://localhost/Pizzip/controller/client/enregistrerCommande.php';
         var parametres = nom + '&' + prenom + '&' + modeCommande + '&' + typeBoite + '&' + tel + '&' + adresse + '&' + codePostal + '&' + ville + '&' +
             verifierPizzaNom + '&' + verifierPizzaQuantite + '&' + verifierIngBase1 + '&' + verifierIngBase2 + '&' + verifierIngBase3 + '&' + verifierIngBase4 +
             '&' + verifierIngOpt1 + '&' + verifierIngOpt2 + '&' + verifierIngOpt3 + '&' + verifierIngOpt4 + '&' + verifierTaille;
@@ -289,14 +289,14 @@ $(doc).ready(function () {
             if (result.success == true) {   // Si les données utilisateurs ont pu être enregistrées, on peut enregistrer les pizzas
                 $.ajax({
                     type: 'POST',
-                    url: 'http://localhost/Pizzip/controller/enregistrerPizza.php',
+                    url: 'http://localhost/Pizzip/controller/client/enregistrerPizza.php',
                     data: JSON.stringify(pizzaCommande),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (resultat) {
                         console.log(resultat);
                         if (resultat.success == true) {
-                            let url = 'http://localhost/Pizzip/view/pages/finCommande.php';    // URL - Page de fin de commande
+                            let url = '../../view/pages/finCommande.php';    // URL - Page de fin de commande
 
                             adresseComplete = $("input[name='adresse']").val() + ' - ' + $("input[name='ville']").val();  // $_POST['adr']
                             let prixTotal = $('#montantTotal').text();  // $_POST['total']

@@ -52,7 +52,7 @@
 			<div class='listePizza'>
 				<!-- Liste des pizzas -->
 				<?php
-				require_once("../../controller/connexion.php");
+				require_once("../../controller/client/connexion.php");
 
 				try {
 					$result = $pdo->query("SELECT * FROM PIZZA");    // Requete PDO pour afficher les pizzas
@@ -143,7 +143,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="../../model/scripts/priseDeCommande.js"></script>
+	<script type="text/javascript" src="../../model/scripts/client/priseDeCommande.js"></script>
 </body>
 
 </html>
