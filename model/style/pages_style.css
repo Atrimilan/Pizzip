@@ -325,7 +325,7 @@ input[type="button"] {
 }
 
 #lienAccueilCommande {
-    padding: 20px;
+    padding: 10px;
 }
 @media screen and (max-width: 970px) {
     /* Reponsive Panier */
@@ -537,6 +537,16 @@ input[type="button"] {
     -webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
     -ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
     user-select: none; /* Propriété standard */
+}
+
+#espaceAdmin {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: rgb(206, 22, 22);
+}
+#espaceAdmin:hover {
+    color: rgb(226, 106, 106);
 }
 
 @media screen and (max-width: 850px) {
