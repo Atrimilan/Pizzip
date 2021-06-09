@@ -2,7 +2,7 @@
     header('Access-Control-Allow-Origin: *');	// CORS policy 
     //      ----- CONNEXION A LA BASE DE DONNEES -----
     include("../../controller/connexion.php");
-    include("../../model/scripts/chargerTouteLivraison.php");  
+    include("../../controller/livreur/chargerTouteLivraison.php");  
 
 ?>
 
@@ -13,7 +13,8 @@
 
     <meta charset="UTF-8">
     <title>Piz.zip - Livraison</title>
-    <link rel="stylesheet" href="../../model/style/style.css" media="screen">
+    <link rel="shortcut icon" href="../../model/images/pizzipLogo.png">
+    <link rel="stylesheet" href="../../model/style/ihm_livreur.css" media="screen">
     <script src="https://code.jquery.com/jquery-latest.js"> </script> <!-- Dernier Jquery -->
 
 </head>
@@ -46,7 +47,7 @@
     ?>
 
 
-    <script src="../../model/scripts/chargerLivraison.js"></script> 
+    <script src="../../model/scripts/livreur/chargerLivraison.js"></script> 
 </body>
 
 </html>

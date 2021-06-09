@@ -5,7 +5,7 @@ $(document).ready(function () {
    setInterval(function () {
       
       $.ajax({
-         url: "http://localhost/coursphp/Pizzip/model/scripts/livraisonTotal.json",
+         url: "http://localhost/coursphp/Pizzip/controller/livreur/livraisonTotal.json",
 
          success: function (data) {
             //console.log(data);
@@ -30,7 +30,7 @@ $(document).ready(function () {
 
                }*/
 
-               var logoItineraire = "<img src=../../icone_itinéraire width=100>";
+               var logoItineraire = "<img src= ../../model/images/icone_itinéraire width=100>";
                var adresseClient = commande[i].AdrClient + ", " + commande[i].CP_Client + " " + commande[i].VilClient;
                var adresseSansEspace = adresseClient.replace(/ /g,'+'); // remplace les espaces par des + 
                var urlitineraire = "http://maps.google.com/maps?saddr=" + adresseOrigine + "&daddr=" + adresseSansEspace;
@@ -93,7 +93,7 @@ $(document).ready(function () {
    = error;
 
    function changementEtat(etat, numCom) {
-      $.post("../../model/scripts/modifRequete.php", {etat: etat, numCom: numCom});
+      $.post("../../controller/livreur/modifRequete.php", {etat: etat, numCom: numCom});
    }
 
    function supprimer(numero) {

@@ -65,5 +65,5 @@ echo $tableauJsonCommande; */
 
 <body>
     <script src="https://code.jquery.com/jquery-latest.js"> </script> <!-- Dernier Jquery --> 
-    <script src="../../model/scripts/livraison.js"></script>  
+    <script src="../../model/scripts/livreur/livraison.js"></script>  
 </body>
