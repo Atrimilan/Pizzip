@@ -1,6 +1,6 @@
 <?php
 
-    include("../../controller/connexion.php");  
+require_once("../../controller/connexion.php");  
 
     $etat=$_POST["etat"];
     $numCom =$_POST["numCom"];

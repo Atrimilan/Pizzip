@@ -1,7 +1,7 @@
 <?php  
     header('Access-Control-Allow-Origin: *');	// CORS policy 
     //      ----- CONNEXION A LA BASE DE DONNEES -----
-    include("../../controller/connexion.php");
+    require_once("../../controller/connexion.php");
     include("../../controller/livreur/chargerTouteLivraison.php");  
 
 ?>

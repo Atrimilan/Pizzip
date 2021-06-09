@@ -1,6 +1,6 @@
 <?php
 header('Access-Control-Allow-Origin: *');	// CORS policy
-include("../../controller/connexion.php"); // Connexion à la BDD
+require_once("../../controller/connexion.php"); // Connexion à la BDD
 
 $tabComplet = array();
 

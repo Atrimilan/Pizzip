@@ -5,7 +5,7 @@ $(document).ready(function () {
    setInterval(function () {
       
       $.ajax({
-         url: "http://localhost/coursphp/Pizzip/controller/livreur/livraisonTotal.json",
+         url: "http://localhost/Pizzip/controller/livreur/livraisonTotal.json",
 
          success: function (data) {
             //console.log(data);
