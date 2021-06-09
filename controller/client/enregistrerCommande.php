@@ -4,9 +4,9 @@ header('Access-Control-Allow-Origin: *');	// CORS policy
 require_once("./connexion.php");	// Connexion à la BDD
 
 $success = true;
-$idAutoInc;
+$idAutoInc ="";
 if (!empty($_GET['modeCommande']) && !empty($_GET['nom']) && !empty($_GET['prenom'])  && !empty($_GET['tel']) && !empty($_GET['typeBoite']) && !empty($_GET['verifPizza']) && !empty($_GET['verifPizzaQuant'])) {
-
+	
 	$modeCommande = $_GET['modeCommande'];
 	$nom = $_GET['nom'];
 	$prenom = $_GET['prenom'];
@@ -44,10 +44,10 @@ if (!empty($_GET['modeCommande']) && !empty($_GET['nom']) && !empty($_GET['preno
 	array_push($listeVerifIng, str_replace(',', '', $_GET['ingBase2']));
 	array_push($listeVerifIng, str_replace(',', '', $_GET['ingBase3']));
 	array_push($listeVerifIng, str_replace(',', '', $_GET['ingBase4']));
-	array_push($listeVerifIng, str_replace(',', '', $_GET['ingOpt1']));
+	/*array_push($listeVerifIng, str_replace(',', '', $_GET['ingOpt1']));
 	array_push($listeVerifIng, str_replace(',', '', $_GET['ingOpt2']));
 	array_push($listeVerifIng, str_replace(',', '', $_GET['ingOpt3']));
-	array_push($listeVerifIng, str_replace(',', '', $_GET['ingOpt4']));
+	array_push($listeVerifIng, str_replace(',', '', $_GET['ingOpt4']));*/
 	
 	for ($i = 0; $i < sizeof($listeVerifIng); $i++) {   // Parcourir le tableau d'ingrédients
 		if ($listeVerifIng[$i] != "") { // Si l'ingrédient n'est pas null ...
