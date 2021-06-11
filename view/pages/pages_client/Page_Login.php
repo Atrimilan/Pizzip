@@ -10,7 +10,8 @@
 
 <body>
     <div>
-        <p>Login</p>
+        <h1>Page de login</h1>
+        <p>Cette page sera disponible sur la branche master, lors de la fusion des pages de tous les développeurs.</p>
     </div>
 </body>
 
