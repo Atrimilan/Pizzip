@@ -287,7 +287,7 @@ $(doc).ready(function () {
             console.log("%cNuméro de commande: %c" + result.numCom, "color:lightgreen", "color:white");
             pizzaCommande.numCommande = result.numCom;
             if (result.success == true) {   // Si les données utilisateurs ont pu être enregistrées, on peut enregistrer les pizzas
-                $.ajax({
+                $.ajax({    // Note : Cette requête pourrait être fusionnée avec la précédente ($.getJSON) dans une version ultérieure
                     type: 'POST',
                     url: 'http://localhost/CNAM/Pizzip/controller/enregistrerPizza.php',
                     data: JSON.stringify(pizzaCommande),
