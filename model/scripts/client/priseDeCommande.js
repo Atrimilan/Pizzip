@@ -101,25 +101,7 @@ $(doc).ready(function () {
     $(document).on('click', '.modifierPizza', function (event) { // Modifier une pizza
         $('.editionContainer').css("display", "block");
         $('.contourNoir').css("display", "block");
-        //$('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Ingrédient 1 :</p><select class='editionIng' name='editionIngBase1'><select></div>");  // ajouter un select pour tous les ingrédients
-        //$('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Ingrédient 2 :</p><select class='editionIng' name='editionIngBase2'><select></div>");  // de base et ingrédients optionnels (ingBase1 à 4
-        //$('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Ingrédient 3 :</p><select class='editionIng' name='editionIngBase3'><select></div>");  // et ingOpt1 à 4)
-        //$('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Ingrédient 4 :</p><select class='editionIng' name='editionIngBase4'><select></div>");  // ..
-        //$('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Option 1 :</p><select class='editionIng' name='editionIngOpt1'><select></div>");       // ..
-        //$('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Option 2 :</p><select class='editionIng' name='editionIngOpt2'><select></div>");       // ..
-        //$('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Option 3 :</p><select class='editionIng' name='editionIngOpt3'><select></div>");
-        //$('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Option 4 :</p><select class='editionIng' name='editionIngOpt4'><select></div>");
-
-        //listeIngredientsJSON.listeIngredients.forEach(function (ingredActuel) {  // pour chaque ingrédient (base/opt), on l'ajoute en option de chaque select
-        //$('select[name="editionIngBase1"]').append("<option value='" + ingredActuel + "'>" + ingredActuel + "</option>"); // ..
-        //$('select[name="editionIngBase2"]').append("<option value='" + ingredActuel + "'>" + ingredActuel + "</option>"); // ..
-        //$('select[name="editionIngBase3"]').append("<option value='" + ingredActuel + "'>" + ingredActuel + "</option>"); // ..
-        //$('select[name="editionIngBase4"]').append("<option value='" + ingredActuel + "'>" + ingredActuel + "</option>");
-        //$('select[name="editionIngOpt1"]').append("<option value='" + ingredActuel + "'>" + ingredActuel + "</option>");
-        //$('select[name="editionIngOpt2"]').append("<option value='" + ingredActuel + "'>" + ingredActuel + "</option>");
-        //$('select[name="editionIngOpt3"]').append("<option value='" + ingredActuel + "'>" + ingredActuel + "</option>");
-        //$('select[name="editionIngOpt4"]').append("<option value='" + ingredActuel + "'>" + ingredActuel + "</option>");
-        //});
+        
         boutonEditer = event.target.id;
         var nomPizzaATrouver = $('#' + boutonEditer).parent().find('.nomPizza').text(); // Récupérer le nom de la pizza qu'on Edit
 
@@ -137,15 +119,6 @@ $(doc).ready(function () {
 
         var nomPizzaJSON = listeIngredientsJSON.listePizza[nomPizzaATrouver];   // Récupérer les ingrédients de la pizza, grâce au JSON chargé au départ
         console.log(listeIngredientsJSON.listePizza[nomPizzaATrouver]);
-
-        //$('select[name="editionIngBase1"]').val(nomPizzaJSON.IngBase1).change();  // Sélectionner les options selon les ingrédients correspondants
-        //$('select[name="editionIngBase2"]').val(nomPizzaJSON.IngBase2).change();  // à la pizza de base
-        //$('select[name="editionIngBase3"]').val(nomPizzaJSON.IngBase3).change();  // ...
-        //$('select[name="editionIngBase4"]').val(nomPizzaJSON.IngBase4).change();  // ...
-        //$('select[name="editionIngOpt1"]').val(nomPizzaJSON.IngOpt1).change();    // ...
-        //$('select[name="editionIngOpt2"]').val(nomPizzaJSON.IngOpt2).change();
-        //$('select[name="editionIngOpt3"]').val(nomPizzaJSON.IngOpt3).change();
-        //$('select[name="editionIngOpt4"]').val(nomPizzaJSON.IngOpt4).change();
     });
 
     $(document).on('keyup', function (e) {   // RACCOURCIS - Appuyer sur Echap pour fermer le Pop Up

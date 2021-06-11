@@ -1,8 +1,8 @@
 SELECT *
 FROM PIZZA
-/*WHERE NomPizza NOT IN
+WHERE NomPizza NOT IN
     /* Charger toutes les pizzas ne se trouvant pas dans la liste suivante */
-    /*(
+    (
         SELECT NomPizza
         FROM PIZZA
             INNER JOIN INGREDIENT ON (
@@ -19,4 +19,4 @@ FROM PIZZA
             )
         where INGREDIENT.DateArchiv != 'utiliser'
             /* Sélectionner toutes les pizzas dont les ingrédients ne sont pas en "utiliser" */
-   /* )*/
+    )
