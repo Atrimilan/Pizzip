@@ -8,7 +8,7 @@ array_push($listePizza);
 
 $resultIng = $pdo->query("SELECT NomPizza FROM PIZZA");  // Récupérer tous les ingrédients
 while ($ligne = $resultIng->fetch(PDO::FETCH_ASSOC)) {
-    array_push($listeIngredients, $ligne['NomPizza']); // Ajouter tous les ingrédients dans la liste
+    array_push($listePizza, $ligne['NomPizza']); // Ajouter tous les ingrédients dans la liste
 }
 $pizza['listePizza'] = $listePizza;
 

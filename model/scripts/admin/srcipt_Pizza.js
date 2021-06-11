@@ -21,7 +21,7 @@ $(document).ready(function() {
 
     $("#bouttonAjouterPizza").click(function(){
         let pizza = $('#ajouterPizzaNom').val();
-        let ingr = $('#ajouterPizzaIng').val();
+        let ingr = $('select[name=ajouterPizzaIng]').val();
         let prix= $('#ajouterPizzaPrix').val();
         
         $.ajax({
@@ -49,11 +49,12 @@ $(document).ready(function() {
     //----------------------------------------------------------------
 
     var listePizzaJSON;
-    $.getJSON("../../../controller/listePizza.php").done(function (result) {   // Requete AJAX - Récupérer tous les ingrédients
-        listePizzaJSON = result;
-        console.log(result);    
-        listePizzaJSON.listePizza.forEach(function (ingredActuel) {  // pour chaque ingrédient (base/opt), on l'ajoute en option de chaque select
-            $('select[name="ajouterPizzaIng"]').append("<span value='" + ingredActuel + "'>" + ingredActuel + "</>"); //
-        });
-    });
+
+    $.getJSON("../../../controller/listePizza.php").done(function(result){
+        listePizzaJSON=result;
+        console.log(result);
+        listePizzaJSON.listePizza.forEach(function(pizzaActuel){
+            $('#nomPizza').append('<input type="checkbox>'+pizzaActuel+'</input>');
+        })
+    })
 });
