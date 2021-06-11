@@ -49,21 +49,9 @@ while ($tabCommande = $result -> fetch(PDO :: FETCH_ASSOC) ) {
         }
     }              
 }
-   
-    /*echo"<br><br>";
-    print_r($tabComplet);
-    echo"<br><br>";*/
 
     //            ----- TRANSFORMER EN JSON -----
 $tableauJsonCommande = json_encode($tabComplet);
-$fichierJson1 = file_put_contents('livraisonTotal.json',$tableauJsonCommande);
 
-/*echo"<br><br>";
-echo $tableauJsonCommande; */ 
+echo $tableauJsonCommande; 
        
-?>
-
-<body>
-    <script src="https://code.jquery.com/jquery-latest.js"> </script> <!-- Dernier Jquery --> 
-    <script src="../../model/scripts/livreur/livraison.js"></script>  
-</body>

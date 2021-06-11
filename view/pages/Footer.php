@@ -3,8 +3,6 @@
 //  --  ---------------  FOOTER PRESENT SUR TOUTES LES PAGES  ---------------  -->
 ?>
 
-<link rel="stylesheet" href="../../model/style/style.css" media="screen">
-
 <footer id="bas_page">
         <p>
                 <a href=mailto:info@pizzip.com" id="mail_PIZZIP" target="_blank" title="Mail de Pizzip">info@pizzip.com</a> <br>
