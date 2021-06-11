@@ -21,13 +21,13 @@ $(document).ready(function () {
 
             for (var i = 0; i < limite; i++) {
 
-               var logoItineraire = "<img src= ../../model/images/icone_itinéraire width=100>";
+               var logoItineraire = "<img src= ../../../model/images/icone_itinéraire width=100>";
                var adresseClient = commande[i].AdrClient + ", " + commande[i].CP_Client + " " + commande[i].VilClient;
                var adresseSansEspace = adresseClient.replace(/ /g,'+'); // remplace les espaces par des + 
                var urlitineraire = "http://maps.google.com/maps?saddr=" + adresseOrigine + "&daddr=" + adresseSansEspace;
 
                var textTD1 = "N° " + commande[i].NumCom;
-               var textTD2 = "<td>" + commande[i].NomClient + "<br> Adresse : " + adresseClient + "<br> Telephone : " +commande[i].TelClient + "<br> Fichier : " + commande[i].TypeEmbal +".zip" + "<br> Pizza : " + commande[i+1].Quant + " x " + commande[i+2].NomPizza + " <br> Etat : " + commande[i].Etat + " <br> Horaire : " + commande[i].HeureDispo +" le " + commande[i].Date + "</td><br>"
+               var textTD2 = "<td>" + commande[i].NomClient + "<br> Adresse : " + adresseClient + "<br> Telephone : " +commande[i].TelClient + "<br> Fichier : " + commande[i].TypeEmbal +".zip" + "<br> Pizza : " + commande[i].Quant + " x " + commande[i].NomPizza + " <br> Etat : " + commande[i].Etat + " <br> Horaire : " + commande[i].HeureDispo +" le " + commande[i].Date + "</td><br>"
                var itinéraire = "<a href="+ urlitineraire + " id=test target=_blank title='Itinéraire de la commande :" + commande[i].NumCom + "'>" + logoItineraire +" </a>";
                var textTD3 = "<td> <input type=button id=" + commande[i].NumCom + " class=btn1 name=demarrer" + commande[i].NumCom + " value=" + "'Demarrer Livraison'" + " >  <br> <input type=button id=" + commande[i].NumCom + " class=btn2 name=terminer" + commande[i].NumCom + " value="+ "'Terminer Livraison'"+ " > <br>" + itinéraire +"<br></td><br>"
                
@@ -57,10 +57,6 @@ $(document).ready(function () {
 
                }
 
-               if (document.getElementById("ligneundefined")) { // Supprimme les lignes inutiles
-                  document.getElementById("ligneundefined").remove();
-               }
-
                var nombreCommande = $('tr').length - 1;
                espaceNombre.innerHTML = "nombre de commandes à livrer passées : " + nombreCommande;
             }
@@ -75,7 +71,7 @@ $(document).ready(function () {
    = error;
 
    function changementEtat(etat, numCom) {
-      $.post("../../controller/livreur/modifRequete.php", {etat: etat, numCom: numCom});
+      $.post("../../../controller/livreur/modifRequete.php", {etat: etat, numCom: numCom});
    }
 
    function supprimer(numero) {

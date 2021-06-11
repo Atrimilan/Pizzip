@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');    // CORS policy 
 //      ----- CONNEXION A LA BASE DE DONNEES -----
-require_once("../../controller/connexion.php");
+require_once("../../../controller/connexion.php");
 
 ?>
 
@@ -12,8 +12,8 @@ require_once("../../controller/connexion.php");
 
     <meta charset="UTF-8">
     <title>Piz.zip - Livraison</title>
-    <link rel="shortcut icon" href="../../model/images/pizzipLogo.png">
-    <link rel="stylesheet" href="../../model/style/ihm_livreur.css" media="screen">
+    <link rel="shortcut icon" href="../../../model/images/pizzipLogo.png">
+    <link rel="stylesheet" href="../../../model/style/ihm_livreur.css" media="screen">
     <script src="https://code.jquery.com/jquery-latest.js"> </script> <!-- Dernier Jquery -->
 
 </head>
@@ -46,12 +46,12 @@ require_once("../../controller/connexion.php");
 
     <?php
     //         -----  FOOTER -----
-    include("../pages/Footer.php");
+    include("../../pages/Footer.php");
     ?>
 
 
-    <script src="../../model/scripts/livreur/chargerLivraison.js"></script>
-    <script src="../../model/scripts/livreur/livraison.js"></script>
+    <script src="../../../model/scripts/livreur/chargerLivraison.js"></script>
+    <script src="../../../model/scripts/livreur/livraison.js"></script>
 
 </body>
 
