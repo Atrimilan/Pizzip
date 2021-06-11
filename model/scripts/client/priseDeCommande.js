@@ -5,7 +5,7 @@ var boutonEditer;
 
 $(doc).ready(function () {
 
-    $.getJSON("http://localhost/CNAM/Pizzip/controller/listeIngred.php").done(function (result) {   // Requete AJAX - Récupérer tous les ingrédients
+    $.getJSON("http://localhost/Pizzip/controller/client/listeIngred.php").done(function (result) {   // Requete AJAX - Récupérer tous les ingrédients
         listeIngredientsJSON = result;
         console.log(result);
     });
@@ -101,40 +101,24 @@ $(doc).ready(function () {
     $(document).on('click', '.modifierPizza', function (event) { // Modifier une pizza
         $('.editionContainer').css("display", "block");
         $('.contourNoir').css("display", "block");
-        $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Ingrédient 1 :</p><select class='editionIng' name='editionIngBase1'><select></div>");  // ajouter un select pour tous les ingrédients
-        $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Ingrédient 2 :</p><select class='editionIng' name='editionIngBase2'><select></div>");  // de base et ingrédients optionnels (ingBase1 à 4
-        $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Ingrédient 3 :</p><select class='editionIng' name='editionIngBase3'><select></div>");  // et ingOpt1 à 4)
-        $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Ingrédient 4 :</p><select class='editionIng' name='editionIngBase4'><select></div>");  // ..
-        $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Option 1 :</p><select class='editionIng' name='editionIngOpt1'><select></div>");       // ..
-        $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Option 2 :</p><select class='editionIng' name='editionIngOpt2'><select></div>");       // ..
-        $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Option 3 :</p><select class='editionIng' name='editionIngOpt3'><select></div>");
-        $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Option 4 :</p><select class='editionIng' name='editionIngOpt4'><select></div>");
-
-        i = 0;
-        listeIngredientsJSON.listeIngredients.forEach(function (ingredActuel) {  // pour chaque ingrédient (base/opt), on l'ajoute en option de chaque select
-            $('select[name="editionIngBase1"]').append("<option value='" + ingredActuel + "'>" + ingredActuel + "</option>"); // ..
-            $('select[name="editionIngBase2"]').append("<option value='" + ingredActuel + "'>" + ingredActuel + "</option>"); // ..
-            $('select[name="editionIngBase3"]').append("<option value='" + ingredActuel + "'>" + ingredActuel + "</option>"); // ..
-            $('select[name="editionIngBase4"]').append("<option value='" + ingredActuel + "'>" + ingredActuel + "</option>");
-            $('select[name="editionIngOpt1"]').append("<option value='" + ingredActuel + "'>" + ingredActuel + "</option>");
-            $('select[name="editionIngOpt2"]').append("<option value='" + ingredActuel + "'>" + ingredActuel + "</option>");
-            $('select[name="editionIngOpt3"]').append("<option value='" + ingredActuel + "'>" + ingredActuel + "</option>");
-            $('select[name="editionIngOpt4"]').append("<option value='" + ingredActuel + "'>" + ingredActuel + "</option>");
-        });
+        
         boutonEditer = event.target.id;
         var nomPizzaATrouver = $('#' + boutonEditer).parent().find('.nomPizza').text(); // Récupérer le nom de la pizza qu'on Edit
 
+        for (let i = 1; i < 4; i++) {   // Pour les options de 1 à 4
+            if (listeIngredientsJSON.listePizza[nomPizzaATrouver]['IngOpt' + i] != "") {    // Ajouter un <select> de l'Option
+                $('.editionContainer').append("<div class='editionBlock'><p class='editionTitre'>Option " + i + " :</p><select class='editionIng' name='editionIngOpt" + i + "'><select></div>");
+                $('select[name="editionIngOpt' + i + '"]').append("<option value=''></option>");
+                for (let j = 1; j < 4; j++) {   // Pour les options de 1 à 4
+                    if (listeIngredientsJSON.listePizza[nomPizzaATrouver]['IngOpt' + j] != "") {    // Ajouter chaque Option dans <option>
+                        $('select[name="editionIngOpt' + i + '"]').append("<option value='" + listeIngredientsJSON.listePizza[nomPizzaATrouver]['IngOpt' + j] + "'>" + listeIngredientsJSON.listePizza[nomPizzaATrouver]['IngOpt' + j] + "</option>");
+                    }
+                }
+            };
+        }
+
         var nomPizzaJSON = listeIngredientsJSON.listePizza[nomPizzaATrouver];   // Récupérer les ingrédients de la pizza, grâce au JSON chargé au départ
         console.log(listeIngredientsJSON.listePizza[nomPizzaATrouver]);
-
-        $('select[name="editionIngBase1"]').val(nomPizzaJSON.IngBase1).change();  // Sélectionner les options selon les ingrédients correspondants
-        $('select[name="editionIngBase2"]').val(nomPizzaJSON.IngBase2).change();  // à la pizza de base
-        $('select[name="editionIngBase3"]').val(nomPizzaJSON.IngBase3).change();  // ...
-        $('select[name="editionIngBase4"]').val(nomPizzaJSON.IngBase4).change();  // ...
-        $('select[name="editionIngOpt1"]').val(nomPizzaJSON.IngOpt1).change();    // ...
-        $('select[name="editionIngOpt2"]').val(nomPizzaJSON.IngOpt2).change();
-        $('select[name="editionIngOpt3"]').val(nomPizzaJSON.IngOpt3).change();
-        $('select[name="editionIngOpt4"]').val(nomPizzaJSON.IngOpt4).change();
     });
 
     $(document).on('keyup', function (e) {   // RACCOURCIS - Appuyer sur Echap pour fermer le Pop Up
@@ -149,24 +133,54 @@ $(doc).ready(function () {
         $('#' + boutonEditer).parent().find('.ingBase2').text($('select[name="editionIngBase2"]').val());   // conformément aux choix effectués dans les SELECT
         $('#' + boutonEditer).parent().find('.ingBase3').text($('select[name="editionIngBase3"]').val());   // ...
         $('#' + boutonEditer).parent().find('.ingBase4').text($('select[name="editionIngBase4"]').val());   // ...
-        if ($('select[name="editionIngOpt1"]').val() == "" && $('select[name="editionIngOpt2"]').val() == "" && $('select[name="editionIngOpt3"]').val() == "" && $('select[name="editionIngOpt4"]').val() == "") {
+
+        if (($('select[name="editionIngOpt1"]').val() == "" || $('select[name="editionIngOpt1"]').val() == undefined) &&
+            ($('select[name="editionIngOpt2"]').val() == "" || $('select[name="editionIngOpt2"]').val() == undefined) &&
+            ($('select[name="editionIngOpt3"]').val() == "" || $('select[name="editionIngOpt3"]').val() == undefined) &&
+            ($('select[name="editionIngOpt4"]').val() == "" || $('select[name="editionIngOpt4"]').val() == undefined)) {
             console.log("OPTIONS : NON");
             $('#' + boutonEditer).parent().find('.optionsPizza').empty();   // Si en fermant, les options sont vides (== ""), on vide tout dans le texte Option Pizza (tout en gardant la balise <p>)
-        } else {    // Si en fermant il y a des options
+        }
+        else {    // Si en fermant il y a des options
             console.log("OPTIONS : OUI");
             idElement = boutonEditer.slice(-1); // On récupère l'ID de la pizza en récupèrant l'ID du bouton "Editer"
             console.log($('#' + boutonEditer).parent().find('.optionsPizza'));
-            if ($('#' + boutonEditer).parent().find('.optionsPizza').children().length > 0) {   // Si Options Pizza a des enfants (donc au moins une option)
-                $('#' + boutonEditer).parent().find('.ingOpt1').text($('select[name="editionIngOpt1"]').val());
-                $('#' + boutonEditer).parent().find('.ingOpt2').text($('select[name="editionIngOpt2"]').val());
-                $('#' + boutonEditer).parent().find('.ingOpt3').text($('select[name="editionIngOpt3"]').val());
-                $('#' + boutonEditer).parent().find('.ingOpt4').text($('select[name="editionIngOpt4"]').val());
-            } else {    // Sinon, elle n'a pas d'options, on les rajoute
-                $('#' + boutonEditer).parent().find('.optionsPizza').append("<p>Options : <span class='ingOpt1' id='panierIngBase1_pizza_" + idElement + "'>" + $('select[name="editionIngOpt1"]').val() + "</span> " +
-                    "<span class='ingOpt2' id='panierIngBase1_pizza_" + idElement + "'>" + $('select[name="editionIngOpt2"]').val() + "</span> " +
-                    "<span class='ingOpt3' id='panierIngBase1_pizza_" + idElement + "'>" + $('select[name="editionIngOpt3"]').val() + "</span> " +
-                    "<span class='ingOpt4' id='panierIngBase1_pizza_" + idElement + "'>" + $('select[name="editionIngOpt4"]').val() + "</span></p>");
 
+            if ($('#' + boutonEditer).parent().find('.optionsPizza').children().length > 0) {   // Si Options Pizza a des enfants (donc au moins une option)
+                if ($('select[name="editionIngOpt1"]').val() != undefined) {
+                    $('#' + boutonEditer).parent().find('.ingOpt1').text($('select[name="editionIngOpt1"]').val().replace('null', ''));
+                }
+                if ($('select[name="editionIngOpt2"]').val() != undefined) {
+                    $('#' + boutonEditer).parent().find('.ingOpt2').text($('select[name="editionIngOpt2"]').val().replace('null', ''));
+                }
+                if ($('select[name="editionIngOpt3"]').val() != undefined) {
+                    $('#' + boutonEditer).parent().find('.ingOpt3').text($('select[name="editionIngOpt3"]').val().replace('null', ''));
+                }
+                if ($('select[name="editionIngOpt4"]').val() != undefined) {
+                    $('#' + boutonEditer).parent().find('.ingOpt4').text($('select[name="editionIngOpt4"]').val().replace('null', ''));
+                }
+            } else {    // Sinon, elle n'a pas d'options, on les rajoute
+                $('#' + boutonEditer).parent().find('.optionsPizza').append("Options :");
+                if ($('select[name="editionIngOpt1"]').val() != undefined) {
+                    $('#' + boutonEditer).parent().find('.optionsPizza').append("<span class='ingOpt1' id='panierIngOpt1_pizza_" + idElement + "'>" + $('select[name="editionIngOpt1"]').val().replace('null', '') + "</span> ");
+                } else {
+                    $('#' + boutonEditer).parent().find('.optionsPizza').append("<span class='ingOpt1' id='panierIngOpt4_pizza_" + idElement + "'></span> ");
+                }
+                if ($('select[name="editionIngOpt2"]').val() != undefined) {
+                    $('#' + boutonEditer).parent().find('.optionsPizza').append("<span class='ingOpt2' id='panierIngOpt2_pizza_" + idElement + "'>" + $('select[name="editionIngOpt2"]').val().replace('null', '') + "</span> ");
+                } else {
+                    $('#' + boutonEditer).parent().find('.optionsPizza').append("<span class='ingOpt2' id='panierIngOpt2_pizza_" + idElement + "'></span> ");
+                }
+                if ($('select[name="editionIngOpt3"]').val() != undefined) {
+                    $('#' + boutonEditer).parent().find('.optionsPizza').append("<span class='ingOpt3' id='panierIngOpt3_pizza_" + idElement + "'>" + $('select[name="editionIngOpt3"]').val().replace('null', '') + "</span> ");
+                } else {
+                    $('#' + boutonEditer).parent().find('.optionsPizza').append("<span class='ingOpt3' id='panierIngOpt3_pizza_" + idElement + "'></span> ");
+                }
+                if ($('select[name="editionIngOpt4"]').val() != undefined) {
+                    $('#' + boutonEditer).parent().find('.optionsPizza').append("<span class='ingOpt4' id='panierIngOpt4_pizza_" + idElement + "'>" + $('select[name="editionIngOpt4"]').val().replace('null', '') + "</span> ");
+                } else {
+                    $('#' + boutonEditer).parent().find('.optionsPizza').append("<span class='ingOpt4' id='panierIngOpt4_pizza_" + idElement + "'></span> ");
+                }
             }
         }
         $('.editionContainer').css("display", "none");
@@ -224,10 +238,28 @@ $(doc).ready(function () {
                 let ingBase2_commande = $(this).find('.ingBase2').text() + ",";
                 let ingBase3_commande = $(this).find('.ingBase3').text() + ",";
                 let ingBase4_commande = $(this).find('.ingBase4').text() + ",";
-                let ingOpt1_commande = $(this).find('.ingOpt1').text() + ",";
-                let ingOpt2_commande = $(this).find('.ingOpt2').text() + ",";
-                let ingOpt3_commande = $(this).find('.ingOpt3').text() + ",";
-                let ingOpt4_commande = $(this).find('.ingOpt4').text() + ",";
+
+                let ingOpt1_commande, ingOpt2_commande, ingOpt3_commande, ingOpt4_commande;
+                if ($(this).find('.ingOpt1').text() != undefined || $(this).find('.ingOpt1').text() != "") {
+                    ingOpt1_commande = $(this).find('.ingOpt1').text() + ",";
+                } else {
+                    ingOpt1_commande = ",";
+                }
+                if ($(this).find('.ingOpt2').text() != undefined || $(this).find('.ingOpt2').text() != "") {
+                    ingOpt2_commande = $(this).find('.ingOpt2').text() + ",";
+                } else {
+                    ingOpt2_commande = ",";
+                }
+                if ($(this).find('.ingOpt3').text() != undefined || $(this).find('.ingOpt3').text() != "") {
+                    ingOpt3_commande = $(this).find('.ingOpt3').text() + ",";
+                } else {
+                    ingOpt3_commande = ",";
+                }
+                if ($(this).find('.ingOpt4').text() != undefined || $(this).find('.ingOpt4').text() != "") {
+                    ingOpt4_commande = $(this).find('.ingOpt4').text() + ",";
+                } else {
+                    ingOpt4_commande = ",";
+                }
 
                 let unePizza = {
                     nomPizza: pizzaSelection,
@@ -276,7 +308,7 @@ $(doc).ready(function () {
             console.log("%cPas de pizza sélectionnée\nImpossible de passer la commande", "color:salmon");
         }
 
-        var lienAPI = 'http://localhost/CNAM/Pizzip/controller/enregistrerCommande.php';
+        var lienAPI = 'http://localhost/Pizzip/controller/client/enregistrerCommande.php';
         var parametres = nom + '&' + prenom + '&' + modeCommande + '&' + typeBoite + '&' + tel + '&' + adresse + '&' + codePostal + '&' + ville + '&' +
             verifierPizzaNom + '&' + verifierPizzaQuantite + '&' + verifierIngBase1 + '&' + verifierIngBase2 + '&' + verifierIngBase3 + '&' + verifierIngBase4 +
             '&' + verifierIngOpt1 + '&' + verifierIngOpt2 + '&' + verifierIngOpt3 + '&' + verifierIngOpt4 + '&' + verifierTaille;
@@ -289,14 +321,14 @@ $(doc).ready(function () {
             if (result.success == true) {   // Si les données utilisateurs ont pu être enregistrées, on peut enregistrer les pizzas
                 $.ajax({    // Note : Cette requête pourrait être fusionnée avec la précédente ($.getJSON) dans une version ultérieure
                     type: 'POST',
-                    url: 'http://localhost/CNAM/Pizzip/controller/enregistrerPizza.php',
+                    url: 'http://localhost/Pizzip/controller/client/enregistrerPizza.php',
                     data: JSON.stringify(pizzaCommande),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (resultat) {
                         console.log(resultat);
                         if (resultat.success == true) {
-                            let url = 'http://localhost/CNAM/Pizzip/view/pages/finCommande.php';    // URL - Page de fin de commande
+                            let url = '../../../view/pages/pages_client/finCommande.php';    // URL - Page de fin de commande
 
                             adresseComplete = $("input[name='adresse']").val() + ' - ' + $("input[name='ville']").val();  // $_POST['adr']
                             let prixTotal = $('#montantTotal').text();  // $_POST['total']

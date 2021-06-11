@@ -5,8 +5,8 @@
 	<meta charset="utf-8" />
 	<title>Piz.zip - Commande</title>
 	<script src="https://code.jquery.com/jquery-latest.js"></script> <!-- Dernier Jquery -->
-	<link href="../../model/style/pages_style.css" rel="stylesheet" type="text/css">
-	<link rel="shortcut icon" href="../../model/images/pizzipLogo.png">
+	<link href="../../../model/style/style_client.css" rel="stylesheet" type="text/css">
+	<link rel="shortcut icon" href="../../../model/images/pizzipLogo.png">
 </head>
 
 <body>
@@ -52,15 +52,15 @@
 			<div class='listePizza'>
 				<!-- Liste des pizzas -->
 				<?php
-				require_once("../../controller/connexion.php");
+				require_once("../../../controller/client/connexion.php");
 
 				try {
-					$result = $pdo->query("SELECT * FROM PIZZA");    // Requete PDO pour afficher les pizzas
+					$result = $pdo->query(file_get_contents('../../../controller/client/chargerPizzas.sql'));    // Requete PDO pour afficher les pizzas
 
 					while ($tabPizza = $result->fetch(PDO::FETCH_ASSOC)) {
 						echo "<div class='blockPizza'>";
 						echo 	"<div class='divPizza' id='pizza_" . $tabPizza['IdPizza'] . "' >";
-						echo		"<img class='photoPizza' id='img_" . $tabPizza['NomPizza'] . "' src='../../model/images/" . $tabPizza['NomPizza'] . ".jpg' alt='Image " . $tabPizza['NomPizza'] . "'>";
+						echo		"<img class='photoPizza' id='img_" . $tabPizza['NomPizza'] . "' src='../../../model/images/" . $tabPizza['NomPizza'] . ".jpg' alt='Pas de photo'>";
 						echo 		"<p>Pizza : <span class='nomPizza' id='nomPizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['NomPizza'] . "</span></p>";
 						echo 		"<p>Taille : <span class='taillePizza' id='taillePizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['Taille'] . "</span></p>";
 						echo 		"<p>Ingrédients : ";
@@ -68,15 +68,6 @@
 						echo			"<span class='ingBase2' id='ingBase2_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngBase2'] . "</span> ";
 						echo			"<span class='ingBase3' id='ingBase3_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngBase3'] . "</span> ";
 						echo			"<span class='ingBase4' id='ingBase4_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngBase4'] . "</span> ";
-						echo		"</p>";
-						echo 		"<p class='optionsPizza'>";	// Insérer le texte Options Pizza
-						if (isset($tabPizza['IngOpt1']) || isset($tabPizza['IngOpt2']) || isset($tabPizza['IngOpt3']) || isset($tabPizza['IngOpt4'])) {	// Vérifier la présence d'options
-							echo			"Options : ";
-							echo			"<span class='ingOpt1' id='ingOpt1_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngOpt1'] . "</span> ";	// Mettre des options dans des spans
-							echo			"<span class='ingOpt2' id='ingOpt2_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngOpt2'] . "</span> ";	// s'il en existe au moins une 
-							echo			"<span class='ingOpt3' id='ingOpt3_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngOpt3'] . "</span> ";	// ...
-							echo			"<span class='ingOpt4' id='ingOpt4_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['IngOpt4'] . "</span> ";	// ...
-						}
 						echo		"</p>";
 						echo 		"<p>Prix : <span class='prixPizza' id='prixPizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['PrixUHT'] . "</span> €</p>";
 						echo 	"</div>";
@@ -109,7 +100,7 @@
 					<option value="XL">Grande</option>
 				</select>
 			</div>
-			<a href="../.." id="lienAccueilCommande" class="lien">Accueil</a>
+			<a href="../../.." id="lienAccueilCommande" class="lien">Accueil</a>
 
 			<div class="editionPopUp">
 				<div class="editionContainer">
@@ -143,7 +134,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="../../model/scripts/priseDeCommande.js"></script>
+	<script type="text/javascript" src="../../../model/scripts/client/priseDeCommande.js"></script>
 </body>
 
 </html>
