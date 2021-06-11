@@ -1,5 +1,5 @@
 <?php
-require_once('../controller/connexion.php');
+require_once('./connexion.php');
 $verif ="";
 $variable = trim(strtolower($_POST['ing'])); //Convertie la chaine en minuscule et enlève les espaces en début et en fin
 $tab = saveIng($pdo,$variable); //Sauvegarde les données récupéré dans un tableau

@@ -4,7 +4,7 @@ $(document).ready(function() {
         let ingredient = $('#ajouterIngChamp').val();
         
         $.ajax({
-            url:"../pages/Server.php",
+            url:"../../../controller/recupDataIng.php",
             type:"POST",
             data: {
                 ing: ingredient
