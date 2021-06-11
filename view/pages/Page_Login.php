@@ -15,4 +15,23 @@
     </div>
 </body>
 
+<style>
+    /* Style rapide, juste pour donner un minimum de forme à cette page qui n'a utilité que dans la branche master */
+    body {
+        background-color: rgb(92, 92, 95);
+        font-family: 'Segoe UI',
+            Tahoma,
+            Geneva,
+            Verdana,
+            sans-serif;
+        color: whitesmoke;
+        text-align: center;
+        text-shadow: 1px 1px 5px rgb(45, 45, 47), 0 0 1em rgb(45, 45, 47), 0 0 0.2em rgb(45, 45, 47);
+    }
+
+    div {
+        padding: 30vh 0;
+    }
+</style>
+
 </html>
