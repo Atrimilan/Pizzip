@@ -9,7 +9,7 @@ $autorisation = pizzaExistePas($pdo, $pizza); //Sauvegarde les données récupé
 
 // ------------ VERIFICATION QUE LA PIZZA N'EXISTE PAS  -------------//
 if ($autorisation == true){
-    ajouterPizza($pdo, $pizza, $prix, $ingr);
+    ajouterPizza($pdo, $pizza, $prix, $ingred);
     $verif = "ajoute";
 } else {
     $verif = "present"; // Si non, ne rien faire
