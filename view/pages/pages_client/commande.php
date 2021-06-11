@@ -5,8 +5,8 @@
 	<meta charset="utf-8" />
 	<title>Piz.zip - Commande</title>
 	<script src="https://code.jquery.com/jquery-latest.js"></script> <!-- Dernier Jquery -->
-	<link href="../../model/style/pages_style.css" rel="stylesheet" type="text/css">
-	<link rel="shortcut icon" href="../../model/images/pizzipLogo.png">
+	<link href="../../../model/style/style_client.css" rel="stylesheet" type="text/css">
+	<link rel="shortcut icon" href="../../../model/images/pizzipLogo.png">
 </head>
 
 <body>
@@ -52,15 +52,15 @@
 			<div class='listePizza'>
 				<!-- Liste des pizzas -->
 				<?php
-				require_once("../../controller/client/connexion.php");
+				require_once("../../../controller/client/connexion.php");
 
 				try {
-					$result = $pdo->query(file_get_contents('../../controller/client/chargerPizzas.sql'));    // Requete PDO pour afficher les pizzas
+					$result = $pdo->query(file_get_contents('../../../controller/client/chargerPizzas.sql'));    // Requete PDO pour afficher les pizzas
 
 					while ($tabPizza = $result->fetch(PDO::FETCH_ASSOC)) {
 						echo "<div class='blockPizza'>";
 						echo 	"<div class='divPizza' id='pizza_" . $tabPizza['IdPizza'] . "' >";
-						echo		"<img class='photoPizza' id='img_" . $tabPizza['NomPizza'] . "' src='../../model/images/" . $tabPizza['NomPizza'] . ".jpg' alt='Pas de photo'>";
+						echo		"<img class='photoPizza' id='img_" . $tabPizza['NomPizza'] . "' src='../../../model/images/" . $tabPizza['NomPizza'] . ".jpg' alt='Pas de photo'>";
 						echo 		"<p>Pizza : <span class='nomPizza' id='nomPizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['NomPizza'] . "</span></p>";
 						echo 		"<p>Taille : <span class='taillePizza' id='taillePizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['Taille'] . "</span></p>";
 						echo 		"<p>Ingrédients : ";
@@ -100,7 +100,7 @@
 					<option value="XL">Grande</option>
 				</select>
 			</div>
-			<a href="../.." id="lienAccueilCommande" class="lien">Accueil</a>
+			<a href="../../.." id="lienAccueilCommande" class="lien">Accueil</a>
 
 			<div class="editionPopUp">
 				<div class="editionContainer">
@@ -134,7 +134,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="../../model/scripts/client/priseDeCommande.js"></script>
+	<script type="text/javascript" src="../../../model/scripts/client/priseDeCommande.js"></script>
 </body>
 
 </html>

@@ -355,7 +355,7 @@ $(doc).ready(function () {
                     success: function (resultat) {
                         console.log(resultat);
                         if (resultat.success == true) {
-                            let url = '../../view/pages/finCommande.php';    // URL - Page de fin de commande
+                            let url = '../../../view/pages/pages_client/finCommande.php';    // URL - Page de fin de commande
 
                             adresseComplete = $("input[name='adresse']").val() + ' - ' + $("input[name='ville']").val();  // $_POST['adr']
                             let prixTotal = $('#montantTotal').text();  // $_POST['total']
