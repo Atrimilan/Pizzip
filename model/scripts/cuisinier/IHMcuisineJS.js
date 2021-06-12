@@ -1,10 +1,11 @@
 $(document).ready(function () {
     let interval;
-    let Index;
 
     function afficherCommande(numCom) {
         $("tbody").append("<tr class='alert alert-light' id='" + numCom + "'></tr>");
         $("tbody").children().last().load("../../../controller/cuisinier/DossierOF/" + numCom + ".txt");
+        $().css('background-color', '#34ce57');
+        
     }
     $("#debut").click(function () {
         $("#debut").prop("disabled", true);

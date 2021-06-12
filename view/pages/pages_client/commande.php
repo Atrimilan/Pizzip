@@ -133,7 +133,6 @@
 			<div class="espaceBottomPanier"></div>
 		</div>
 	</div>
-
 	<script type="text/javascript" src="../../../model/scripts/client/priseDeCommande.js"></script>
 </body>
 

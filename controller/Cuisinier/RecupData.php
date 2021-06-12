@@ -61,7 +61,7 @@ function createFichier($tabCom) {
         $txt .= "</td>";
         $txt .= "<td>";
         $txt .= "<div class='form-check'>";
-        $txt .= "    <input class='btn-check' type='button' value='acceptée' name='$numCOm' id='flexRadioDefault1' checked>";
+        $txt .= "    <input class='btn-check' type='button' value='acceptée' style='background-color : #34ce57' name='$numCOm' id='flexRadioDefault1' checked>";
         $txt .= "    <label class='form-check-label' for='flexRadioDefault1'>";
         $txt .= "    </label>";
         $txt .= "</div>";
