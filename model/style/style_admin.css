@@ -1,0 +1,32 @@
+tbody>tr:hover{
+    background-color: #bef5ba!important;
+}
+tbody>tr{
+    background-color: #bcc7bb!important;
+}
+thead{
+    background-color: grey !important;
+}
+tr input{
+    float: right!important;
+}
+tr select{
+    float: right!important;
+}
+.form-check{
+    margin-bottom: 10px!important;
+}
+tr button{
+    margin-top: 20px!important;
+    height: 70px!important;
+    width: 90px!important;
+}
+body{
+    background-color: grey!important;
+}
+table{
+    margin-top: 20px;
+}
+img{
+    width: 50px;
+}
