@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "remotemysql.com",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Pizzip",
+            "username": "eEPfirnc1C",
+            "password": "vZFMsKIeXw",
+            "database": "eEPfirnc1C"
+        }
+    ]
+}

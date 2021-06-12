@@ -1,0 +1,54 @@
+/* ------------------- COULEUR FOND ---------------------*/
+body{
+    background: rgb(92, 92, 95);
+}
+
+/* ------------------- CONTENUE GROBAL ---------------------*/
+#container{
+    width:400px;
+    margin:0 auto;
+    margin-top: 70px;
+}
+
+#container h1{
+    width: 38%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+/* ------------------- DISPOSITION DU FORMULAIRE ---------------------*/
+#test {
+    width:100%;
+    padding: 30px;
+    border: 1px solid white;
+    background: white;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+/* ------------------- CADRE DES INPUTS ---------------------*/
+select, input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* ------------------- BOUTON SE CONNECTER ---------------------*/
+input[type=button] {
+    background-color: rgb(92, 92, 95);
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+input[type=button]:hover {
+    background-color: white;
+    color: rgb(92, 92, 95);
+    border: 1px solid rgb(92, 92, 95);
+}
