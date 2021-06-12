@@ -11,87 +11,113 @@
  *
  * @author julesKantzer
  */
- require_once '../Modele/Connexion.php'; 
-class TakeData {
-     
-    
-    function recupInfo($pdo) {
+require_once '../Modele/Connexion.php';
 
+class TakeData {
+
+    function recupIgredientUtiliser($pdo) {
         try {
             $tabResult = array();
-            $requete = "select * from INGREDIENT";
+            $requete = "select * from INGREDIENT where DateArchiv='utiliser'";
             $result = $pdo->query($requete);
             while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
-                $tabResult[$ligne['IdIngred']] = ["NomIngred" => $ligne["NomIngred"],"frais" => $ligne["Frais"], "unité" => $ligne['Unite'], "StockMin" => $ligne["StockMin"], "StockReel" => $ligne["StockReel"], "PrixUHT" => $ligne["PrixUHT"], "Quantité à commander" => $ligne["Q_A_Com"]];
+                $tabResult[$ligne['IdIngred']] = ["NomIngred" => $ligne["NomIngred"], "frais" => $ligne["Frais"], "unité" => $ligne['Unite'], "StockMin" => $ligne["StockMin"], "StockReel" => $ligne["StockReel"], "PrixUHT" => $ligne["PrixUHT"], "Quantité à commander" => $ligne["Q_A_Com"]];
             }
         } catch (PDOException $ex) {
             print $ex->getMessage();
         }
         return $tabResult;
-        
     }
-    function changeValeur($nomDeChamp,$donner, $valeur, $pdo) {
+    function recupIgredientArchiver($pdo) {
         try {
-            $requete = "UPDATE INGREDIENT SET $nomDeChamp = '$donner' WHERE IdIgred = $valeur ";
+            $tabResult = array();
+            $requete = "select * from INGREDIENT where DateArchiv='archiver'";
+            $result = $pdo->query($requete);
+            while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
+                $tabResult[$ligne['IdIngred']] = ["NomIngred" => $ligne["NomIngred"], "frais" => $ligne["Frais"], "unité" => $ligne['Unite'], "StockMin" => $ligne["StockMin"], "StockReel" => $ligne["StockReel"], "PrixUHT" => $ligne["PrixUHT"], "Quantité à commander" => $ligne["Q_A_Com"]];
+            }
+        } catch (PDOException $ex) {
+            print $ex->getMessage();
+        }
+        return $tabResult;
+    }
+     function actualiserIngred($pdo,$id) {
+        try {
+            $requete = "UPDATE INGREDIENT SET DateArchiv = 'utiliser' where IdIngred = ".$id;
             $result = $pdo->exec($requete);
         } catch (PDOException $ex) {
             print $ex->getMessage();
         }
+        return $result;
     }
-    function changeNomIngred($donner, $valeur, $pdo) {
+    
+    function archiverIngred($pdo,$id) {
         try {
-            $requete = "UPDATE INGREDIENT SET Etat = '$donner' WHERE IdIgred = $valeur ";
+            $requete = "UPDATE INGREDIENT SET DateArchiv = 'archiver' where IdIngred = ".$id;
             $result = $pdo->exec($requete);
         } catch (PDOException $ex) {
             print $ex->getMessage();
         }
+        return $result;
     }
-    function changefrais($donner, $valeur, $pdo) {
+    function changefrais($donner, $id, $pdo) {
         try {
-            $requete = "UPDATE INGREDIENT SET Frais = '$donner' WHERE IdIgred = $valeur ";
+            $requete = "UPDATE INGREDIENT SET Frais = '$donner' WHERE IdIngred = $id ";
             $result = $pdo->exec($requete);
         } catch (PDOException $ex) {
             print $ex->getMessage();
         }
+        return $result;
     }
-    function changeUnite($donner, $valeur, $pdo) {
+
+    function changeUnite($donner, $id, $pdo) {
         try {
-            $requete = "UPDATE INGREDIENT SET Unite = '$donner' WHERE IdIgred = $valeur ";
+            $requete = "UPDATE INGREDIENT SET Unite = '$donner' WHERE IdIngred = $id ";
             $result = $pdo->exec($requete);
         } catch (PDOException $ex) {
             print $ex->getMessage();
         }
+        return $result;
     }
-    function changeStockMin($donner, $valeur, $pdo) {
+
+    function changeStockMin($donner, $id, $pdo) {
         try {
-            $requete = "UPDATE INGREDIENT SET StockMin = '$donner' WHERE IdIgred = $valeur ";
+            $requete = "UPDATE INGREDIENT SET StockMin = '$donner' WHERE IdIngred = $id ";
             $result = $pdo->exec($requete);
         } catch (PDOException $ex) {
             print $ex->getMessage();
         }
+        return $result;
     }
-    function changeStockReel($donner, $valeur, $pdo) {
+
+    function changeStockReel($donner, $id, $pdo) {
         try {
-            $requete = "UPDATE INGREDIENT SET StockReel = '$donner' WHERE IdIgred = $valeur ";
+            $requete = "UPDATE INGREDIENT SET StockReel = '$donner' WHERE IdIngred = $id ";
             $result = $pdo->exec($requete);
         } catch (PDOException $ex) {
             print $ex->getMessage();
         }
+        return $result;
     }
-    function changePrixUHT($donner, $valeur, $pdo) {
+
+    function changePrixUHT($donner, $id, $pdo) {
         try {
-            $requete = "UPDATE INGREDIENT SET PrixUHT = '$donner' WHERE IdIgred = $valeur ";
+            $requete = "UPDATE INGREDIENT SET PrixUHT = '$donner' WHERE IdIngred = $id ";
             $result = $pdo->exec($requete);
         } catch (PDOException $ex) {
             print $ex->getMessage();
         }
+        return $result;
     }
-    function changeQuantiteACommander($donner, $valeur, $pdo) {
+
+    function changeQuantiteACommander($donner, $id, $pdo) {
         try {
-            $requete = "UPDATE INGREDIENT SET Q_A_Com = '$donner' WHERE IdIgred = $valeur ";
+            $requete = "UPDATE INGREDIENT SET Q_A_Com = '$donner' WHERE IdIngred = $id ";
             $result = $pdo->exec($requete);
         } catch (PDOException $ex) {
             print $ex->getMessage();
         }
+        return $result;
     }
+
 }

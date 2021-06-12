@@ -3,12 +3,13 @@ require_once('../modele/connexion.php');
 $verif ="";
 $variable = trim(strtolower($_POST['ing'])); //Convertie la chaine en minuscule et enlève les espaces en début et en fin
 $tab = saveIng($pdo,$variable); //Sauvegarde les données récupéré dans un tableau
+
 if (lectureTab($tab,$variable)){
     ajouterIng($pdo,$variable); //Si l'ingrédient n'est pas dans le tableau : alors AJOUTER
-    $verif = "ajoute";
+    $verif = 'oui';
 }
 else {
-    $verif = "present"; // Si non, ne rien faire
+    $verif = 'non'; // Si non, ne rien faire
 }
 echo json_encode($verif); // return verif
 
@@ -32,9 +33,8 @@ function saveIng($pdo, $variable){
 // ---------------- LECTURE DE TABLEAU ----------------------
 function lectureTab($tab, $chaine){
     $verif = true;
-    foreach($tab as $value ){
-        
-        if ($value == $chaine){
+    foreach($tab as $value ){      
+        if (($value == $chaine) && empty($chaine)){
             $verif = false;
         }    
     }

@@ -1,0 +1,13 @@
+tbody>tr:hover{
+    background-color: #bef5ba!important;
+}
+tbody>tr{
+    background-color: #bcc7bb!important;
+}
+button{
+    margin-left: 5px;
+}
+thead{
+    background-color: grey !important;
+    
+}

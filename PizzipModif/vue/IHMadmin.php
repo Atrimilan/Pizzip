@@ -13,25 +13,25 @@ and open the template in the editor.
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/style.css">
 
     </head>
     <body>
         <div class="container">
             <h1>IHM Administration</h1><br>
+            
             <h2>Ajout d'ingrédients</h2>
             <input type="text" id="ajouterIngChamp">
-            <button id="bouttonAjouter">Ajouter</button>
-            <script type="text/javascript" src="QueryAjax.js"></script>
+            <button class=" btn btn-primary btn-lg mb-2" id="bouttonAjouter">Ajouter</button> 
+            <p id ="resultatAjout"></p>
             <h2>Modification d'ingrédients</h2>    
+            <button class=" btn btn-primary btn-lg mb-2" id="bouttonUtiliser">Utiliser</button>
+            <button class=" btn btn-primary btn-lg mb-2" id="bouttonArchiver">Archiver</button>           
             <table class="table table-bordered ", style="margin-top:15px;">
                 <thead class="thead-dark">
-                    <tr><th class="col-md-1">Nom Ingredient</th><th class="col-md-4">Option</th><th class="col-md-2">actions</th></tr>
+                    <tr><th class="col-md-1">Nom Ingredient</th><th class="col-md-3">propriétés actuelle</th><th class="col-md-3">propriétés à modifier</th><th class="col-md-2">actions</th></tr>
                 </thead>
                 <tbody>
-                <div>
-                    <tr>
-                    </tr>
-                </div>
                 </tbody>
             </table>
         </div>
