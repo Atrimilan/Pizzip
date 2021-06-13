@@ -60,7 +60,7 @@
 					while ($tabPizza = $result->fetch(PDO::FETCH_ASSOC)) {
 						echo "<div class='blockPizza'>";
 						echo 	"<div class='divPizza' id='pizza_" . $tabPizza['IdPizza'] . "' >";
-						echo		"<img class='photoPizza' id='img_" . $tabPizza['NomPizza'] . "' src='../../../model/images/" . $tabPizza['NomPizza'] . ".jpg' alt='Pas de photo'>";
+						echo		"<img class='photoPizza' id='img_" . $tabPizza['NomPizza'] . "' src='../../../model/images/pizzipLogoCarre.png' alt='Pas de photo'>";
 						echo 		"<p>Pizza : <span class='nomPizza' id='nomPizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['NomPizza'] . "</span></p>";
 						echo 		"<p>Taille : <span class='taillePizza' id='taillePizza_" . $tabPizza['IdPizza'] . "'>" . $tabPizza['Taille'] . "</span></p>";
 						echo 		"<p>Ingrédients : ";

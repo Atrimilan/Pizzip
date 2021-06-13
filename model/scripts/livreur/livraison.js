@@ -2,7 +2,7 @@
 // ----- Actualiser la page -----
 setInterval(function() {
     $.ajax({
-        url: "http://localhost/Pizzip/controller/livreur/chargerTouteLivraison.php",
+        url: "../../../controller/livreur/chargerTouteLivraison.php",
         success: function (data) {
             console.log("Actualisé JSON Complet");
         }

@@ -16,6 +16,7 @@ WHERE NomPizza NOT IN
                 OR PIZZA.IngOpt3 = INGREDIENT.NomIngred
                 OR PIZZA.IngOpt4 = INGREDIENT.NomIngred
                 OR PIZZA.IngOpt5 = INGREDIENT.NomIngred
+                OR PIZZA.IngOpt6 = INGREDIENT.NomIngred
             )
         where INGREDIENT.DateArchiv != 'utiliser'
             /* Sélectionner toutes les pizzas dont les ingrédients ne sont pas en "utiliser" */

@@ -3,7 +3,7 @@ $(document).ready(function () {
    setInterval(function () {
       
       $.ajax({
-         url: "http://localhost/Pizzip/controller/livreur/chargerTouteLivraison.php",
+         url: "../../../controller/livreur/chargerTouteLivraison.php",
 
          success: function (data) {
             data = JSON.parse(data);

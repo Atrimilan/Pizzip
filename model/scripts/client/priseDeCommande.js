@@ -4,11 +4,24 @@ var listeIngredientsJSON;   // JSON Ingrédients - Récupération AJAX des ingr�
 var boutonEditer;
 
 $(doc).ready(function () {
+    // echo		"<img class='photoPizza' id='img_" . $tabPizza['NomPizza'] . "' src='../../../model/images/" . $tabPizza['NomPizza'] . ".jpg' alt='Pas de photo'>";
 
-    $.getJSON("http://localhost/Pizzip/controller/client/listeIngred.php").done(function (result) {   // Requete AJAX - Récupérer tous les ingrédients
+    $.getJSON("../../../controller/client/listeIngred.php").done(function (result) {   // Requete AJAX - Récupérer tous les ingrédients
         listeIngredientsJSON = result;
         console.log(result);
+
+
+        $(".blockPizza").each(function (ev) {   // Pour toutes les pizzas i
+            maDivPizza = "#pizza_" + ev;  // prendre la #pizza_(i)
+            let lienImageActuelle = $(maDivPizza).find('.photoPizza').attr('src');  // Récupérer le lien par défaut
+            let nomPizzaActuelle = $(maDivPizza).find('.nomPizza').text();  // Récupérer le nom de la pizza
+            try {
+                let lienNouvelleImage = lienImageActuelle.replace("pizzipLogoCarre.png", nomPizzaActuelle + ".jpg");    // Remplacer le nom de
+                $(maDivPizza).find('.photoPizza').attr('src', lienNouvelleImage);   // l'image par défaut, par celui de l'image de la pizza actuelle
+            } catch (depassementListe) { }  // try-catch car le each part de 0, les noms des pizzas listées commencent à 1
+        });
     });
+
 
     $('input[name=typeBoite]').click(function () { // changer le type de boite : carton - thermo        
         var spanMontantTotal = $('#montantTotal');
@@ -101,7 +114,7 @@ $(doc).ready(function () {
     $(document).on('click', '.modifierPizza', function (event) { // Modifier une pizza
         $('.editionContainer').css("display", "block");
         $('.contourNoir').css("display", "block");
-        
+
         boutonEditer = event.target.id;
         var nomPizzaATrouver = $('#' + boutonEditer).parent().find('.nomPizza').text(); // Récupérer le nom de la pizza qu'on Edit
 
@@ -284,9 +297,9 @@ $(doc).ready(function () {
 
         if (modeCommande == "modeCommande=livraison") {
             // Données utiles seulement dans le cas d'une livraison
-            adresse = 'adresse=' + $(".infosClient").children('input[name="adresse"]').val().trim();
+            adresse = 'adresse=' + $(".infosClient").children('input[name="adresse"]').val().trim().replace("'", "\\'");
             codePostal = 'codePostal=' + $(".infosClient").children('input[name="codePostal"]').val().trim();
-            ville = 'ville=' + $(".infosClient").children('input[name="ville"]').val().trim();
+            ville = 'ville=' + $(".infosClient").children('input[name="ville"]').val().trim().replace("'", "\\'");
         }
 
         console.log("%c--- Validation de la commande ---", "color:red; font-weight:bold"); // Debut d'AJAX
@@ -308,8 +321,8 @@ $(doc).ready(function () {
             console.log("%cPas de pizza sélectionnée\nImpossible de passer la commande", "color:salmon");
         }
 
-        var lienAPI = 'http://localhost/Pizzip/controller/client/enregistrerCommande.php';
-        var parametres = nom + '&' + prenom + '&' + modeCommande + '&' + typeBoite + '&' + tel + '&' + adresse + '&' + codePostal + '&' + ville + '&' +
+        var lienAPI = '../../../controller/client/enregistrerCommande.php';
+        var parametres = nom.replace("'", "\\'") + '&' + prenom.replace("'", "\\'") + '&' + modeCommande + '&' + typeBoite + '&' + tel + '&' + adresse + '&' + codePostal + '&' + ville + '&' +
             verifierPizzaNom + '&' + verifierPizzaQuantite + '&' + verifierIngBase1 + '&' + verifierIngBase2 + '&' + verifierIngBase3 + '&' + verifierIngBase4 +
             '&' + verifierIngOpt1 + '&' + verifierIngOpt2 + '&' + verifierIngOpt3 + '&' + verifierIngOpt4 + '&' + verifierTaille;
         console.log("Requete : " + lienAPI + '?' + parametres);
@@ -321,7 +334,7 @@ $(doc).ready(function () {
             if (result.success == true) {   // Si les données utilisateurs ont pu être enregistrées, on peut enregistrer les pizzas
                 $.ajax({    // Note : Cette requête pourrait être fusionnée avec la précédente ($.getJSON) dans une version ultérieure
                     type: 'POST',
-                    url: 'http://localhost/Pizzip/controller/client/enregistrerPizza.php',
+                    url: '../../../controller/client/enregistrerPizza.php',
                     data: JSON.stringify(pizzaCommande),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
