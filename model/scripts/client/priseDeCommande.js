@@ -173,7 +173,7 @@ $(doc).ready(function () {
                     $('#' + boutonEditer).parent().find('.ingOpt4').text($('select[name="editionIngOpt4"]').val().replace('null', ''));
                 }
             } else {    // Sinon, elle n'a pas d'options, on les rajoute
-                $('#' + boutonEditer).parent().find('.optionsPizza').append("Options :");
+                $('#' + boutonEditer).parent().find('.optionsPizza').append("Options : ");
                 if ($('select[name="editionIngOpt1"]').val() != undefined) {
                     $('#' + boutonEditer).parent().find('.optionsPizza').append("<span class='ingOpt1' id='panierIngOpt1_pizza_" + idElement + "'>" + $('select[name="editionIngOpt1"]').val().replace('null', '') + "</span> ");
                 } else {
