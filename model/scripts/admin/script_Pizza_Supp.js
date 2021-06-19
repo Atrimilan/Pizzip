@@ -10,7 +10,7 @@ $(document).ready(function () {
         console.log(result);
         listePizzaJSON.listePizza.forEach(function (pizzaActuel) {
             console.log(pizzaActuel);
-            $('body').append('<p>' + pizzaActuel + '<button id="' + pizzaActuel + '" class="Supprimer">Supprimer</button> </p>');
+            $('body').append('<p id="suppPizza">' + pizzaActuel + '<button id="' + pizzaActuel + '" class="Supprimer">Supprimer</button> </p>');
         });
     });
 

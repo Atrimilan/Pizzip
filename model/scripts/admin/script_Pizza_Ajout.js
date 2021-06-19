@@ -25,7 +25,7 @@ $(document).ready(function () {
         let prix = $('#ajouterPizzaPrix').val();
 
         $.ajax({
-            url: "../../../controller/recupDataPizza.php",
+            url: "../../../controller/ajouterDataPizza.php",
             type: "POST",
             data: {
                 piz: pizza,
