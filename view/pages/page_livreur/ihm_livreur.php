@@ -2,7 +2,6 @@
 header('Access-Control-Allow-Origin: *');    // CORS policy 
 //      ----- CONNEXION A LA BASE DE DONNEES -----
 require_once("../../../controller/connexion.php");
-
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +12,7 @@ require_once("../../../controller/connexion.php");
     <meta charset="UTF-8">
     <title>Piz.zip - Livraison</title>
     <link rel="shortcut icon" href="../../../model/images/pizzipLogo.png">
-    <link rel="stylesheet" href="../../../model/style/ihm_livreur.css" media="screen">
+    <link rel="stylesheet" href="../../../model/style/style_livreur.css" media="screen">
     <script src="https://code.jquery.com/jquery-latest.js"> </script> <!-- Dernier Jquery -->
 
 </head>
@@ -21,11 +20,10 @@ require_once("../../../controller/connexion.php");
 <body>
     <?php
     //         -----  HEADER -----
-    //include("../pages/Header.php");
+    include("../../pages/Header.php");
     ?>
 
 
-    <!-- <p> Livreur : <?php echo $_SESSION['prenom']; ?> <br/><br/> </p> -->
     <h1>Commandes à Livrer :</h1> <br /><br />
 
     <p id="espace_nombre"> </p>
@@ -45,10 +43,19 @@ require_once("../../../controller/connexion.php");
 
 
     <?php
-    //         -----  FOOTER -----
-    include("../../pages/Footer.php");
-    ?>
 
+
+    //         -----  FOOTER -----
+    //include("../../pages/Footer.php");
+    ?>
+    
+    <script>
+        /*$('#bouton_Liv').click(function() {
+            var livreur = $('select[name="espaceLivreur"]').val();
+            alert(livreur);
+            $.post("../../../controller/livreur/modifRequete.php", {livreur:livreur});
+        });*/
+    </script>
 
     <script src="../../../model/scripts/livreur/chargerLivraison.js"></script>
     <script src="../../../model/scripts/livreur/livraison.js"></script>

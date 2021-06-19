@@ -1,3 +1,7 @@
+<?php
+//require_once("../../controller/connexion.php");
+?>
+
 <html>
 
 <head>
@@ -43,6 +47,7 @@
 
         if (option == "Admin") {
             document.location.href = "../pages/page_admin/IHMadmin.php"; //renvoyer sur admin
+
         } else if (option == "Livreur") {
             document.location.href = "../pages/page_livreur/ihm_livreur.php"; //renvoyer sur livreur
 

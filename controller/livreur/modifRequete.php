@@ -4,6 +4,8 @@ require_once("../../controller/connexion.php");
 
     $etat=$_POST["etat"];
     $numCom =$_POST["numCom"];
+    //$livreur = $_GET["livreur"];
+
         
        //            ----- REQUETE SQL -----    
        $requeteChangeEtatCommande = "UPDATE COMMANDE SET Etat = :etatLivraison WHERE NumCom = :numCommande;";
@@ -16,4 +18,4 @@ require_once("../../controller/connexion.php");
        // --- EXECUTION REQUETE PREPARE  ---
        $requetePre ->execute();       
 
-    echo "livraison n° $numCom = $etat";
+    echo "livraison n° $numCom = $etat ";
