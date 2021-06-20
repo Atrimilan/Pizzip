@@ -21,17 +21,19 @@ $(document).ready(function () {
 
             for (var i = 0; i < limite; i++) {
 
+         //        ---------- Adresse livraison ----------
                var logoItineraire = "<img src= ../../../model/images/icone_itinéraire width=100>";
                var adresseClient = commande[i].AdrClient + ", " + commande[i].CP_Client + " " + commande[i].VilClient;
                var adresseSansEspace = adresseClient.replace(/ /g, '+'); // remplace les espaces par des + 
                var urlitineraire = "http://maps.google.com/maps?saddr=" + adresseOrigine + "&daddr=" + adresseSansEspace;
 
+         //        ---------- texte à ajouter dans les colonnes ----------
                var textTD1 = "N° " + commande[i].NumCom;
                var textTD2 = "<td>" + commande[i].NomClient + "<br> Adresse : " + adresseClient + "<br> Telephone : " + commande[i].TelClient + "<br> Fichier : " + commande[i].TypeEmbal + ".zip" + "<br> Pizza : " + commande[i].Quant + " x " + commande[i].NomPizza + " <br> Etat : " + commande[i].Etat + " <br> Horaire : " + commande[i].HeureDispo + " le " + commande[i].Date + "</td><br>"
                var itinéraire = "<a href=" + urlitineraire + " id=test target=_blank title='Itinéraire de la commande :" + commande[i].NumCom + "'>" + logoItineraire + " </a>";
                var textTD3 = "<td> <input type=button id=" + commande[i].NumCom + " class=btn1 name=demarrer" + commande[i].NumCom + " value=" + "'Demarrer Livraison'" + " >  <br> <input type=button id=" + commande[i].NumCom + " class=btn2 name=terminer" + commande[i].NumCom + " value=" + "'Terminer Livraison'" + " > <br>" + itinéraire + "<br></td><br>"
 
-
+         //        ---------- Ajout des elements dans les colonnes  ----------
                var ligne = document.createElement("tr");
                ligne.setAttribute("id", "ligne" + commande[i].NumCom);
 
@@ -66,16 +68,11 @@ $(document).ready(function () {
    }, 3000);
 
    //        ---------- FONCTION ----------
-   function error() { return true; }
-   window.onerror
-      = error;
-
-   function changementEtat(etat, numCom) {
+   function changementEtat(etat, numCom) { // envoie de variables en post
       $.post("../../../controller/livreur/modifRequete.php", { etat: etat, numCom: numCom});
    }
 
-   function supprimer(numero) {
-      // Supprime tous les enfant d'un élément
+   function supprimer(numero) { // Supprime tous les enfant d'un élément
       var element = document.getElementById("ligne" + numero);
       while (element.firstChild) {
          element.removeChild(element.firstChild);
