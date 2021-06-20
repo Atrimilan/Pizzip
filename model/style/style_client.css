@@ -69,6 +69,14 @@ p {
     width: 20%;
     padding: 10px;
 }
+.listePanier {
+    position: fixed;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    height:65%;
+    width: 20%;
+    padding-right: 5px;
+}
 .fondPanier {
     /* Fond du panier qui suit l'écran = illusion de longueur dynamique à l'ajout de pizza */
     background-color: rgb(52, 52, 55);
