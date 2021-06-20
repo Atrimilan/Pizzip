@@ -1,10 +1,8 @@
 
 <ul>
-    <li><a class="active" href="#home">Home</a></li>
-    <li><a href="#news">/</a></li>
-    <li><a href="#contact">/</a></li>
+    <li><a  href="../Page_login.php">Deconnexion<img src="../../../model/images/pizzipLogo.png" width="20"></a></li>
 
-    <li><a <!-- -------- Selection Livreur depuis BDD ---------->
+    <li> <!-- -------- Selection Livreur depuis BDD ---------->
 
                 Livreur : <select name="espaceLivreur" size="1">
                     <?php
@@ -21,5 +19,5 @@
                 <!--                    -------- FIN Selection Livreur depuis BDD ---------->
                 <!--<input id="bouton_Liv" type="submit" name="bouton_Livreur" value="OK"> -->
 
-        </a></li>
+        </li>
 </ul>
