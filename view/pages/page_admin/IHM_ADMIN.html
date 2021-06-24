@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<head>
+    <script src="https://code.jquery.com/jquery-latest.js"></script> <!-- Dernier Jquery -->
+    <link rel="stylesheet" href="../../../model/style/styleAdmin.css">
+    <meta charset="UTF-8">
+    <title>Piz.zip - Administration</title>
+    <header>IHM Administration - PIZZA<br></header>
+</head>
+
+<body>
+    <article id="ajouterPizza">
+        <h2>AJOUTER PIZZA</h2>
+        Nom Pizza <input type="text" id="ajouterPizzaNom"> <!--ajouterPizzaNom-->
+        <select name='ajouterPizzaIng' id='ajouterPizzaIng'></select>
+        Prix <input type="number" id="ajouterPizzaPrix" min="0">
+        <button id="bouttonAjouterPizza">Ajouter</button>
+        <script type="text/javascript" src="../../../model/scripts/admin/script_Pizza_Ajout.js"></script>
+    </article>
+
+    <article id="modifierPizza">
+        <h2>Modifier Pizza</h2>
+        <select name='selectPizza' id='selectPizza'>Pizza</select>
+        <button id='update' name='update'>Modifier</button>
+        <br>Ingrédient de base 1 <select name="ingBase" id="ingBase"></select>
+        <script type="text/javascript" src="../../../model/scripts/admin/script_Pizza_modif.js"></script>
+    </article>
+
+    <article id="supprimerPizza">
+        <h2>SUPPRIMER PIZZA</h2>
+        <script type="text/javascript" src="../../../model/scripts/admin/script_Pizza_Supp.js"></script>
+    </article>
+</body>
+
+<footer>
+
+</footer>
+
+</html>
