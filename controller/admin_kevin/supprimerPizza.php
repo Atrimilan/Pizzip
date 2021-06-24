@@ -1,5 +1,5 @@
 <?php
-require_once('./connexion.php');   // Connexion à la BDD
+require_once('../connexion.php');   // Connexion à la BDD
 echo json_encode(["test" => "test"]);
 $pizza = $_GET['pizzaASupprimer'];
 print($pizza);

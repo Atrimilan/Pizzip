@@ -29,7 +29,7 @@ and open the template in the editor.
                         <a class="nav-link" href="./IHMadmin.php">Ingrédients</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Pizza</a>
+                        <a class="nav-link" href="./IHM_ADMIN.html">Pizza</a>
                     </li>
                 </ul>
             </div>

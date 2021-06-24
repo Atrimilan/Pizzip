@@ -1,5 +1,5 @@
 <?php
-require_once('./connexion.php');
+require_once('../connexion.php');
 $verif = "";
 $pizza = trim($_POST['piz']); //Convertie la chaine en minuscule et enlève les espaces en début et en fin
 $ingred = trim($_POST['ingr']);
