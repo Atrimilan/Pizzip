@@ -10,6 +10,8 @@ $(doc).ready(function () {
         listeIngredientsJSON = result;
         console.log(result);
 
+        
+
         $(".blockPizza").each(function (ev) {   // Pour toutes les pizzas i
             maDivPizza = "#pizza_" + (ev + 1);  // prendre la #pizza_(i)
             let lienImageActuelle = $(maDivPizza).find('.photoPizza').attr('src');  // Récupérer le lien par défaut
